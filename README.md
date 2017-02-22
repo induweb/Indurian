@@ -1,2 +1,2 @@
 # Indurian
-Arcade game written in React.js
+Arcade game written in React.js, HTML, CSS
