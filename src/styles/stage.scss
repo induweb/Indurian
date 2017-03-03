@@ -1,0 +1,67 @@
+.stage-container {
+    max-width: 100%;
+    position: relative;
+    height: 650px;
+    width: 950px;
+    background-image: url(../images/window_03.png);
+    background-size: cover;
+}
+
+.game-area {
+    position: absolute;
+    top: 90px;
+    left: 100px;
+    bottom: 100px;
+    right: 100px;
+    border: 2px solid #d5ad52;
+    background-image: url(../images/sprites/sand.jpg);
+    background-size: cover;
+}
+
+.crate {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 100px;
+    -webkit-background-size: contain;
+    background-size: contain;
+    opacity: .9;
+}
+
+.crate-1 {
+    background-image: url(../images/crate.png);
+    top: 30%;
+}
+
+.crate-2 {
+    background-image: url(../images/crate2.png);
+    top: 60%;
+}
+
+.stone {
+    background-image: url(../images/stone.png);
+    top: 45%;
+}
+
+.paddle {
+    animation: paddle-glow .2s infinite ease;
+    background: #ffffff;
+    height: 80px;
+    top: 200px;
+    left: 100px;
+    border-radius: 10px;
+    position: absolute;
+    width: 3px;
+    box-shadow: 0 0 7px 2px #00ccff;
+}
+
+@keyframes paddle-glow {
+
+    33% {
+        box-shadow: 0 0 15px 1px #00ccff;
+    }
+
+    66% {
+        box-shadow: 0 0 12px 1px #00ccff;
+    }
+}

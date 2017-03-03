@@ -1,0 +1,45 @@
+.wizard {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    height: 75px;
+    width: 55px;
+    background-image: url(../images/sprites/idle.png);
+    //background-position: 0 0;
+
+    //&:hover{
+    //    background-position: -178px 0;
+    //}
+}
+
+.wizard-idle {
+    -webkit-animation: wizard-idle-anim 1s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    wizard-idle-anim 1s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      wizard-idle-anim 1s steps(1) infinite;
+    animation:         wizard-idle-anim 1s steps(1) infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes wizard-idle-anim {
+    0%   { background-position: -58px 0;}
+    25%  { background-position: 0 0;}
+    50%  { background-position: -118px 0;}
+    75%  { background-position: -177px 1px;}
+}
+@-moz-keyframes wizard-idle-anim {
+    0%   { background-position: -58px 0;}
+    25%  { background-position: 0 0;}
+    50%  { background-position: -118px 0;}
+    75%  { background-position: -177px 1px;}
+}
+@-o-keyframes wizard-idle-anim {
+    0%   { background-position: -58px 0;}
+    25%  { background-position: 0 0;}
+    50%  { background-position: -118px 0;}
+    75%  { background-position: -177px 1px;}
+}
+@keyframes wizard-idle-anim {
+    0%   { background-position: -58px 0;}
+    25%  { background-position: 0 0;}
+    50%  { background-position: -118px 0;}
+    75%  { background-position: -177px 1px;}
+}

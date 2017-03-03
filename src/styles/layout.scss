@@ -1,0 +1,116 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Shojumaru', cursive;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../images/bg.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+a {
+    color: #2d9eac;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+
+    h1 {
+        font-size: 40px;
+        margin: 0;
+    }
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 21px;
+    max-width: 100%;
+    width: 530px;
+    height: 120px;
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    margin-left: -265px;
+    background-image: url(../images/window_04.png);
+    background-size: cover;
+    font-size: 2em;
+
+    span.nav-btn {
+        display: block;
+        width: 90px;
+        height: 90px;
+        background-position: 0 0;
+
+        &:hover {
+            background-position: -176px 0;
+        }
+
+        &.play-btn {
+            background-image: url(../images/sprites/btn-play.png);
+        }
+
+        &.home-btn {
+            background-image: url(../images/sprites/btn-home.png);
+        }
+
+        &.config-btn {
+            background-image: url(../images/sprites/btn-config.png);
+        }
+
+        &.info-btn {
+            background-image: url(../images/sprites/btn-info.png);
+        }
+
+        &.fb-btn {
+            background-image: url(../images/sprites/btn-fb.png);
+        }
+    }
+
+    .active {
+        span {
+            background-position: -88px 0!important;
+        }
+    }
+}
+
+.stage-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.stage-btn {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 4px 0;
+    cursor: pointer;
+    background-position: 0 0;
+    background-image: url(../images/sprites/btn.png);
+    line-height: 76px;
+    font-size: 28px;
+    background-color: transparent;
+    border: 0;
+    color: #303c07;
+    text-decoration: none;
+
+    &:hover {
+        background-position: -177px 0;
+    }
+}
+
+.content {
+    height: 420px;
+    overflow: auto;
+}
