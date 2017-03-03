@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexLink } from 'react-router';
 
-class Menu extends React.Component {s
+class Menu extends React.Component {
     render() {
         return (
             <nav className="bottom-nav">
