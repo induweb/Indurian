@@ -1,9 +1,11 @@
 import React from 'react';
 import Crate from './Crate';
+import stagesData from 'json-loader!../sources/data.json';
 // require('../styles/stage.scss')
 
 class CrateView extends React.Component {
   render () {
+      console.log(stagesData);
     return (
         <div>
           <Crate type="crate-2" left="500" top="100"></Crate>
