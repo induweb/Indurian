@@ -65,7 +65,7 @@ class Stage extends React.Component {
             <Wizard></Wizard>
             <Ball></Ball>
             <Paddle></Paddle>
-              <CrateView ></CrateView>
+              <CrateView id={this.props.params.stageId}></CrateView>
           </div>
 
         </div>

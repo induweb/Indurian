@@ -5,12 +5,12 @@ import stagesData from 'json-loader!../sources/data.json';
 
 class CrateView extends React.Component {
   render () {
-      console.log(stagesData);
+      let stageData = stagesData.stages[this.props.id - 1];
     return (
         <div>
-          <Crate type="crate-2" left="500" top="100"></Crate>
-          <Crate type="crate-1" left="540" top="200"></Crate>
-          <Crate type="stone" left="500" top="300"></Crate>
+            {stageData.blocks.map(function(data){
+                return <Crate type={data.type} left={data.left} top={data.top} key={data.id}></Crate>
+            })}
         </div>
     );
 
