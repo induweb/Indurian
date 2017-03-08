@@ -8,9 +8,7 @@ class CrateView extends React.Component {
       let stageData = stagesData.stages[this.props.id - 1];
     return (
         <div>
-            {stageData.blocks.map(function(data){
-                return <Crate type={data.type} left={data.left} top={data.top} key={data.id}></Crate>
-            })}
+            {stageData.blocks.map(data => ( <Crate {...data}></Crate> ))}
         </div>
     );
 

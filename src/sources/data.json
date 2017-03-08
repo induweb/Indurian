@@ -9,21 +9,21 @@
           "left": 300,
           "type": "crate-1",
           "value": 1,
-          "id": 0
+          "key": 0
         },
         {
           "top": 90,
           "left": 350,
           "type": "crate-2",
           "value": 1,
-          "id": 1
+          "key": 1
         },
         {
           "top": 130,
           "left": 300,
           "type": "stone",
           "value": 2,
-          "id": 2
+          "key": 2
         }
       ]
     }
