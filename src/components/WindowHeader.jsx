@@ -9,7 +9,7 @@ const Background = styled.div`
   top: -50px;
   left: 50%;
   margin-left: -298px;
-  background-image: url(images/window_06.png);
+  background-image: url(../images/window_06.png);
   background-size: cover;
 `;
 
@@ -25,7 +25,7 @@ class WindowHeader extends React.Component {
     render() {
         return (
             <Background>
-                <H2Header>INDURIAN</H2Header>
+                <H2Header>{this.props.children}</H2Header>
             </Background>
         );
     }

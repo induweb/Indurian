@@ -26,7 +26,7 @@ const Container = styled.div`
 const LayoutWrapper = (props) => {
   return (
     <Wrapper className="index">
-        <WindowHeader></WindowHeader>
+        <WindowHeader>Indurian</WindowHeader>
         <Container className="container">
             {props.children}
         </Container>

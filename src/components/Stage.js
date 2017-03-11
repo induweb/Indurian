@@ -1,13 +1,21 @@
 import React from 'react';
+import WindowHeader from './WindowHeader';
 import Wizard from './Wizard';
 import Ball from './Ball';
-import Paddle from './Paddle';
 import CrateView from './CrateView';
 require('../styles/stage.scss');
 
-class Stage extends React.Component {
+const Stage = React.createClass({
 
-    _handleKeyPressed(event){
+    getInitialState: function() {
+        return {
+            wizardPosition: {
+                top: 175
+            }
+        }
+    },
+
+    handleKeyPressed: function(event){
         // console.log(event.keyCode);
         switch (event.keyCode) {
             case 27: {
@@ -20,6 +28,12 @@ class Stage extends React.Component {
             }
             case 38: {
                 console.log('Up');
+                this.setState({
+                   wizardPosition: {
+                       top: this.state.wizardPosition.top - 5
+                   }
+                });
+                console.log('stage: ',this.state);
                 break;
             }
             case 39: {
@@ -28,6 +42,11 @@ class Stage extends React.Component {
             }
             case 40: {
                 console.log('Down');
+                this.setState({
+                    wizardPosition: {
+                        top: this.state.wizardPosition.top + 5
+                    }
+                });
                 break;
             }
             case 32: {
@@ -47,30 +66,29 @@ class Stage extends React.Component {
                 break;
             }
         }
-    }
+    },
 
-    componentWillMount(){
-        document.addEventListener('keydown', this._handleKeyPressed, false);
-    }
+    componentWillMount: function(){
+        document.addEventListener('keydown', this.handleKeyPressed, false);
+    },
 
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this._handleEscKey, false);
-    }
+    componentWillUnmount: function() {
+        document.removeEventListener('keydown', this.handleEscKey, false);
+    },
 
-  render () {
+  render: function () {
+    const stageID = this.props.params.stageId;
 
     return (<div className="stage-container">
-          <div className="game-area">
-            <p>{`Stage id is: ${this.props.params.stageId}`}</p>
-            <Wizard></Wizard>
-            <Ball></Ball>
-            <Paddle></Paddle>
-              <CrateView id={this.props.params.stageId}></CrateView>
-          </div>
-
-        </div>
+                <WindowHeader>Poziom #{stageID}</WindowHeader>
+                <div className="game-area">
+                    <Wizard position={this.state.wizardPosition} />
+                    <Ball />
+                    <CrateView id={stageID} />
+                </div>
+             </div>
     );
   }
-}
+});
 
 export default Stage;
