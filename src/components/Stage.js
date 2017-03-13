@@ -11,12 +11,16 @@ const Stage = React.createClass({
         return {
             wizardPosition: {
                 top: 175
-            }
+            },
+            spellPosition: 50,
+            wizardState: 'idle'
         }
     },
 
     handleKeyPressed: function(event){
         // console.log(event.keyCode);
+        let interv;
+
         switch (event.keyCode) {
             case 27: {
                 console.log('Escape');
@@ -38,6 +42,21 @@ const Stage = React.createClass({
             }
             case 39: {
                 console.log('Right');
+                clearInterval(interv);
+                interv = setInterval(()=>{
+                    if (this.state.spellPosition > 700) {
+                        clearInterval(interv);
+                        this.setState({
+                            spellPosition: 60,
+                            wizardState: 'idle'
+                        });
+                        return;
+                    }
+                    this.setState({
+                        spellPosition: this.state.spellPosition + 5,
+                        wizardState: 'attack'
+                    });
+                }, 15);
                 break;
             }
             case 40: {
@@ -82,7 +101,7 @@ const Stage = React.createClass({
     return (<div className="stage-container">
                 <WindowHeader>Poziom #{stageID}</WindowHeader>
                 <div className="game-area">
-                    <Wizard position={this.state.wizardPosition} />
+                    <Wizard position={this.state.wizardPosition} wizardState={this.state.wizardState} spellPosition={this.state.spellPosition} />
                     <Ball />
                     <CrateView id={stageID} />
                 </div>
