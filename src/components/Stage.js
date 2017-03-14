@@ -23,6 +23,17 @@ class Stage extends React.Component {
         this.interval = null;
     }
 
+    resetSpell() {
+        this.setState({
+            spellPosition: {
+                left: 60,
+                top: -10
+            },
+            wizardState: 'idle'
+        });
+        this.interval = null;
+    }
+
     handleKeyPressed(event){
         // console.log(event.keyCode);
 
@@ -55,14 +66,7 @@ class Stage extends React.Component {
                     this.interval = setInterval(()=>{
                         if (this.state.spellPosition.left > 800) {
                             clearInterval(this.interval);
-                            this.interval = null;
-                            this.setState({
-                                spellPosition: {
-                                    left: 60,
-                                    top: -10
-                                },
-                                wizardState: 'idle'
-                            });
+                            this.resetSpell();
                             return;
                         }
                         this.setState({
@@ -73,6 +77,8 @@ class Stage extends React.Component {
                             wizardState: 'attack'
                         });
                     }, 15);
+                } else {
+                    this.resetSpell();
                 }
 
                 break;
