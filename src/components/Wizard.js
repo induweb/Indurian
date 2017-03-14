@@ -1,19 +1,23 @@
 import React from 'react';
 import Paddle from './Paddle';
-import Spell from './Spell';
+// import Spell from './Spell';
 require('../styles/wizard.scss');
+{/*<Spell left={this.props.spellPosition} top={this.props.wizardPosition.top}/>*/}
 
-const Wizard = React.createClass({
+class Wizard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-  render: function() {
-    console.log('wizard: ', this.props);
-    return (
-        <div className={`wizard wizard-${this.props.wizardState}`} style={{top: this.props.position.top + 'px'}}>
-            <Spell position={this.props.spellPosition} />
-            <Paddle />
-        </div>
+  render() {
+    // console.log('wizard: ', this.props);
+    return (<div>
+                <div className={`wizard wizard-${this.props.wizardState}`} style={{top: this.props.wizardPosition.top + 'px'}}>
+                    <Paddle />
+                </div>
+            </div>
     );
   }
-});
+}
 
 export default Wizard;

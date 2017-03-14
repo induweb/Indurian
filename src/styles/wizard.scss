@@ -1,6 +1,6 @@
 .wizard {
     position: absolute;
-    left: 10px;
+    left: 1px;
     bottom: 30px;
     height: 73px;
     width: 104px;
@@ -20,34 +20,29 @@
     -o-animation:      wizard-attack-anim .3s steps(1) infinite;
     animation:         wizard-attack-anim .3s steps(1) infinite; /* IE 10+, Fx 29+ */
     background-image: url(../images/sprites/attack.png);
-
-    .spell {
-        display: block;
-    }
 }
 
 .spell {
-    display: none;
+    //display: none;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     position: absolute;
     top: 23px;
-    left: 50px;
+    left: 150px;
     background-color: #f40aff;
     -webkit-animation: spell-anim-1 .2s infinite; /* Safari 4+ */
     -moz-animation:    spell-anim-1 .2s infinite; /* Fx 5+ */
     -o-animation:      spell-anim-1 .2s infinite;
     animation:         spell-anim-1 .2s infinite; /* IE 10+, Fx 29+ */
 
-    &::before {
+    .before {
         position: absolute;
-        width: 10px;
+        width: 20px;
         height: 10px;
-        margin-top: -1px;
-        margin-left: 1px;
+        margin-top: 0px;
+        margin-left: -8px;
         opacity: 0;
-        content: '';
         border-radius: 50%;
         background-color: #507498;
         -webkit-animation: spell-anim-2 .2s infinite; /* Safari 4+ */
@@ -56,14 +51,13 @@
         animation:         spell-anim-2 .2s infinite; /* IE 10+, Fx 29+ */
     }
 
-    &::after {
+    .after {
         position: absolute;
-        width: 10px;
+        width: 15px;
         height: 10px;
-        margin-top: 1px;
-        margin-left: -1px;
+        margin-top: 0px;
+        margin-left: -4px;
         opacity: 1;
-        content: '';
         border-radius: 50%;
         background-color: #429494;
         -webkit-animation: spell-anim-3 .2s infinite; /* Safari 4+ */
@@ -99,33 +93,33 @@ keyframes wizard-attack-anim {
 
 @-webkit-keyframes wizard-idle-anim {
     0%   { background-position: 0 0;}
-    25%  { background-position: 0 -73px;}
+    25%  { background-position: 0 -74px;}
     50%  { background-position: 0 -146px;}
-    75%  { background-position: 0 -73px;}
+    75%  { background-position: 0 -74px;}
 
     //75%  { background-position: 0 -219px;}
 }
 @-moz-keyframes wizard-idle-anim {
     0%   { background-position: 0 0;}
-    25%  { background-position: 0 -73px;}
+    25%  { background-position: 0 -74px;}
     50%  { background-position: 0 -146px;}
-    75%  { background-position: 0 -73px;}
+    75%  { background-position: 0 -74px;}
 
     //75%  { background-position: 0 -219px;}
 }
 @-o-keyframes wizard-idle-anim {
     0%   { background-position: 0 0;}
-    25%  { background-position: 0 -73px;}
+    25%  { background-position: 0 -74px;}
     50%  { background-position: 0 -146px;}
-    75%  { background-position: 0 -73px;}
+    75%  { background-position: 0 -74px;}
 
     //75%  { background-position: 0 -219px;}
 }
 @keyframes wizard-idle-anim {
     0%   { background-position: 0 0;}
-    25%  { background-position: 0 -73px;}
+    25%  { background-position: 0 -74px;}
     50%  { background-position: 0 -146px;}
-    75%  { background-position: 0 -73px;}
+    75%  { background-position: 0 -74px;}
 
     //75%  { background-position: 0 -219px;}
 }
