@@ -9,114 +9,55 @@ require('../styles/stage.scss');
 class Stage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            wizardPosition: {
-                top: 175
-            },
-            spellPosition: {
-                left: 50,
-                top: -10
-            },
-            wizardState: 'idle'
-        };
+        this.state = props.route.store.state;
+        this.store = props.route.store;
+        this.actions = props.route.actions;
+        // console.log(this.store);
 
         this.interval = null;
     }
 
-    resetSpell() {
-        this.setState({
-            spellPosition: {
-                left: 60,
-                top: -10
-            },
-            wizardState: 'idle'
+    componentDidMount() {
+        document.addEventListener('keydown', (event)=> {
+            this.actions.handleKeyPressed(this.state, event);
         });
-        this.interval = null;
+
+        this.store.addListener((state) => {
+            this.setState({
+                wizardPosition: {
+                    top: state.wizardPosition.top
+                },
+                spellPosition: {
+                    left: state.spellPosition.left,
+                    top: state.spellPosition.top
+                },
+                wizardState: state.wizardState
+            });
+        });
+
     }
 
-    handleKeyPressed(event){
+    // resetSpell() {
+    //     this.setState({
+    //         spellPosition: {
+    //             left: 60,
+    //             top: -10
+    //         },
+    //         wizardState: 'idle'
+    //     });
+    //     this.interval = null;
+    // }
+
+    // handleKeyPressed(event){
         // console.log(event.keyCode);
 
-        switch (event.keyCode) {
-            case 27: {
-                console.log('Escape');
-                break;
-            }
-            case 37: {
-                console.log('Left');
-                break;
-            }
-            case 38: {
-                console.log('Up');
-                this.setState({
-                   wizardPosition: {
-                       top: this.state.wizardPosition.top - 5
-                   }
-                });
-                console.log('stage: ',this.state);
-                break;
-            }
-            case 39: {
-                console.log('Right');
-                let spellPositionTop =  this.state.wizardPosition.top + 20;
-                console.log(typeof this.interval);
-                clearInterval(this.interval);
 
-                if (!this.interval) {
-                    this.interval = setInterval(()=>{
-                        if (this.state.spellPosition.left > 800) {
-                            clearInterval(this.interval);
-                            this.resetSpell();
-                            return;
-                        }
-                        this.setState({
-                            spellPosition: {
-                                left: this.state.spellPosition.left + 5,
-                                top: spellPositionTop
-                            },
-                            wizardState: 'attack'
-                        });
-                    }, 15);
-                } else {
-                    this.resetSpell();
-                }
-
-                break;
-            }
-            case 40: {
-                console.log('Down');
-                console.log(this);
-                console.log(this.state);
-                this.setState({
-                    wizardPosition: {
-                        top: this.state.wizardPosition.top + 5
-                    }
-                });
-                break;
-            }
-            case 32: {
-                console.log('Space');
-                break;
-            }
-            case 65: {
-                console.log('A');
-                break;
-            }
-            case 83: {
-                console.log('S');
-                break;
-            }
-            case 68: {
-                console.log('D');
-                break;
-            }
-        }
-    }
+    // }
 
     componentWillMount(){
-         console.log(this.state);
-        document.addEventListener('keydown', this.handleKeyPressed.bind(this), false);
-        // document.addEventListener('keyup', this.handleKeyUp, false);
+        // console.log(this.state);
+        // console.log(this.actions);
+        // document.addEventListener('keydown', this.handleKeyPressed.bind(this), false);
     }
 
     componentWillUnmount() {
