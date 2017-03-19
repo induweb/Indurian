@@ -88,6 +88,7 @@ console.log('interval', !AppState.interval);
                 state.wizardPosition = {
                     top: state.wizardPosition.top + 5
                 };
+                AppState.dispatchEvents(state);
                 break;
             }
         }
