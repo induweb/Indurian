@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import WindowHeader from './WindowHeader';
 import Wizard from './Wizard';
 import Ball from './Ball';
@@ -9,6 +11,7 @@ require('../styles/stage.scss');
 class Stage extends React.Component {
     constructor(props) {
         super(props);
+        console.log('props',props);
         this.state = props.route.store.state;
         this.store = props.route.store;
         this.actions = props.route.actions;
@@ -65,6 +68,7 @@ class Stage extends React.Component {
     }
 
     render() {
+        console.log('pppp', this.props);
         const stageID = this.props.params.stageId;
         return (<div className="stage-container">
                     <WindowHeader>Poziom #{stageID}</WindowHeader>
@@ -78,5 +82,20 @@ class Stage extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = (state, ownProps = {}) => {
+    console.log('sss',state); // state
+    console.log('ooo',ownProps); // undefined
+    return {
+        stages:state.stages
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
+};
+
+Stage = connect(mapStateToProps, mapDispatchToProps)(Stage);
 
 export default Stage;

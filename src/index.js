@@ -1,17 +1,34 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import actionCreators from './actions/actionCreators';
+
 import App from './components/Main';
 import About from './components/About';
 import Options from './components/Options';
 import Play from './components/Play';
 import Stage from './components/Stage';
 import LayoutWrapper from './components/LayoutWrapper';
-import stagesData from 'json-loader!./sources/data.json';
+
+
 
 require('./styles/layout.scss');
 require('normalize.css');
+
+import reduxStore from './stores/reduxStore';
+
+console.log('reduxStore: ', reduxStore);
+
+reduxStore.subscribe(()=> {
+   //dostajemy nowy stan
+    console.log('reduxStore newState: ', reduxStore.getState());
+});
+
+let actions = actionCreators(reduxStore.dispatch);
+
+actions.loadData();
 
 function StateStore() {
     this.state = {};
@@ -32,7 +49,7 @@ function StateStore() {
     };
 }
 
-let actions = {
+let actions2 = {
     resetSpell: function(state) {
         console.log('stateAction',state);
         state.spellPosition = {
@@ -65,7 +82,7 @@ console.log('interval', !AppState.interval);
                         console.log('duuupa');
                         if (state.spellPosition.left > 800) {
                             clearInterval(AppState.interval);
-                            actions.resetSpell(state);
+                            actions2.resetSpell(state);
                             return;
                         }
                         state.spellPosition = {
@@ -78,7 +95,7 @@ console.log('interval', !AppState.interval);
                 } else {
                     clearInterval(AppState.interval);
                     AppState.interval = null;
-                    actions.resetSpell(state);
+                    actions2.resetSpell(state);
                     AppState.dispatchEvents(state);
                 }
 
@@ -105,13 +122,24 @@ AppState.state = {
         left: 50,
         top: -10
     },
-    wizardState: 'idle',
-    stagesData: stagesData
+    wizardState: 'idle'
 };
 
+// const mapStateToProps = (state) => {
+//     return { ...state };
+// };
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         // onIncrement: () => dispatch({ type: 'INCREMENT' }),
+//         // onDecrement: () => dispatch({ type: 'DECREMENT' })
+//     }
+// };
+
+// reduxStore = connect(mapStateToProps, mapDispatchToProps)(reduxStore);
 
 // Render the main component into the dom
 ReactDOM.render((
+<Provider store={reduxStore}>
   <Router history={browserHistory}>
     <Route path="/" component={LayoutWrapper}>
       <IndexRoute component={App}/>
@@ -120,6 +148,7 @@ ReactDOM.render((
       <Route path="/play" component={Play} />
 
     </Route>
-      <Route path="/stage/:stageId" component={Stage} store={AppState} actions={actions}/>
+      <Route path="/stage/:stageId" component={Stage} store={AppState} actions2={actions2}/>
   </Router>
+</Provider>
 ), document.getElementById('app'));
