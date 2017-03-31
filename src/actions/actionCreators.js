@@ -1,18 +1,10 @@
-import ACTIONS from '../constants/actions'
-import stagesData from 'json-loader!../sources/data.json';
+import * as stageActions from './stageActions';
+import * as loadActions from './loadActions';
 
-const makeActionCreators = function(dispatch){
-    return {
-        loadData: function(){
-            dispatch({
-                type: ACTIONS.LOAD_DATA,
-                payload: stagesData.stages,
-                meta:{
-                    timestamp: Date.now()
-                }
-            })
-        }
-    };
-};
+const actions = [
+    stageActions,
+    loadActions
+];
+console.log('actions', actions);
 
-export default makeActionCreators;
+export default actions[0];

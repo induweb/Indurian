@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import actions from '../actions/actionCreators';
 
 import WindowHeader from './WindowHeader';
 import Wizard from './Wizard';
@@ -12,31 +13,29 @@ class Stage extends React.Component {
     constructor(props) {
         super(props);
         console.log('props',props);
-        this.state = props.route.store.state;
-        this.store = props.route.store;
-        this.actions = props.route.actions;
-        // console.log(this.store);
 
+        props.stageLoad();
         this.interval = null;
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', (event)=> {
-            this.actions.handleKeyPressed(this.state, event);
-        });
+        // document.addEventListener('keydown', (event)=> {
+        //     this.actions.handleKeyPressed(this.state, event);
+        // });
+        //
+        // this.store.addListener((state) => {
+        //     this.setState({
+        //         wizardPosition: {
+        //             top: state.wizardPosition.top
+        //         },
+        //         spellPosition: {
+        //             left: state.spellPosition.left,
+        //             top: state.spellPosition.top
+        //         },
+        //         wizardState: state.wizardState
+        //     });
+        // });
 
-        this.store.addListener((state) => {
-            this.setState({
-                wizardPosition: {
-                    top: state.wizardPosition.top
-                },
-                spellPosition: {
-                    left: state.spellPosition.left,
-                    top: state.spellPosition.top
-                },
-                wizardState: state.wizardState
-            });
-        });
 
     }
 
@@ -61,6 +60,7 @@ class Stage extends React.Component {
         // console.log(this.state);
         // console.log(this.actions);
         // document.addEventListener('keydown', this.handleKeyPressed.bind(this), false);
+        // onStageLoad();
     }
 
     componentWillUnmount() {
@@ -73,8 +73,8 @@ class Stage extends React.Component {
         return (<div className="stage-container">
                     <WindowHeader>Poziom #{stageID}</WindowHeader>
                     <div className="game-area">
-                        <Wizard wizardPosition={this.state.wizardPosition} wizardState={this.state.wizardState} spellPosition={this.state.spellPosition} />
-                        <Spell left={this.state.spellPosition.left} top={this.state.spellPosition.top}/>
+                        <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.state} />
+                        {/*<Spell left={this.state.spellPosition.left} top={this.state.spellPosition.top}/>*/}
                         <Ball />
                         <CrateView id={stageID} />
                     </div>
@@ -85,15 +85,15 @@ class Stage extends React.Component {
 
 
 const mapStateToProps = (state, ownProps = {}) => {
-    console.log('sss',state); // state
-    console.log('ooo',ownProps); // undefined
     return {
-        stages:state.stages
+        wizard:state.wizard
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        stageLoad: () => dispatch(actions.loadData())
+    }
 };
 
 Stage = connect(mapStateToProps, mapDispatchToProps)(Stage);

@@ -10,9 +10,8 @@ class Wizard extends React.Component {
     }
 
   render() {
-    // console.log('wizard: ', this.props);
     return (<div>
-                <div className={`wizard wizard-${this.props.wizardState}`} style={{top: this.props.wizardPosition.top + 'px'}}>
+                <div className={`wizard wizard-${this.props.wizardState}`} style={{top: this.props.wizardPosition + 'px'}}>
                     <Paddle />
                 </div>
             </div>
