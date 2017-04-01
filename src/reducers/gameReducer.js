@@ -10,7 +10,15 @@ const initialState = {
 const gameReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTIONS.WIZARD_MOVE_UP:
-            return {...state, wizard: action.payload};
+            return {...state, wizard: {
+                positionTop: state.wizard.positionTop + action.payload.positionMove,
+                state: action.payload.state
+            }};
+        case ACTIONS.WIZARD_MOVE_DOWN:
+            return {...state, wizard: {
+                positionTop: state.wizard.positionTop + action.payload.positionMove,
+                state: action.payload.state
+            }};
 
         default:
             return state;

@@ -18,55 +18,6 @@ class Stage extends React.Component {
         this.keyInterval = null;
     }
 
-    componentDidMount() {
-        // document.addEventListener('keydown', (event)=> {
-        //     this.actions.handleKeyPressed(this.state, event);
-        // });
-        //
-        // this.store.addListener((state) => {
-        //     this.setState({
-        //         wizardPosition: {
-        //             top: state.wizardPosition.top
-        //         },
-        //         spellPosition: {
-        //             left: state.spellPosition.left,
-        //             top: state.spellPosition.top
-        //         },
-        //         wizardState: state.wizardState
-        //     });
-        // });
-
-
-    }
-
-    // resetSpell() {
-    //     this.setState({
-    //         spellPosition: {
-    //             left: 60,
-    //             top: -10
-    //         },
-    //         wizardState: 'idle'
-    //     });
-    //     this.interval = null;
-    // }
-
-    // handleKeyPressed(event){
-        // console.log(event.keyCode);
-
-
-    // }
-
-    componentWillMount(){
-        // console.log(this.state);
-        // console.log(this.actions);
-        // document.addEventListener('keydown', this.handleKeyPressed.bind(this), false);
-        // onStageLoad();
-    }
-
-    componentWillUnmount() {
-        // document.removeEventListener('keydown', this.handleEscKey, false);
-    }
-
     keyHandler = (data, event) => {
         console.log(data);
         console.log(event.keyCode);
@@ -87,6 +38,12 @@ class Stage extends React.Component {
             }
             case 40: {
                 //down
+                if (data) {
+                    // console.log('Interwal dispaczujacy');
+                    this.props.wizardMoveDown();
+                } else {
+                    // console.log('clear interwal');
+                }
                 break;
             }
         }
@@ -121,7 +78,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         stageLoad: () => dispatch(actions.loadData()),
-        wizardMoveUp: () => dispatch(actions.wizardMoveUp())
+        wizardMoveUp: () => dispatch(actions.wizardMoveUp()),
+        wizardMoveDown: () => dispatch(actions.wizardMoveDown())
     }
 };
 

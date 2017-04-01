@@ -25,8 +25,21 @@ export function wizardMoveUp(){
     return{
         type: ACTIONS.WIZARD_MOVE_UP,
         payload: {
-            positionTop: 150,
-            state: 'attack'
+            positionMove: -5,
+            state: 'idle'
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function wizardMoveDown(){
+    return{
+        type: ACTIONS.WIZARD_MOVE_DOWN,
+        payload: {
+            positionMove: 5,
+            state: 'idle'
         },
         meta:{
             timestamp: Date.now()
