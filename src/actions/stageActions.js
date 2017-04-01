@@ -20,3 +20,16 @@ export function loadStage(){
         }
     };
 }
+
+export function wizardMoveUp(){
+    return{
+        type: ACTIONS.WIZARD_MOVE_UP,
+        payload: {
+            positionTop: 150,
+            state: 'attack'
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}

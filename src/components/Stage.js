@@ -15,7 +15,7 @@ class Stage extends React.Component {
         console.log('props',props);
 
         props.stageLoad();
-        this.interval = null;
+        this.keyInterval = null;
     }
 
     componentDidMount() {
@@ -67,10 +67,38 @@ class Stage extends React.Component {
         // document.removeEventListener('keydown', this.handleEscKey, false);
     }
 
+    keyHandler = (data, event) => {
+        console.log(data);
+        console.log(event.keyCode);
+        switch (event.keyCode) {
+            case 38: { //up
+                if (data) {
+                    console.log('Interwal dispaczujacy');
+                    this.props.wizardMoveUp();
+                } else {
+                    console.log('clear interwal');
+                }
+                break;
+            }
+            case 39: {
+                //right
+
+                break;
+            }
+            case 40: {
+                //down
+                break;
+            }
+        }
+    };
+
     render() {
         console.log('pppp', this.props);
         const stageID = this.props.params.stageId;
-        return (<div className="stage-container">
+        return (<div className="stage-container"
+                     onKeyDown={ this.keyHandler.bind(this, true) }
+                     onKeyUp={ this.keyHandler.bind(this, false) }
+                    tabIndex="1">
                     <WindowHeader>Poziom #{stageID}</WindowHeader>
                     <div className="game-area">
                         <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.state} />
@@ -84,15 +112,16 @@ class Stage extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps = {}) => {
+const mapStateToProps = (state) => {
     return {
-        wizard:state.wizard
+        wizard:state.game.wizard
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        stageLoad: () => dispatch(actions.loadData())
+        stageLoad: () => dispatch(actions.loadData()),
+        wizardMoveUp: () => dispatch(actions.wizardMoveUp())
     }
 };
 

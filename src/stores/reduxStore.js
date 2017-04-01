@@ -1,11 +1,11 @@
 import {createStore, combineReducers} from 'redux';
 
 import stagesReducer from '../reducers/stagesReducer';
-import wizardReducer from '../reducers/wizardReducer';
+import gameReducer from '../reducers/gameReducer';
 
 const rootReducer = combineReducers({
     stages: stagesReducer,
-    wizard: wizardReducer
+    game: gameReducer
 });
 
 const store = createStore(rootReducer, {});

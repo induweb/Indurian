@@ -18,7 +18,7 @@ class CrateView extends React.Component {
 
 const mapStateToProps = (state = {}) => {
     return {
-        stages:state.stages
+        stages:state.stages.stagesData
     }
 };
 

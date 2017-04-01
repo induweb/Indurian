@@ -7,4 +7,4 @@ const actions = [
 ];
 console.log('actions', actions);
 
-export default actions[0];
+export default actions[0]
