@@ -62,3 +62,14 @@
         box-shadow: 0 0 12px 1px #00ccff;
     }
 }
+
+@keyframes spell-glow {
+
+    33% {
+        box-shadow: 0 0 15px 1px #0d6693;
+    }
+
+    66% {
+        box-shadow: 0 0 12px 1px #0d6693;
+    }
+}

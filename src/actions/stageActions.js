@@ -26,7 +26,7 @@ export function wizardMoveUp(){
         type: ACTIONS.WIZARD_MOVE_UP,
         payload: {
             positionMove: -5,
-            state: 'idle'
+            status: 'idle'
         },
         meta:{
             timestamp: Date.now()
@@ -39,7 +39,35 @@ export function wizardMoveDown(){
         type: ACTIONS.WIZARD_MOVE_DOWN,
         payload: {
             positionMove: 5,
-            state: 'idle'
+            status: 'idle'
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function spellCasting(){
+    return{
+        type: ACTIONS.SPELL_CASTING,
+        payload: {
+            spellWidth: 10,
+            status: 'attack',
+            display: 'block'
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function castStop(){
+    return{
+        type: ACTIONS.CAST_STOP,
+        payload: {
+            width: 0,
+            status: 'idle',
+            display: 'none'
         },
         meta:{
             timestamp: Date.now()

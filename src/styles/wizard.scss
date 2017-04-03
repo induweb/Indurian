@@ -29,8 +29,8 @@
     border-radius: 50%;
     position: absolute;
     top: 23px;
-    left: 150px;
-    background-color: #f40aff;
+    left: 80px;
+    //background-color: #f40aff;
     -webkit-animation: spell-anim-1 .2s infinite; /* Safari 4+ */
     -moz-animation:    spell-anim-1 .2s infinite; /* Fx 5+ */
     -o-animation:      spell-anim-1 .2s infinite;
@@ -38,6 +38,7 @@
 
     .before {
         position: absolute;
+        right: 0;
         width: 20px;
         height: 10px;
         margin-top: 0px;
@@ -53,6 +54,7 @@
 
     .after {
         position: absolute;
+        right: 0;
         width: 15px;
         height: 10px;
         margin-top: 0px;
@@ -64,6 +66,19 @@
         -moz-animation:    spell-anim-3 .2s infinite; /* Fx 5+ */
         -o-animation:      spell-anim-3 .2s infinite;
         animation:         spell-anim-3 .2s infinite; /* IE 10+, Fx 29+ */
+    }
+
+    &::after {
+        content: '';
+        height: 1px;
+        top: 4px;
+        width: 100%;
+        position: absolute;
+        animation: spell-glow .2s infinite ease;
+        background: #ffffff;
+        right: 9px;
+        border-radius: 10px;
+        box-shadow: 0 0 7px 2px #0d6693;
     }
 }
 
