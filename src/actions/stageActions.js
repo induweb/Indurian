@@ -86,3 +86,27 @@ export function loopTick(){
         }
     };
 }
+
+export function changeDirX(){
+    return{
+        type: ACTIONS.CHANGE_DIR_X,
+        payload: {
+            // width: 0,
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function changeDirY(){
+    return{
+        type: ACTIONS.CHANGE_DIR_Y,
+        payload: {
+            // width: 0,
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}

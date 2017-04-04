@@ -90,6 +90,21 @@ class Stage extends React.Component {
         this.keyInterval[keyCode] = null;
     };
 
+    checkBorderCollision = () => {
+        if (this.props.ball.positionLeft + this.props.ball.dirX <- this.props.area.minX) {
+            this.props.changeDirX();
+        }
+        if (this.props.ball.positionTop + this.props.ball.dirY <= this.props.area.minY) {
+            this.props.changeDirY();
+        }
+        if (this.props.ball.positionLeft + this.props.ball.dirX + this.props.ball.radius * 2 >= this.props.area.maxX) {
+            this.props.changeDirX();
+        }
+        if (this.props.ball.positionTop + this.props.ball.dirY + this.props.ball.radius * 2 >= this.props.area.maxY) {
+            this.props.changeDirY();
+        }
+    };
+
     componentWillMount(){
         document.addEventListener('keydown', this.keyHandler.bind(this, true));
         document.addEventListener('keyup', this.keyHandler.bind(this, false));
@@ -97,6 +112,7 @@ class Stage extends React.Component {
 
     componentDidMount(){
         this.gameLoop = setInterval(() => {
+            this.checkBorderCollision();
             this.props.loopTick();
         }, 20);
     }
@@ -128,7 +144,8 @@ const mapStateToProps = (state) => {
     return {
         wizard:state.game.wizard,
         spell: state.game.spell,
-        ball: state.game.ball
+        ball: state.game.ball,
+        area: state.game.area
     }
 };
 
@@ -139,7 +156,10 @@ const mapDispatchToProps = (dispatch) => {
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         spellCasting: () => dispatch(actions.spellCasting()),
         castStop: () => dispatch(actions.castStop()),
-        loopTick: () => dispatch(actions.loopTick())
+        loopTick: () => dispatch(actions.loopTick()),
+        changeDirX: () => dispatch(actions.changeDirX()),
+        changeDirY: () => dispatch(actions.changeDirY())
+
     }
 };
 

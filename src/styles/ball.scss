@@ -1,10 +1,9 @@
 .ball {
     position: absolute;
-    width: 15px;
-    height: 15px;
-    //top: 210px;
-    //left: 120px;
-    border-radius: 10px;
+    width: 16px;
+    height: 16px;
+    z-index: 10;
+    border-radius: 50%;
 
     /* Animation to spin and move the sphere */
     -webkit-animation: spin 1000ms linear infinite;
