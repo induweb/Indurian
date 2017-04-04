@@ -74,3 +74,15 @@ export function castStop(){
         }
     };
 }
+
+export function loopTick(){
+    return{
+        type: ACTIONS.LOOP_TICK,
+        payload: {
+            // width: 0,
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}

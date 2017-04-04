@@ -5,7 +5,8 @@ const ACTIONS = {
     WIZARD_MOVE_UP: Symbol('WIZARD_MOVE_UP'),
     WIZARD_MOVE_DOWN: Symbol('WIZARD_MOVE_DOWN'),
     SPELL_CASTING: Symbol('SPELL_CASTING'),
-    CAST_STOP: Symbol('CAST_STOP')
+    CAST_STOP: Symbol('CAST_STOP'),
+    LOOP_TICK: Symbol('LOOP_TICK')
 };
 
 export default ACTIONS

@@ -1,9 +1,9 @@
 .ball {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 50%;
-    left: 200px;
+    width: 15px;
+    height: 15px;
+    //top: 210px;
+    //left: 120px;
     border-radius: 10px;
 
     /* Animation to spin and move the sphere */
@@ -17,7 +17,7 @@
 }
 
 .normal-ball {
-    background-color: #79ebec;
+    background-color: #2b8cc9;
     //border: 3px solid #fff;
     background-image: -webkit-linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
     background-image: -moz-linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);

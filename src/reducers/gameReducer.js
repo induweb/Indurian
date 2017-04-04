@@ -9,6 +9,12 @@ const initialState = {
         width: 0,
         top: 0,
         display: 'none'
+    },
+    ball: {
+        positionTop: 210,
+        positionLeft: 120,
+        directionX: 2,
+        directionY: 2
     }
 };
 
@@ -41,6 +47,13 @@ const gameReducer = (state = initialState, action) => {
                     display: action.payload.display
                 },
                 wizard: {...state.wizard, status: action.payload.status}
+            };
+        case ACTIONS.LOOP_TICK:
+            return {...state,
+                ball: {...state.ball,
+                    positionTop: state.ball.positionTop + state.ball.directionY,
+                    positionLeft: state.ball.positionLeft + state.ball.directionX
+                }
             };
 
         default:

@@ -16,6 +16,8 @@ class Stage extends React.Component {
         super(props);
         this.keyInterval = [];
 
+        this.gameLoop = function () {};
+
         //load stage data
         props.stageLoad();
     }
@@ -93,7 +95,14 @@ class Stage extends React.Component {
         document.addEventListener('keyup', this.keyHandler.bind(this, false));
     }
 
+    componentDidMount(){
+        this.gameLoop = setInterval(() => {
+            this.props.loopTick();
+        }, 20);
+    }
+
     componentWillUnmount() {
+        clearInterval(this.gameLoop);
         document.removeEventListener('keydown', this.keyHandler.bind(this, true));
         document.removeEventListener('keyup', this.keyHandler.bind(this, false));
     }
@@ -106,7 +115,7 @@ class Stage extends React.Component {
                     <div className="game-area">
                         <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.status} />
                         <Spell width={this.props.spell.width} top={this.props.spell.top} display={this.props.spell.display} />
-                        <Ball />
+                        <Ball top={this.props.ball.positionTop} left={this.props.ball.positionLeft}/>
                         <CrateView id={stageID} />
                     </div>
                  </div>
@@ -118,7 +127,8 @@ class Stage extends React.Component {
 const mapStateToProps = (state) => {
     return {
         wizard:state.game.wizard,
-        spell: state.game.spell
+        spell: state.game.spell,
+        ball: state.game.ball
     }
 };
 
@@ -128,7 +138,8 @@ const mapDispatchToProps = (dispatch) => {
         wizardMoveUp: () => dispatch(actions.wizardMoveUp()),
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         spellCasting: () => dispatch(actions.spellCasting()),
-        castStop: () => dispatch(actions.castStop())
+        castStop: () => dispatch(actions.castStop()),
+        loopTick: () => dispatch(actions.loopTick())
     }
 };
 
