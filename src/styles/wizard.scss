@@ -14,6 +14,14 @@
     background-image: url(../images/sprites/idle.png);
 }
 
+.wizard-run {
+    -webkit-animation: wizard-run-anim .5s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    wizard-run-anim .5s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      wizard-run-anim .5s steps(1) infinite;
+    animation:         wizard-run-anim .5s steps(1) infinite; /* IE 10+, Fx 29+ */
+    background-image: url(../images/sprites/run.png);
+}
+
 .wizard-attack {
     -webkit-animation: wizard-attack-anim .3s steps(1) infinite; /* Safari 4+ */
     -moz-animation:    wizard-attack-anim .3s steps(1) infinite; /* Fx 5+ */
@@ -137,6 +145,32 @@ keyframes wizard-attack-anim {
     75%  { background-position: 0 -74px;}
 
     //75%  { background-position: 0 -219px;}
+}
+
+@keyframes wizard-run-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -146px;}
+    75%  { background-position: 0 -219px;}
+}
+
+@-webkit-keyframes wizard-run-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -146px;}
+    75%  { background-position: 0 -219px;}
+}
+@-moz-keyframes wizard-run-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -146px;}
+    75%  { background-position: 0 -219px;}
+}
+@-o-keyframes wizard-run-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -146px;}
+    75%  { background-position: 0 -219px;}
 }
 
 @keyframes spell-anim-1 {

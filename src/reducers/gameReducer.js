@@ -12,8 +12,12 @@ const initialState = {
     },
     ball: {
         radius: 8,
-        positionTop: 210,
-        positionLeft: 120,
+        position: {
+            top: 210,
+            bottom: 226,
+            left: 120,
+            right: 136
+        },
         dirX: 2,
         dirY: 2
     },
@@ -27,6 +31,8 @@ const initialState = {
 
 const gameReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ACTIONS.WIZARD_IDLE:
+            return {...state, wizard: {...state.wizard, status: action.payload.status}};
         case ACTIONS.WIZARD_MOVE_UP:
             return {...state, wizard: {
                 positionTop: state.wizard.positionTop + action.payload.positionMove,
@@ -58,8 +64,12 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.LOOP_TICK:
             return {...state,
                 ball: {...state.ball,
-                    positionTop: state.ball.positionTop + state.ball.dirY,
-                    positionLeft: state.ball.positionLeft + state.ball.dirX
+                    position: {
+                        top: state.ball.position.top + state.ball.dirY,
+                        bottom: state.ball.position.top + state.ball.dirY + 16,
+                        left: state.ball.position.left + state.ball.dirX,
+                        right: state.ball.position.left + state.ball.dirX + 16
+                    }
                 }
             };
         case ACTIONS.CHANGE_DIR_X:

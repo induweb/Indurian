@@ -21,12 +21,24 @@ export function loadStage(){
     };
 }
 
+export function wizardIdle(){
+    return{
+        type: ACTIONS.WIZARD_IDLE,
+        payload: {
+            status: 'idle'
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function wizardMoveUp(){
     return{
         type: ACTIONS.WIZARD_MOVE_UP,
         payload: {
             positionMove: -5,
-            status: 'idle'
+            status: 'run'
         },
         meta:{
             timestamp: Date.now()
@@ -39,7 +51,7 @@ export function wizardMoveDown(){
         type: ACTIONS.WIZARD_MOVE_DOWN,
         payload: {
             positionMove: 5,
-            status: 'idle'
+            status: 'run'
         },
         meta:{
             timestamp: Date.now()

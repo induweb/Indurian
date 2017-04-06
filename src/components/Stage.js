@@ -88,21 +88,30 @@ class Stage extends React.Component {
     clearKeyInterval = (keyCode) => {
         clearInterval(this.keyInterval[keyCode]);
         this.keyInterval[keyCode] = null;
+        this.props.wizardIdle();
     };
 
     checkBorderCollision = () => {
-        if (this.props.ball.positionLeft + this.props.ball.dirX <- this.props.area.minX) {
+        if (this.props.ball.position.left + this.props.ball.dirX <= this.props.area.minX) {
             this.props.changeDirX();
         }
-        if (this.props.ball.positionTop + this.props.ball.dirY <= this.props.area.minY) {
+        if (this.props.ball.position.top + this.props.ball.dirY <= this.props.area.minY) {
             this.props.changeDirY();
         }
-        if (this.props.ball.positionLeft + this.props.ball.dirX + this.props.ball.radius * 2 >= this.props.area.maxX) {
+        if (this.props.ball.position.right + this.props.ball.dirX >= this.props.area.maxX) {
             this.props.changeDirX();
         }
-        if (this.props.ball.positionTop + this.props.ball.dirY + this.props.ball.radius * 2 >= this.props.area.maxY) {
+        if (this.props.ball.position.bottom + this.props.ball.dirY >= this.props.area.maxY) {
             this.props.changeDirY();
         }
+    };
+
+    checkCratesCollision = () => {
+        return false;
+    };
+
+    checkPaddleCollision = () => {
+        return false;
     };
 
     componentWillMount(){
@@ -113,8 +122,9 @@ class Stage extends React.Component {
     componentDidMount(){
         this.gameLoop = setInterval(() => {
             this.checkBorderCollision();
+            this.checkPaddleCollision();
             this.props.loopTick();
-        }, 20);
+        }, 15);
     }
 
     componentWillUnmount() {
@@ -131,7 +141,7 @@ class Stage extends React.Component {
                     <div className="game-area">
                         <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.status} />
                         <Spell width={this.props.spell.width} top={this.props.spell.top} display={this.props.spell.display} />
-                        <Ball top={this.props.ball.positionTop} left={this.props.ball.positionLeft}/>
+                        <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
                         <CrateView id={stageID} />
                     </div>
                  </div>
@@ -152,6 +162,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         stageLoad: () => dispatch(actions.loadData()),
+        wizardIdle: () => dispatch(actions.wizardIdle()),
         wizardMoveUp: () => dispatch(actions.wizardMoveUp()),
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         spellCasting: () => dispatch(actions.spellCasting()),
@@ -159,7 +170,6 @@ const mapDispatchToProps = (dispatch) => {
         loopTick: () => dispatch(actions.loopTick()),
         changeDirX: () => dispatch(actions.changeDirX()),
         changeDirY: () => dispatch(actions.changeDirY())
-
     }
 };
 
