@@ -106,11 +106,57 @@ class Stage extends React.Component {
         }
     };
 
-    checkCratesCollision = () => {
-        return false;
+    checkCollision = (objectPosition) => {
+        // this.props.ball.position > object.top ;
+        let ballPosition = this.props.ball.position;
+
+        if (ballPosition.bottom < objectPosition.top)
+                return false; //Above
+        if (ballPosition.top > objectPosition.bottom)
+                return false; //Below
+        if (ballPosition.left > objectPosition.right)
+                return false; //Left
+        if (ballPosition.right < objectPosition.left)
+                 return false; //Right
+
+        // We have a hit! Update direction based on where we hit the object
+
+
+        //Moving towards lower right
+        if (this.props.ball.dirX == 2 && this.props.ball.dirY == 2) {
+            if (ballPosition.top > objectPosition.top)
+                this.props.changeDirX();
+            else
+            this.props.changeDirY();
+        }
+
+        //Moving towards lower left
+        else if (this.props.ball.dirX == -2 && this.props.ball.dirY == 2) {
+            if (ballPosition.top > objectPosition.top)
+                this.props.changeDirX();
+            else
+                this.props.changeDirY();
+        }
+
+        //Moving towards upper right
+        else if (this.props.ball.dirX == 2 && this.props.ball.dirY == -2) {
+            if (ballPosition.top > objectPosition.top)
+                this.props.changeDirX();
+            else
+                this.props.changeDirY();
+        }
+
+         //Moving towards upper-left
+         else if (this.props.ball.dirX == -2 && this.props.ball.dirY == -2) {
+            if (ballPosition.top > objectPosition.top)
+                this.props.changeDirX();
+            else
+                this.props.changeDirY();
+         }
     };
 
     checkPaddleCollision = () => {
+        this.checkCollision(this.props.wizard.paddle);
         return false;
     };
 

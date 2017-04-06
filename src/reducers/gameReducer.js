@@ -3,7 +3,13 @@ import ACTIONS from '../constants/actions';
 const initialState = {
     wizard: {
         positionTop: 175,
-        status: 'idle'
+        status: 'idle',
+        paddle: {
+            top: 175,
+            right: 105,
+            bottom: 102,
+            left: 102
+        }
     },
     spell: {
         width: 0,
@@ -36,12 +42,22 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.WIZARD_MOVE_UP:
             return {...state, wizard: {
                 positionTop: state.wizard.positionTop + action.payload.positionMove,
-                status: action.payload.status
+                status: action.payload.status,
+                paddle: {
+                    ...state.wizard.paddle,
+                    top: state.wizard.positionTop + action.payload.positionMove,
+                    bottom: state.wizard.positionTop + action.payload.positionMove + 73
+                }
             }};
         case ACTIONS.WIZARD_MOVE_DOWN:
             return {...state, wizard: {
                 positionTop: state.wizard.positionTop + action.payload.positionMove,
-                status: action.payload.status
+                status: action.payload.status,
+                paddle: {
+                    ...state.wizard.paddle,
+                    top: state.wizard.positionTop + action.payload.positionMove,
+                    bottom: state.wizard.positionTop + action.payload.positionMove + 73
+                }
             }};
         case ACTIONS.SPELL_CASTING:
             return {...state,
@@ -50,7 +66,10 @@ const gameReducer = (state = initialState, action) => {
                     top: state.wizard.positionTop + 33,
                     display: action.payload.display
                 },
-                wizard: {...state.wizard, status: action.payload.status}
+                wizard: {
+                    ...state.wizard,
+                    status: action.payload.status
+                }
             };
         case ACTIONS.CAST_STOP:
             return {...state,
@@ -59,7 +78,10 @@ const gameReducer = (state = initialState, action) => {
                     top: 0,
                     display: action.payload.display
                 },
-                wizard: {...state.wizard, status: action.payload.status}
+                wizard: {
+                    ...state.wizard,
+                    status: action.payload.status
+                }
             };
         case ACTIONS.LOOP_TICK:
             return {...state,
