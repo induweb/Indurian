@@ -1,10 +1,11 @@
 import ACTIONS from '../constants/actions'
 import stagesData from 'json-loader!../sources/data.json';
 
-export function loadData() {
+export function loadData(id) {
     return {
         type: ACTIONS.LOAD_DATA,
         payload: stagesData.stages,
+        id: id,
         meta: {
             timestamp: Date.now()
         }
@@ -116,6 +117,30 @@ export function changeDirY(){
         type: ACTIONS.CHANGE_DIR_Y,
         payload: {
             // width: 0,
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function decreaseCrateValue(id){
+    return{
+        type: ACTIONS.DECREASE_CRATE_VALUE,
+        payload: {
+            id: id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function hideCrate(id){
+    return{
+        type: ACTIONS.HIDE_CRATE,
+        payload: {
+            id
         },
         meta:{
             timestamp: Date.now()

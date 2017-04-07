@@ -1,6 +1,8 @@
 import ACTIONS from '../constants/actions';
 
 const initialState = {
+    stagesData: [],
+    blocks: [],
     wizard: {
         positionTop: 175,
         status: 'idle',
@@ -37,6 +39,12 @@ const initialState = {
 
 const gameReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ACTIONS.LOAD_DATA:
+            return {
+                ...state,
+                stagesData: action.payload,
+                blocks: action.payload[action.id - 1].blocks
+            };
         case ACTIONS.WIZARD_IDLE:
             return {...state, wizard: {...state.wizard, status: action.payload.status}};
         case ACTIONS.WIZARD_MOVE_UP:
@@ -105,6 +113,17 @@ const gameReducer = (state = initialState, action) => {
                 ball: {...state.ball,
                     dirY: state.ball.dirY * -1
                 }
+            };
+        case ACTIONS.HIDE_CRATE:
+            let newState = {
+                ...state.blocks[action.payload.id],
+                value: 0
+            };
+            let index = action.payload.id;
+            let blocks = [ ...state.blocks.slice(0,index), newState, ...state.blocks.slice(index+1, state.blocks.length)];
+
+            return {...state,
+                blocks: blocks
             };
 
         default:

@@ -22,7 +22,7 @@
           "top": 80,
           "left": 426,
           "type":"crate-1",
-          "value": 2,
+          "value": 1,
           "key": 2
         },
         {
@@ -43,7 +43,7 @@
           "top": 200,
           "left": 426,
           "type":"crate-1",
-          "value": 2,
+          "value": 1,
           "key": 5
         },
         {
@@ -64,7 +64,7 @@
           "top": 320,
           "left": 426,
           "type":"crate-1",
-          "value": 2,
+          "value": 1,
           "key": 8
         },
         {
@@ -99,7 +99,7 @@
           "top": 80,
           "left": 466,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 13
         },
         {
@@ -120,7 +120,7 @@
           "top": 200,
           "left": 466,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 16
         },
         {
@@ -141,7 +141,7 @@
           "top": 320,
           "left": 466,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 19
         },
         {
@@ -176,7 +176,7 @@
           "top": 80,
           "left": 506,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 24
         },
         {
@@ -197,7 +197,7 @@
           "top": 200,
           "left": 506,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 27
         },
         {
@@ -218,7 +218,7 @@
           "top": 320,
           "left": 506,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 30
         },
         {
@@ -253,7 +253,7 @@
           "top": 80,
           "left": 546,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 35
         },
         {
@@ -274,7 +274,7 @@
           "top": 200,
           "left": 546,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 38
         },
         {
@@ -295,7 +295,7 @@
           "top": 320,
           "left": 546,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 41
         },
         {
@@ -330,7 +330,7 @@
           "top": 80,
           "left": 586,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 46
         },
         {
@@ -351,7 +351,7 @@
           "top": 200,
           "left": 586,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 49
         },
         {
@@ -372,7 +372,7 @@
           "top": 320,
           "left": 586,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 52
         },
         {
@@ -407,7 +407,7 @@
           "top": 80,
           "left": 626,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 57
         },
         {
@@ -428,7 +428,7 @@
           "top": 200,
           "left": 626,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 60
         },
         {
@@ -449,7 +449,7 @@
           "top": 320,
           "left": 626,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 63
         },
         {
@@ -484,7 +484,7 @@
           "top": 80,
           "left": 666,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 68
         },
         {
@@ -505,7 +505,7 @@
           "top": 200,
           "left": 666,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 71
         },
         {
@@ -526,7 +526,7 @@
           "top": 320,
           "left": 666,
           "type": "crate-3",
-          "value": 2,
+          "value": 1,
           "key": 74
         },
         {
@@ -561,7 +561,7 @@
           "top": 80,
           "left": 706,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 79
         },
         {
@@ -582,7 +582,7 @@
           "top": 200,
           "left": 706,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 82
         },
         {
@@ -603,7 +603,7 @@
           "top": 320,
           "left": 706,
           "type": "stone",
-          "value": 2,
+          "value": 1,
           "key": 85
         },
         {
@@ -646,49 +646,49 @@
           "top": 130,
           "left": 400,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 2
         },
         {
           "top": 170,
           "left": 480,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 3
         },
         {
           "top": 210,
           "left": 400,
           "type": "crate-1",
-          "value": 2,
+          "value": 1,
           "key": 4
         },
         {
           "top": 250,
           "left": 400,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 5
         },
         {
           "top": 290,
           "left": 400,
           "type": "crate-2",
-          "value": 2,
+          "value": 1,
           "key": 6
         },
         {
           "top": 370,
           "left": 440,
           "type": "stone",
-          "value": 3,
+          "value": 1,
           "key": 7
         },
         {
           "top": 370,
           "left": 520,
           "type": "stone",
-          "value": 3,
+          "value": 1,
           "key": 8
         }
       ]

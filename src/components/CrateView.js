@@ -5,20 +5,27 @@ import { connect } from 'react-redux';
 // require('../styles/stage.scss')
 
 class CrateView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
   render () {
-      let stageData = this.props.stages[this.props.id - 1];
     return (
         <div>
-            {stageData.blocks.map(data => ( <Crate {...data}/> ))}
+            {this.props.blocks.map(data => {
+                return (
+                    <Crate key={data.key} {...data}/>
+                )
+            })}
         </div>
     );
-
   }
+
 }
 
 const mapStateToProps = (state = {}) => {
     return {
-        stages:state.stages.stagesData
+        blocks: state.game.blocks
     }
 };
 

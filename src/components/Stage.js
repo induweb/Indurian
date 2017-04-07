@@ -19,7 +19,7 @@ class Stage extends React.Component {
         this.gameLoop = function () {};
 
         //load stage data
-        props.stageLoad();
+        props.stageLoad(props.params.stageId);
     }
 
     keyHandler = (data, event) => {
@@ -117,21 +117,21 @@ class Stage extends React.Component {
         if (ballPosition.left > objectPosition.right)
                 return false; //Left
         if (ballPosition.right < objectPosition.left)
-                 return false; //Right
+                return false; //Right
 
         // We have a hit! Update direction based on where we hit the object
 
 
         //Moving towards lower right
-        if (this.props.ball.dirX == 2 && this.props.ball.dirY == 2) {
+        if (this.props.ball.dirX > 0 && this.props.ball.dirY > 0) {
             if (ballPosition.top > objectPosition.top)
                 this.props.changeDirX();
             else
-            this.props.changeDirY();
+                this.props.changeDirY();
         }
 
         //Moving towards lower left
-        else if (this.props.ball.dirX == -2 && this.props.ball.dirY == 2) {
+        else if (this.props.ball.dirX < 0 && this.props.ball.dirY > 0) {
             if (ballPosition.top > objectPosition.top)
                 this.props.changeDirX();
             else
@@ -139,7 +139,7 @@ class Stage extends React.Component {
         }
 
         //Moving towards upper right
-        else if (this.props.ball.dirX == 2 && this.props.ball.dirY == -2) {
+        else if (this.props.ball.dirX > 0 && this.props.ball.dirY < 0) {
             if (ballPosition.top > objectPosition.top)
                 this.props.changeDirX();
             else
@@ -147,17 +147,39 @@ class Stage extends React.Component {
         }
 
          //Moving towards upper-left
-         else if (this.props.ball.dirX == -2 && this.props.ball.dirY == -2) {
+         else if (this.props.ball.dirX < 0 && this.props.ball.dirY < 0) {
             if (ballPosition.top > objectPosition.top)
                 this.props.changeDirX();
             else
                 this.props.changeDirY();
          }
+
+         return true;
     };
 
     checkPaddleCollision = () => {
         this.checkCollision(this.props.wizard.paddle);
-        return false;
+    };
+
+    checkCratesCollision = () => {
+        let blocks = this.props.blocks;
+        blocks.forEach((block)=> {
+            if (block.value !== 0) {
+                let position = {
+                    top: block.top,
+                    right: block.left + 40,
+                    bottom: block.top + 40,
+                    left: block.left
+                };
+                if (this.checkCollision(position)) {
+                    if (block.value > 1) {
+                        this.props.decreaseCrateValue(block.key);
+                    } else {
+                        this.props.hideCrate(block.key);
+                    }
+                }
+            }
+        });
     };
 
     componentWillMount(){
@@ -169,6 +191,7 @@ class Stage extends React.Component {
         this.gameLoop = setInterval(() => {
             this.checkBorderCollision();
             this.checkPaddleCollision();
+            this.checkCratesCollision();
             this.props.loopTick();
         }, 15);
     }
@@ -201,13 +224,14 @@ const mapStateToProps = (state) => {
         wizard:state.game.wizard,
         spell: state.game.spell,
         ball: state.game.ball,
-        area: state.game.area
+        area: state.game.area,
+        blocks: state.game.blocks
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        stageLoad: () => dispatch(actions.loadData()),
+        stageLoad: (id) => dispatch(actions.loadData(id)),
         wizardIdle: () => dispatch(actions.wizardIdle()),
         wizardMoveUp: () => dispatch(actions.wizardMoveUp()),
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
@@ -215,7 +239,9 @@ const mapDispatchToProps = (dispatch) => {
         castStop: () => dispatch(actions.castStop()),
         loopTick: () => dispatch(actions.loopTick()),
         changeDirX: () => dispatch(actions.changeDirX()),
-        changeDirY: () => dispatch(actions.changeDirY())
+        changeDirY: () => dispatch(actions.changeDirY()),
+        decreaseCrateValue: () => dispatch(actions.decreaseCrateValue()),
+        hideCrate: (id) => dispatch(actions.hideCrate(id))
     }
 };
 
