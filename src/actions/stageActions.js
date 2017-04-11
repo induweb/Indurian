@@ -137,6 +137,7 @@ export function changeDirXWithParam(param){
 }
 
 export function changeDirYWithParam(param){
+    console.log('new dirY', param);
     return{
         type: ACTIONS.CHANGE_DIR_Y_WITH_PARAM,
         payload: {

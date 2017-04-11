@@ -26,8 +26,8 @@ const initialState = {
             left: 120,
             right: 136
         },
-        dirX: 1,
-        dirY: 1
+        dirX: 3,
+        dirY: 3
     },
     area: {
         minX: 0,
@@ -111,7 +111,7 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.CHANGE_DIR_X_WITH_PARAM:
             return {...state,
                 ball: {...state.ball,
-                    dirX:  action.payload.param * 4
+                    dirX:  action.payload.param
                 }
             };
         case ACTIONS.CHANGE_DIR_Y:
@@ -123,7 +123,7 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.CHANGE_DIR_Y_WITH_PARAM:
             return {...state,
                 ball: {...state.ball,
-                    dirY:  action.payload.param * 4
+                    dirY:  action.payload.param
                 }
             };
         case ACTIONS.HIDE_CRATE:

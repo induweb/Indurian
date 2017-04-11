@@ -154,8 +154,9 @@ class Stage extends React.Component {
 
     bounceWithAngle = (angle) => {
         angle = angle * (Math.PI / 180);
-        this.props.changeDirX();
-        this.props.changeDirYWithParam(-Math.cos(angle));
+        // this.props.changeDirX();
+        this.props.changeDirXWithParam(Math.sin(angle) * 4); //ball speed param
+        this.props.changeDirYWithParam(-Math.cos(angle) * 4); //ball speed param
     };
 
     calculateHitAngle = () => {
@@ -241,7 +242,7 @@ class Stage extends React.Component {
             this.checkPaddleCollision();
             this.checkCratesCollision();
             this.props.loopTick();
-        }, 15);
+        }, 10);
     }
 
     componentWillUnmount() {
