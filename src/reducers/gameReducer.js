@@ -7,9 +7,9 @@ const initialState = {
         positionTop: 175,
         status: 'idle',
         paddle: {
-            top: 175,
+            top: 102,
             right: 105,
-            bottom: 102,
+            bottom: 175,
             left: 101
         }
     },

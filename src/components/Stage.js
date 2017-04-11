@@ -154,7 +154,6 @@ class Stage extends React.Component {
 
     bounceWithAngle = (angle) => {
         angle = angle * (Math.PI / 180);
-        // this.props.changeDirX();
         this.props.changeDirXWithParam(Math.sin(angle) * 4); //ball speed param
         this.props.changeDirYWithParam(-Math.cos(angle) * 4); //ball speed param
     };
