@@ -130,12 +130,12 @@ class Stage extends React.Component {
     }
 
 
-    checkCollision = (objectPosition) => {
-
-        let w = 0.5 * (this.width(this.props.ball.position) + this.width(objectPosition));
-        let h = 0.5 * (this.height(this.props.ball.position) + this.height(objectPosition));
-        let dx = this.centerX(this.props.ball.position) - this.centerX(objectPosition);
-        let dy = this.centerY(this.props.ball.position) - this.centerY(objectPosition);
+    checkCollision = (objectPosition, mainElementPosition) => {
+        let mainElementPos = mainElementPosition || this.props.ball.position;
+        let w = 0.5 * (this.width(mainElementPos) + this.width(objectPosition));
+        let h = 0.5 * (this.height(mainElementPos) + this.height(objectPosition));
+        let dx = this.centerX(mainElementPos) - this.centerX(objectPosition);
+        let dy = this.centerY(mainElementPos) - this.centerY(objectPosition);
 
         if (Math.abs(dx) <= w && Math.abs(dy) <= h) {
             let wy = w * dy;
@@ -181,6 +181,17 @@ class Stage extends React.Component {
         }
     };
 
+    checkSpellCollision = (objectPosition) => {
+        let spellPosition = {
+            top: this.props.spell.top,
+            right: this.props.spell.width + 80,
+            bottom: this.props.spell.top + 10,
+            left: 80
+        };
+
+        return this.checkCollision(objectPosition, spellPosition);
+    };
+
     checkCratesCollision = () => {
         let blocks = this.props.blocks;
         let closestBlock = {
@@ -203,6 +214,18 @@ class Stage extends React.Component {
                 if (collision.distance < closestBlock.distance) {
                     closestBlock = collision;
                     chosenBlock = block;
+                }
+
+                if (this.keyInterval[KEYCODES.RIGHT]) {
+                    if (this.checkSpellCollision(position)) {
+                        if (block.value > 1) {
+                            this.props.decreaseCrateValue(block.key);
+                        } else {
+                            this.props.hideCrate(block.key);
+                        }
+                        this.clearKeyInterval(KEYCODES.RIGHT);
+                        this.props.castStop();
+                    }
                 }
             }
         });
