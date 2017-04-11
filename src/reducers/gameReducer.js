@@ -7,9 +7,9 @@ const initialState = {
         positionTop: 175,
         status: 'idle',
         paddle: {
-            top: 102,
+            top: 175,
             right: 105,
-            bottom: 175,
+            bottom: 248,
             left: 101
         }
     },
@@ -127,15 +127,27 @@ const gameReducer = (state = initialState, action) => {
                 }
             };
         case ACTIONS.HIDE_CRATE:
-            let newState = {
+            let newStateHideCrate = {
                 ...state.blocks[action.payload.id],
                 value: 0
             };
-            let index = action.payload.id;
-            let blocks = [ ...state.blocks.slice(0,index), newState, ...state.blocks.slice(index+1, state.blocks.length)];
+            let indexHideCrate = action.payload.id;
+            let blocksHideCrate = [ ...state.blocks.slice(0,indexHideCrate), newStateHideCrate, ...state.blocks.slice(indexHideCrate+1, state.blocks.length)];
 
             return {...state,
-                blocks: blocks
+                blocks: blocksHideCrate
+            };
+
+        case ACTIONS.DECREASE_CRATE_VALUE:
+            let newStateDecrease = {
+                ...state.blocks[action.payload.id],
+                value: state.blocks[action.payload.id].value - 1
+            };
+            let indexDecrease = action.payload.id;
+            let blocksDecrease = [ ...state.blocks.slice(0,indexDecrease), newStateDecrease, ...state.blocks.slice(indexDecrease+1, state.blocks.length)];
+
+            return {...state,
+                blocks: blocksDecrease
             };
 
         default:

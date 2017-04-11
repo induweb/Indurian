@@ -290,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
         changeDirXWithParam: (param) => dispatch(actions.changeDirXWithParam(param)),
         changeDirY: () => dispatch(actions.changeDirY()),
         changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
-        decreaseCrateValue: () => dispatch(actions.decreaseCrateValue()),
+        decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id))
     }
 };

@@ -137,7 +137,6 @@ export function changeDirXWithParam(param){
 }
 
 export function changeDirYWithParam(param){
-    console.log('new dirY', param);
     return{
         type: ACTIONS.CHANGE_DIR_Y_WITH_PARAM,
         payload: {
@@ -153,7 +152,7 @@ export function decreaseCrateValue(id){
     return{
         type: ACTIONS.DECREASE_CRATE_VALUE,
         payload: {
-            id: id
+            id
         },
         meta:{
             timestamp: Date.now()
