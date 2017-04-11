@@ -124,6 +124,30 @@ export function changeDirY(){
     };
 }
 
+export function changeDirXWithParam(param){
+    return{
+        type: ACTIONS.CHANGE_DIR_X_WITH_PARAM,
+        payload: {
+            param
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function changeDirYWithParam(param){
+    return{
+        type: ACTIONS.CHANGE_DIR_Y_WITH_PARAM,
+        payload: {
+            param
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function decreaseCrateValue(id){
     return{
         type: ACTIONS.DECREASE_CRATE_VALUE,

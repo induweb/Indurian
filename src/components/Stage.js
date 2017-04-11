@@ -17,6 +17,13 @@ class Stage extends React.Component {
         this.keyInterval = [];
 
         this.gameLoop = function () {};
+        this.side = {
+            None :0,
+            Left : 1,
+            Top : 2,
+            Right : 3,
+            Bottom : 4
+        };
 
         //load stage data
         props.stageLoad(props.params.stageId);
@@ -106,80 +113,121 @@ class Stage extends React.Component {
         }
     };
 
+    centerX(objectPosition) {
+        return (objectPosition.left + objectPosition.right) / 2;
+    }
+
+    centerY(objectPosition) {
+        return (objectPosition.top + objectPosition.bottom) / 2;
+    }
+
+    width(objectPosition) {
+        return objectPosition.right - objectPosition.left;
+    }
+
+    height(objectPosition) {
+        return objectPosition.bottom - objectPosition.top;
+    }
+
+
     checkCollision = (objectPosition) => {
-        // this.props.ball.position > object.top ;
-        let ballPosition = this.props.ball.position;
 
-        if (ballPosition.bottom < objectPosition.top)
-                return false; //Above
-        if (ballPosition.top > objectPosition.bottom)
-                return false; //Below
-        if (ballPosition.left > objectPosition.right)
-                return false; //Left
-        if (ballPosition.right < objectPosition.left)
-                return false; //Right
+        let w = 0.5 * (this.width(this.props.ball.position) + this.width(objectPosition));
+        let h = 0.5 * (this.height(this.props.ball.position) + this.height(objectPosition));
+        let dx = this.centerX(this.props.ball.position) - this.centerX(objectPosition);
+        let dy = this.centerY(this.props.ball.position) - this.centerY(objectPosition);
 
-        // We have a hit! Update direction based on where we hit the object
+        if (Math.abs(dx) <= w && Math.abs(dy) <= h) {
+            let wy = w * dy;
+            let hx = h * dx;
+            let distance = Math.abs(dx) + Math.abs(dy);
 
-
-        //Moving towards lower right
-        if (this.props.ball.dirX > 0 && this.props.ball.dirY > 0) {
-            if (ballPosition.top > objectPosition.top)
-                this.props.changeDirX();
-            else
-                this.props.changeDirY();
+            if (wy > hx) {
+                return wy > -hx ? {side: this.side.Top, distance: distance} : {side: this.side.Left, distance: distance};
+            } else {
+                return wy > -hx ? {side: this.side.Right, distance: distance} : {side: this.side.Bottom, distance: distance};
+            }
+        } else {
+            return this.side.None;
         }
+    };
 
-        //Moving towards lower left
-        else if (this.props.ball.dirX < 0 && this.props.ball.dirY > 0) {
-            if (ballPosition.top > objectPosition.top)
-                this.props.changeDirX();
-            else
-                this.props.changeDirY();
-        }
+    bounceWithAngle = (angle) => {
+        angle = angle * (Math.PI / 180);
+        this.props.changeDirX();
+        this.props.changeDirYWithParam(-Math.cos(angle));
+    };
 
-        //Moving towards upper right
-        else if (this.props.ball.dirX > 0 && this.props.ball.dirY < 0) {
-            if (ballPosition.top > objectPosition.top)
-                this.props.changeDirX();
-            else
-                this.props.changeDirY();
-        }
+    calculateHitAngle = () => {
+        let ball = this.props.ball;
+        let paddlePosition = this.props.wizard.paddle;
 
-         //Moving towards upper-left
-         else if (this.props.ball.dirX < 0 && this.props.ball.dirY < 0) {
-            if (ballPosition.top > objectPosition.top)
-                this.props.changeDirX();
-            else
-                this.props.changeDirY();
-         }
+        let ballY = this.centerY(ball.position);
+        let hitSpot = ballY - paddlePosition.bottom;
+        let maxPaddle = this.height(paddlePosition) + ball.radius;
+        let minPaddle = -ball.radius;
+        let paddleRange = maxPaddle - minPaddle;
 
-         return true;
+        let minAngle = 60;
+        let maxAngle = 120;
+        let angleRange = maxAngle - minAngle;
+
+        return (((this.height(paddlePosition) - Math.abs(hitSpot)) * angleRange) / paddleRange) + minAngle;
     };
 
     checkPaddleCollision = () => {
-        this.checkCollision(this.props.wizard.paddle);
+        if (this.checkCollision(this.props.wizard.paddle).side) {
+            this.bounceWithAngle(this.calculateHitAngle());
+        }
     };
 
     checkCratesCollision = () => {
         let blocks = this.props.blocks;
+        let closestBlock = {
+            distance: 9999
+        };
+        let chosenBlock;
+        let wasHit = false;
         blocks.forEach((block)=> {
             if (block.value !== 0) {
+
                 let position = {
                     top: block.top,
                     right: block.left + 40,
                     bottom: block.top + 40,
                     left: block.left
                 };
-                if (this.checkCollision(position)) {
-                    if (block.value > 1) {
-                        this.props.decreaseCrateValue(block.key);
-                    } else {
-                        this.props.hideCrate(block.key);
-                    }
+
+                let collision = this.checkCollision(position);
+
+                if (collision.distance < closestBlock.distance) {
+                    closestBlock = collision;
+                    chosenBlock = block;
                 }
             }
         });
+
+        switch (closestBlock.side) {
+            case (this.side.Left):
+            case (this.side.Right):
+                this.props.changeDirX();
+                wasHit = true;
+                break;
+
+            case (this.side.Top):
+            case (this.side.Bottom):
+                this.props.changeDirY();
+                wasHit = true;
+                break;
+        }
+
+        if (wasHit) {
+            if (chosenBlock.value > 1) {
+                this.props.decreaseCrateValue(chosenBlock.key);
+            } else {
+                this.props.hideCrate(chosenBlock.key);
+            }
+        }
     };
 
     componentWillMount(){
@@ -239,7 +287,9 @@ const mapDispatchToProps = (dispatch) => {
         castStop: () => dispatch(actions.castStop()),
         loopTick: () => dispatch(actions.loopTick()),
         changeDirX: () => dispatch(actions.changeDirX()),
+        changeDirXWithParam: (param) => dispatch(actions.changeDirXWithParam(param)),
         changeDirY: () => dispatch(actions.changeDirY()),
+        changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
         decreaseCrateValue: () => dispatch(actions.decreaseCrateValue()),
         hideCrate: (id) => dispatch(actions.hideCrate(id))
     }

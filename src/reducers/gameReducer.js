@@ -10,7 +10,7 @@ const initialState = {
             top: 175,
             right: 105,
             bottom: 102,
-            left: 102
+            left: 101
         }
     },
     spell: {
@@ -21,13 +21,13 @@ const initialState = {
     ball: {
         radius: 8,
         position: {
-            top: 210,
-            bottom: 226,
+            top: 205,
+            bottom: 221,
             left: 120,
             right: 136
         },
-        dirX: 2,
-        dirY: 2
+        dirX: 1,
+        dirY: 1
     },
     area: {
         minX: 0,
@@ -108,10 +108,22 @@ const gameReducer = (state = initialState, action) => {
                     dirX: state.ball.dirX * -1
                 }
             };
+        case ACTIONS.CHANGE_DIR_X_WITH_PARAM:
+            return {...state,
+                ball: {...state.ball,
+                    dirX:  action.payload.param * 4
+                }
+            };
         case ACTIONS.CHANGE_DIR_Y:
             return {...state,
                 ball: {...state.ball,
                     dirY: state.ball.dirY * -1
+                }
+            };
+        case ACTIONS.CHANGE_DIR_Y_WITH_PARAM:
+            return {...state,
+                ball: {...state.ball,
+                    dirY:  action.payload.param * 4
                 }
             };
         case ACTIONS.HIDE_CRATE:
