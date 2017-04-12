@@ -38,7 +38,9 @@ class Stage extends React.Component {
             this.checkBorderCollision();
             this.checkPaddleCollision();
             this.checkCratesCollision();
-            this.props.increaseMana(0.1);
+            if (this.props.mana < 188) {
+                this.props.increaseMana(0.1);
+            }
             this.props.loopTick();
         }, 10);
     };
@@ -116,6 +118,9 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.RIGHT: {
+                if (!this.gameLoop) {
+                    return;
+                }
                 if (this.keyInterval[KEYCODES.DOWN]) {
                     this.clearKeyInterval(KEYCODES.DOWN);
                 }
