@@ -160,6 +160,24 @@ export function decreaseCrateValue(id){
     };
 }
 
+export function resetBall(){
+    return{
+        type: ACTIONS.RESET_BALL,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function decreaseLife(){
+    return{
+        type: ACTIONS.DECREASE_LIFE,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function addPoints(points){
     return{
         type: ACTIONS.ADD_POINTS,

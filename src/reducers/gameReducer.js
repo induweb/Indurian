@@ -159,6 +159,26 @@ const gameReducer = (state = initialState, action) => {
                 points: state.points + action.payload.points
             };
 
+        case ACTIONS.DECREASE_LIFE:
+            return {...state,
+                lifes: state.lifes - 1
+            };
+
+        case ACTIONS.RESET_BALL:
+            return {...state,
+                ball: {
+                    radius: 8,
+                    position: {
+                        top: 205,
+                        bottom: 221,
+                        left: 120,
+                        right: 136
+                    },
+                    dirX: 3,
+                    dirY: 3
+                }
+            };
+
         default:
             return state;
     }

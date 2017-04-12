@@ -20,7 +20,7 @@ class Stage extends React.Component {
         super(props);
         this.keyInterval = [];
 
-        this.gameLoop = function () {};
+        this.gameLoop = null;
         this.side = {
             None :0,
             Left : 1,
@@ -33,9 +33,41 @@ class Stage extends React.Component {
         props.stageLoad(props.params.stageId);
     }
 
+    startGame = () => {
+        this.gameLoop = setInterval(() => {
+            this.checkBorderCollision();
+            this.checkPaddleCollision();
+            this.checkCratesCollision();
+            this.props.loopTick();
+        }, 10);
+    };
+
+    stopGame = () => {
+        clearInterval(this.gameLoop);
+        this.gameLoop = null;
+        this.props.decreaseLife();
+        if (this.props.lifes === 0) {
+            this.gameOver();
+        } else {
+            setTimeout(()=>{
+                this.props.resetBall();
+            },500);
+        }
+    };
+
+    gameOver = () => {
+        console.log('GAME OVER!');
+    }
+
     keyHandler = (data, event) => {
 
         switch (event.keyCode) {
+            case KEYCODES.SPACE: {
+                if (!this.gameLoop && this.props.lifes > 0) {
+                    this.startGame();
+                }
+                break;
+            }
             case KEYCODES.UP: {
                 if (this.keyInterval[KEYCODES.RIGHT]) {
                     return;
@@ -105,7 +137,7 @@ class Stage extends React.Component {
     checkBorderCollision = () => {
         if (this.props.ball.position.left + this.props.ball.dirX <= this.props.area.minX) {
             this.props.changeDirX();
-            console.log('Live Lost');
+            this.stopGame();
         }
         if (this.props.ball.position.top + this.props.ball.dirY <= this.props.area.minY) {
             this.props.changeDirY();
@@ -266,12 +298,12 @@ class Stage extends React.Component {
     }
 
     componentDidMount(){
-        this.gameLoop = setInterval(() => {
-            this.checkBorderCollision();
-            this.checkPaddleCollision();
-            this.checkCratesCollision();
-            this.props.loopTick();
-        }, 10);
+        // this.gameLoop = setInterval(() => {
+        //     this.checkBorderCollision();
+        //     this.checkPaddleCollision();
+        //     this.checkCratesCollision();
+        //     this.props.loopTick();
+        // }, 10);
     }
 
     componentWillUnmount() {
@@ -324,9 +356,11 @@ const mapDispatchToProps = (dispatch) => {
         spellCasting: () => dispatch(actions.spellCasting()),
         castStop: () => dispatch(actions.castStop()),
         loopTick: () => dispatch(actions.loopTick()),
+        resetBall: () => dispatch(actions.resetBall()),
         changeDirX: () => dispatch(actions.changeDirX()),
         changeDirXWithParam: (param) => dispatch(actions.changeDirXWithParam(param)),
         changeDirY: () => dispatch(actions.changeDirY()),
+        decreaseLife: () => dispatch(actions.decreaseLife()),
         changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
