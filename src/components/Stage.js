@@ -55,9 +55,15 @@ class Stage extends React.Component {
         }
     };
 
+    pauseGame = () => {
+        clearInterval(this.gameLoop);
+        this.gameLoop = null;
+        console.log('GAME PAUSED!');
+    };
+
     gameOver = () => {
         console.log('GAME OVER!');
-    }
+    };
 
     keyHandler = (data, event) => {
 
@@ -66,6 +72,10 @@ class Stage extends React.Component {
                 if (!this.gameLoop && this.props.lifes > 0) {
                     this.startGame();
                 }
+                break;
+            }
+            case KEYCODES.ESC: {
+                this.pauseGame();
                 break;
             }
             case KEYCODES.UP: {
