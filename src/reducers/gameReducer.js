@@ -47,7 +47,7 @@ const gameReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stagesData: action.payload,
-                blocks: action.payload[action.id - 1].blocks
+                blocks: action.id ? action.payload[action.id - 1].blocks : []
             };
         case ACTIONS.WIZARD_IDLE:
             return {...state, wizard: {...state.wizard, status: action.payload.status}};

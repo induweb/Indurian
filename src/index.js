@@ -17,7 +17,7 @@ require('normalize.css');
 import reduxStore from './stores/reduxStore';
 
 reduxStore.subscribe(()=> {
-    // console.log('reduxStore nowyStan: ', reduxStore.getState());
+    console.log('reduxStore nowyStan: ', reduxStore.getState());
 });
 
 // Render the main component into the dom
