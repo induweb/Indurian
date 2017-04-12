@@ -8,7 +8,7 @@ class Mana extends React.Component {
     render() {
         return (
             <div className="mana-bar">
-                {/*<H2Header>{this.props.children}</H2Header>*/}
+                <span style={{left: this.props.mana + 70 + 'px'}}></span>
             </div>
         );
     }

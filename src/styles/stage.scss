@@ -36,6 +36,21 @@
     }
 }
 
+.health-bar, .mana-bar {
+    position: relative;
+    span {
+        position: absolute;
+        background-color: #53381d;
+        //content: '';
+        top: 18px;
+        bottom: 19px;
+        //left: 70px;
+        right: 24px;
+        //l 70 - 0
+        //l 258 - 188
+    }
+}
+
 .lifes-bar {
     position: absolute;
     top: -4px;

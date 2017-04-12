@@ -178,11 +178,35 @@ export function decreaseLife(){
     };
 }
 
-export function addPoints(points){
+export function addPoints(points) {
     return{
         type: ACTIONS.ADD_POINTS,
         payload: {
             points
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function increaseMana(value) {
+    return{
+        type: ACTIONS.INCREASE_MANA,
+        payload: {
+            value
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function decreaseMana(value) {
+    return{
+        type: ACTIONS.DECREASE_MANA,
+        payload: {
+            value
         },
         meta:{
             timestamp: Date.now()

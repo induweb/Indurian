@@ -8,7 +8,7 @@ class Health extends React.Component {
     render() {
         return (
             <div className="health-bar">
-                {/*<H2Header>{this.props.children}</H2Header>*/}
+                <span></span>
             </div>
         );
     }

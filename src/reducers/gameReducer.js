@@ -5,7 +5,7 @@ const initialState = {
     blocks: [],
     lifes: 3,
     points: 0,
-    mana: 100,
+    mana: 188,
     health: 100,
     wizard: {
         positionTop: 175,
@@ -157,6 +157,16 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.ADD_POINTS:
             return {...state,
                 points: state.points + action.payload.points
+            };
+
+        case ACTIONS.INCREASE_MANA:
+            return {...state,
+                mana: state.mana + action.payload.value
+            };
+
+        case ACTIONS.DECREASE_MANA:
+            return {...state,
+                mana: state.mana - action.payload.value
             };
 
         case ACTIONS.DECREASE_LIFE:

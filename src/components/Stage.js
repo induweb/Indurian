@@ -38,6 +38,7 @@ class Stage extends React.Component {
             this.checkBorderCollision();
             this.checkPaddleCollision();
             this.checkCratesCollision();
+            this.props.increaseMana(0.1);
             this.props.loopTick();
         }, 10);
     };
@@ -126,7 +127,13 @@ class Stage extends React.Component {
                     if (!this.keyInterval[KEYCODES.RIGHT]) {
 
                         this.keyInterval[KEYCODES.RIGHT] = setInterval(()=>{
+                            if (this.props.mana <= 0) {
+                                this.clearKeyInterval(KEYCODES.RIGHT);
+                                this.props.castStop();
+                                return;
+                            }
                             this.props.spellCasting();
+                            this.props.decreaseMana(1);
                         }, 25);
                     }
                 } else {
@@ -374,7 +381,9 @@ const mapDispatchToProps = (dispatch) => {
         changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
-        addPoints: (points) => dispatch(actions.addPoints(points))
+        addPoints: (points) => dispatch(actions.addPoints(points)),
+        increaseMana: (value) => dispatch(actions.increaseMana(value)),
+        decreaseMana: (value) => dispatch(actions.decreaseMana(value))
     }
 };
 
