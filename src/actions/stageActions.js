@@ -160,6 +160,18 @@ export function decreaseCrateValue(id){
     };
 }
 
+export function addPoints(points){
+    return{
+        type: ACTIONS.ADD_POINTS,
+        payload: {
+            points
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function hideCrate(id){
     return{
         type: ACTIONS.HIDE_CRATE,

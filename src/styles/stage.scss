@@ -19,6 +19,60 @@
     background-size: cover;
 }
 
+.points-bar {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 185px;
+    height: 67px;
+    background-image: url(../images/points.png);
+    span {
+        color: #fff;
+        font-size: 28px;
+        line-height: 67px;
+        text-align: right;
+        display: block;
+        padding-right: 23px;
+    }
+}
+
+.lifes-bar {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 185px;
+    height: 67px;
+    background-image: url(../images/lifes.png);
+
+    span {
+        color: #fff;
+        font-size: 28px;
+        line-height: 67px;
+        text-align: right;
+        display: block;
+        padding-right: 90px;
+    }
+}
+
+.mana-bar {
+    position: absolute;
+    bottom: -70px;
+    left: 140px;
+    width: 283px;
+    height: 67px;
+    background-image: url(../images/mana.png);
+}
+
+.health-bar {
+    position: absolute;
+    bottom: -70px;
+    right: 140px;
+    width: 282px;
+    height: 67px;
+    background-image: url(../images/health.png);
+}
+
+
 .crate {
     width: 40px;
     height: 40px;

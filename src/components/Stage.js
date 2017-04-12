@@ -4,6 +4,10 @@ import actions from '../actions/actionCreators';
 import KEYCODES from '../constants/keyCodes';
 
 import WindowHeader from './WindowHeader';
+import Points from './Points';
+import Lifes from './Lifes';
+import Mana from './Mana';
+import Health from './Health';
 import Wizard from './Wizard';
 import Ball from './Ball';
 import CrateView from './CrateView';
@@ -101,6 +105,7 @@ class Stage extends React.Component {
     checkBorderCollision = () => {
         if (this.props.ball.position.left + this.props.ball.dirX <= this.props.area.minX) {
             this.props.changeDirX();
+            console.log('Live Lost');
         }
         if (this.props.ball.position.top + this.props.ball.dirY <= this.props.area.minY) {
             this.props.changeDirY();
@@ -223,6 +228,7 @@ class Stage extends React.Component {
                         } else {
                             this.props.hideCrate(block.key);
                         }
+                        this.props.addPoints(10);
                         this.clearKeyInterval(KEYCODES.RIGHT);
                         this.props.castStop();
                     }
@@ -245,6 +251,7 @@ class Stage extends React.Component {
         }
 
         if (wasHit) {
+            this.props.addPoints(10);
             if (chosenBlock.value > 1) {
                 this.props.decreaseCrateValue(chosenBlock.key);
             } else {
@@ -284,6 +291,10 @@ class Stage extends React.Component {
                         <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
                         <CrateView id={stageID} />
                     </div>
+                    <Points points={this.props.points}/>
+                    <Lifes lifes={this.props.lifes}/>
+                    <Mana mana={this.props.mana}/>
+                    <Health health={this.props.health}/>
                  </div>
         );
     }
@@ -296,7 +307,11 @@ const mapStateToProps = (state) => {
         spell: state.game.spell,
         ball: state.game.ball,
         area: state.game.area,
-        blocks: state.game.blocks
+        blocks: state.game.blocks,
+        lifes: state.game.lifes,
+        points: state.game.points,
+        mana: state.game.mana,
+        health: state.game.health
     }
 };
 
@@ -314,7 +329,8 @@ const mapDispatchToProps = (dispatch) => {
         changeDirY: () => dispatch(actions.changeDirY()),
         changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
-        hideCrate: (id) => dispatch(actions.hideCrate(id))
+        hideCrate: (id) => dispatch(actions.hideCrate(id)),
+        addPoints: (points) => dispatch(actions.addPoints(points))
     }
 };
 

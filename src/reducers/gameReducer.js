@@ -3,6 +3,10 @@ import ACTIONS from '../constants/actions';
 const initialState = {
     stagesData: [],
     blocks: [],
+    lifes: 3,
+    points: 0,
+    mana: 100,
+    health: 100,
     wizard: {
         positionTop: 175,
         status: 'idle',
@@ -148,6 +152,11 @@ const gameReducer = (state = initialState, action) => {
 
             return {...state,
                 blocks: blocksDecrease
+            };
+
+        case ACTIONS.ADD_POINTS:
+            return {...state,
+                points: state.points + action.payload.points
             };
 
         default:
