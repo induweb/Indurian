@@ -38,6 +38,10 @@ const initialState = {
         minY: 0,
         maxX: 750,
         maxY: 444
+    },
+    customWindow: {
+        display: 'none',
+        type: ''
     }
 };
 
@@ -174,6 +178,22 @@ const gameReducer = (state = initialState, action) => {
                 lifes: state.lifes - 1
             };
 
+        case ACTIONS.SHOW_CUSTOM_WINDOW:
+            return {...state,
+                customWindow: {
+                    display: 'block',
+                    type: action.payload.type
+                }
+            };
+
+        case ACTIONS.HIDE_CUSTOM_WINDOW:
+            return {...state,
+                customWindow: {
+                    display: 'none',
+                    type: ''
+                }
+            };
+
         case ACTIONS.RESET_BALL:
             return {...state,
                 ball: {
@@ -186,6 +206,16 @@ const gameReducer = (state = initialState, action) => {
                     },
                     dirX: 3,
                     dirY: 3
+                },
+                wizard: {
+                    positionTop: 175,
+                    status: 'idle',
+                    paddle: {
+                        top: 175,
+                        right: 105,
+                        bottom: 248,
+                        left: 101
+                    }
                 }
             };
 

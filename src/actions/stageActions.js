@@ -225,3 +225,24 @@ export function hideCrate(id){
         }
     };
 }
+
+export function showCustomWindow(type){
+    return{
+        type: ACTIONS.SHOW_CUSTOM_WINDOW,
+        payload: {
+            type
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function hideCustomWindow(){
+    return{
+        type: ACTIONS.HIDE_CUSTOM_WINDOW,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}

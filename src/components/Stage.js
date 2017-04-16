@@ -4,6 +4,7 @@ import actions from '../actions/actionCreators';
 import KEYCODES from '../constants/keyCodes';
 
 import WindowHeader from './WindowHeader';
+import CustomWindow from './CustomWindow';
 import Points from './Points';
 import Lifes from './Lifes';
 import Mana from './Mana';
@@ -56,12 +57,15 @@ class Stage extends React.Component {
                 this.props.resetBall();
             },500);
         }
+        this.clearAllKeyIntervals();
     };
 
     pauseGame = () => {
-        clearInterval(this.gameLoop);
-        this.gameLoop = null;
-        console.log('GAME PAUSED!');
+        if (this.props.customWindow.display == 'none') {
+            clearInterval(this.gameLoop);
+            this.gameLoop = null;
+            this.props.showCustomWindow('pause');
+        }
     };
 
     gameOver = () => {
@@ -69,20 +73,20 @@ class Stage extends React.Component {
     };
 
     keyHandler = (data, event) => {
-
         switch (event.keyCode) {
             case KEYCODES.SPACE: {
-                if (!this.gameLoop && this.props.lifes > 0) {
+                if (!this.gameLoop && this.props.lifes > 0 && data && this.props.customWindow.display == 'none') {
                     this.startGame();
                 }
                 break;
             }
             case KEYCODES.ESC: {
-                this.pauseGame();
+                if (data)
+                    this.pauseGame();
                 break;
             }
             case KEYCODES.UP: {
-                if (this.keyInterval[KEYCODES.RIGHT]) {
+                if (this.keyInterval[KEYCODES.RIGHT] || !this.gameLoop ) {
                     return;
                 }
                 if (data) {
@@ -100,7 +104,7 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.DOWN: {
-                if (this.keyInterval[KEYCODES.RIGHT]) {
+                if (this.keyInterval[KEYCODES.RIGHT] || !this.gameLoop ) {
                     return;
                 }
                 if (data) {
@@ -154,6 +158,19 @@ class Stage extends React.Component {
         clearInterval(this.keyInterval[keyCode]);
         this.keyInterval[keyCode] = null;
         this.props.wizardIdle();
+    };
+
+    clearAllKeyIntervals = () => {
+        if (this.keyInterval[KEYCODES.DOWN]) {
+            this.clearKeyInterval(KEYCODES.DOWN);
+        }
+        if (this.keyInterval[KEYCODES.UP]) {
+            this.clearKeyInterval(KEYCODES.UP);
+        }
+        if (this.keyInterval[KEYCODES.RIGHT]) {
+            this.clearKeyInterval(KEYCODES.RIGHT);
+            this.props.castStop();
+        }
     };
 
     checkBorderCollision = () => {
@@ -345,6 +362,7 @@ class Stage extends React.Component {
                         <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
                         <CrateView id={stageID} />
                     </div>
+                    <CustomWindow display={this.props.customWindow.display}/>
                     <Points points={this.props.points}/>
                     <Lifes lifes={this.props.lifes}/>
                     <Mana mana={this.props.mana}/>
@@ -365,7 +383,8 @@ const mapStateToProps = (state) => {
         lifes: state.game.lifes,
         points: state.game.points,
         mana: state.game.mana,
-        health: state.game.health
+        health: state.game.health,
+        customWindow: state.game.customWindow
     }
 };
 
@@ -387,6 +406,8 @@ const mapDispatchToProps = (dispatch) => {
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
         addPoints: (points) => dispatch(actions.addPoints(points)),
+        showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
+        hideCustomWindow: () => dispatch(actions.hideCustomWindow()),
         increaseMana: (value) => dispatch(actions.increaseMana(value)),
         decreaseMana: (value) => dispatch(actions.decreaseMana(value))
     }
