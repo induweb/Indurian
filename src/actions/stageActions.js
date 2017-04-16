@@ -246,3 +246,12 @@ export function hideCustomWindow(){
         }
     };
 }
+
+export function restartGame(){
+    return{
+        type: ACTIONS.RESTART_GAME,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}

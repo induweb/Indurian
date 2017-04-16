@@ -5,8 +5,18 @@ import { Link } from 'react-router';
 
 class CustomWindow extends React.Component {
 
-    onClick = () => {
+    constructor(props) {
+        super(props);
+    }
+
+    backToGame = () => {
         this.props.hideCustomWindow();
+    };
+
+    restartGame = () => {
+        this.props.hideCustomWindow();
+        this.props.restartGame();
+        this.props.stageLoad(this.props.id);
     };
 
     render() {
@@ -16,8 +26,8 @@ class CustomWindow extends React.Component {
                 <div className="custom-window-content">
                     <h2>Pauza</h2>
                     <div className="buttons">
-                        <button onClick={this.onClick}>Wznów</button>
-                        <button>Restart</button>
+                        <button onClick={this.backToGame}>Wznów</button>
+                        <button onClick={this.restartGame}>Restart</button>
                         <button>Opcje</button>
                         {/*<a href="./play">Wyjście</a>*/}
                         <Link to="/play">Wyjście</Link>
@@ -36,6 +46,8 @@ const mapStateToProps = (state = {}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        restartGame: () => dispatch(actions.restartGame()),
+        stageLoad: (id) => dispatch(actions.loadData(id)),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
         hideCustomWindow: () => dispatch(actions.hideCustomWindow())
     }

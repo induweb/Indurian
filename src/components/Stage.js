@@ -30,6 +30,7 @@ class Stage extends React.Component {
             Bottom : 4
         };
 
+        this.props.restartGame();
         //load stage data
         props.stageLoad(props.params.stageId);
     }
@@ -343,6 +344,7 @@ class Stage extends React.Component {
         //     this.checkCratesCollision();
         //     this.props.loopTick();
         // }, 10);
+
     }
 
     componentWillUnmount() {
@@ -362,7 +364,7 @@ class Stage extends React.Component {
                         <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
                         <CrateView id={stageID} />
                     </div>
-                    <CustomWindow display={this.props.customWindow.display}/>
+                    <CustomWindow display={this.props.customWindow.display} id={stageID}/>
                     <Points points={this.props.points}/>
                     <Lifes lifes={this.props.lifes}/>
                     <Mana mana={this.props.mana}/>
@@ -406,6 +408,7 @@ const mapDispatchToProps = (dispatch) => {
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
         addPoints: (points) => dispatch(actions.addPoints(points)),
+        restartGame: () => dispatch(actions.restartGame()),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
         hideCustomWindow: () => dispatch(actions.hideCustomWindow()),
         increaseMana: (value) => dispatch(actions.increaseMana(value)),

@@ -219,6 +219,9 @@ const gameReducer = (state = initialState, action) => {
                 }
             };
 
+        case ACTIONS.RESTART_GAME:
+            return initialState;
+
         default:
             return state;
     }
