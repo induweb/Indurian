@@ -39,7 +39,7 @@
         background-image: url(../images/btn-bg.png);
         background-position: -4px 0;
         line-height: 96px;
-        font-size: 28px;
+        font-size: 26px;
         color: #303c07;
         cursor: pointer;
         text-decoration: none;
@@ -49,6 +49,7 @@
         }
     }
 }
+
 .custom-window-content {
     background-image: url(../images/custom-window-bg.png);
     z-index: 100;
@@ -58,6 +59,10 @@
     height: 500px;
     width: 370px;
     transform: translate(-185px, -250px);
+
+    .buttons {
+        padding-top: 45px;
+    }
 }
 
 .custom-window-overlay {

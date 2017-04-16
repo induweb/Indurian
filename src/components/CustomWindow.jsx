@@ -28,8 +28,6 @@ class CustomWindow extends React.Component {
                     <div className="buttons">
                         <button onClick={this.backToGame}>Wznów</button>
                         <button onClick={this.restartGame}>Restart</button>
-                        <button>Opcje</button>
-                        {/*<a href="./play">Wyjście</a>*/}
                         <Link to="/play">Wyjście</Link>
                     </div>
                 </div>
