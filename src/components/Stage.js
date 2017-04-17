@@ -38,12 +38,13 @@ class Stage extends React.Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.params && this.stageId != nextProps.params.stageId) {
-            this.props.restartGame();
+            // this.props.restartGame();
             this.stageId = nextProps.params.stageId;
             //load stage data
             this.props.stageLoad(nextProps.params.stageId);
+            this.props.hideCustomWindow();
         }
-    }
+    };
 
     startGame = () => {
         this.gameLoop = setInterval(() => {
