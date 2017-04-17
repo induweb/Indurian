@@ -31,8 +31,18 @@ class Stage extends React.Component {
         };
 
         this.props.restartGame();
+        this.stageId = props.params.stageId;
         //load stage data
         props.stageLoad(props.params.stageId);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.params && this.stageId != nextProps.params.stageId) {
+            this.props.restartGame();
+            this.stageId = nextProps.params.stageId;
+            //load stage data
+            this.props.stageLoad(nextProps.params.stageId);
+        }
     }
 
     startGame = () => {
@@ -356,7 +366,7 @@ class Stage extends React.Component {
     render() {
         // console.log('pppp', this.props);
         const stageID = this.props.params.stageId;
-        return (<div className="stage-container">
+        return (<div className="stage-container" key={stageID}>
                     <WindowHeader>Poziom #{stageID}</WindowHeader>
                     <div className="game-area">
                         <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.status} />

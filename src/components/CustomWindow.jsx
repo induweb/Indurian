@@ -8,6 +8,7 @@ class CustomWindow extends React.Component {
     constructor(props) {
         super(props);
         this.playerName = '';
+        this.nextStage = parseInt(this.props.id) + 1;
     }
 
     backToGame = () => {
@@ -38,6 +39,9 @@ class CustomWindow extends React.Component {
             case 'gameOver':
                 this.title = 'Koniec gry';
                 break;
+            case 'win':
+                this.title = 'Gratulacje';
+                break;
         }
 
         return (
@@ -50,6 +54,7 @@ class CustomWindow extends React.Component {
                             <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
                             <input type="text" id="add-top-score" onChange={this.handleChange}/>
                         </form>
+                        <Link to={'/Stage/' + this.nextStage} className="next">Poziom {this.nextStage}</Link>
                         <button className="resume" onClick={this.backToGame}>Wznów</button>
                         <button className="restart" onClick={this.restartGame}>Restart</button>
                         <Link className="exit" to="/play">Wyjście</Link>
