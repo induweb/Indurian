@@ -25,10 +25,10 @@
         margin: 19px 0;
         font-size: 23px;
         color: #90a8a4;
-        text-shadow: 0px 0px 8px #fff;
+        text-shadow: 0 0 8px #fff;
     }
     
-    button, a {
+    button, a, input {
         display: block;
         height: 96px;
         width: 191px;
@@ -43,10 +43,36 @@
         color: #303c07;
         cursor: pointer;
         text-decoration: none;
+        outline: none;
 
         &:hover {
             background-position: -197px 0;
         }
+    }
+    input {
+        background-position: -581px 0;
+        cursor: auto;
+        padding: 0 25px;
+        &:hover {
+            background-position: -581px 0;
+        }
+    }
+
+    label {
+        text-align: center;
+        display: block;
+    }
+}
+
+.custom-window-pause {
+    input, label {
+        //display: none;
+    }
+}
+
+.custom-window-gameOver {
+    .resume {
+        display: none;
     }
 }
 

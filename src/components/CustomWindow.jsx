@@ -7,6 +7,7 @@ class CustomWindow extends React.Component {
 
     constructor(props) {
         super(props);
+        this.playerName = '';
     }
 
     backToGame = () => {
@@ -19,16 +20,39 @@ class CustomWindow extends React.Component {
         this.props.stageLoad(this.props.id);
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.playerName);
+        // e.target.style.opacity = 0.3;
+    };
+
+    handleChange = (e) => {
+        this.playerName = e.target.value;
+    };
+
     render() {
+        switch(this.props.type) {
+            case 'pause':
+                this.title = 'Pauza';
+                break;
+            case 'gameOver':
+                this.title = 'Koniec gry';
+                break;
+        }
+
         return (
-            <div className="custom-window" style={{display: this.props.display}}>
+            <div className={`custom-window custom-window-${this.props.type}`} style={{display: this.props.display}}>
                 <div className="custom-window-overlay"></div>
                 <div className="custom-window-content">
-                    <h2>Pauza</h2>
+                    <h2>{this.title}</h2>
                     <div className="buttons">
-                        <button onClick={this.backToGame}>Wznów</button>
-                        <button onClick={this.restartGame}>Restart</button>
-                        <Link to="/play">Wyjście</Link>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
+                            <input type="text" id="add-top-score" onChange={this.handleChange}/>
+                        </form>
+                        <button className="resume" onClick={this.backToGame}>Wznów</button>
+                        <button className="restart" onClick={this.restartGame}>Restart</button>
+                        <Link className="exit" to="/play">Wyjście</Link>
                     </div>
                 </div>
             </div>
@@ -38,7 +62,7 @@ class CustomWindow extends React.Component {
 
 const mapStateToProps = (state = {}) => {
     return {
-        blocks: state.game.blocks
+        type: state.game.customWindow.type
     }
 };
 

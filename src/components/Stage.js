@@ -70,7 +70,7 @@ class Stage extends React.Component {
     };
 
     gameOver = () => {
-        console.log('GAME OVER!');
+        this.props.showCustomWindow('gameOver');
     };
 
     keyHandler = (data, event) => {
