@@ -16,7 +16,8 @@ class Play extends React.Component {
           <div className="play">
             <div className="stage-list">
                 {this.props.stagesList.map(function(stage){
-                    return <StageButton content={`${stage.id}`} key={stage.id}></StageButton>;
+                    console.log(stage);
+                    return <StageButton content={`${stage.id}`} unlocked={`${stage.unlocked}`} key={stage.id}/>;
                 })}
             </div>
 

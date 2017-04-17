@@ -108,6 +108,13 @@ a {
     &:hover {
         background-position: -177px 0;
     }
+
+    &.locked {
+        background-position: -353px 0;
+        &:hover {
+            background-position: -353px 0;
+        }
+    }
 }
 
 .content {

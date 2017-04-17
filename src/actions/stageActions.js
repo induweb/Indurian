@@ -1,7 +1,43 @@
 import ACTIONS from '../constants/actions'
 import stagesData from 'json-loader!../sources/data.json';
 
+function checkLocalStorage() {
+    if (typeof localStorage === typeof undefined)
+    {
+        return false;
+    }
+
+    try {
+        sessionStorage.setItem('mod', 'mod');
+        sessionStorage.removeItem('mod');
+    } catch (e) {
+        return false;
+    }
+
+    return true;
+}
+
+function storageSetter(key, value) {
+    if (!checkLocalStorage())
+        return false;
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+function storageGetter(key) {
+    if (!checkLocalStorage())
+        return false;
+    return JSON.parse(localStorage.getItem(key));
+}
+
 export function loadData(id) {
+    storageSetter('stage',{1:'unlocked',2:'unlocked'});
+    let stagesBlocking = storageGetter('stage');
+    // console.log(stagesBlocking);
+    let stages = stagesData.stages.map((stage) => {
+        stage.unlocked = stagesBlocking[stage.id] == 'unlocked' ? 'unlocked' : 'locked';
+        return stage;
+    });
+    // console.log('stages',stages);
     return {
         type: ACTIONS.LOAD_DATA,
         payload: stagesData.stages,
