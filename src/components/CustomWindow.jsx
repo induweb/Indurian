@@ -50,12 +50,14 @@ class CustomWindow extends React.Component {
                 <div className="custom-window-content">
                     <h2>{this.title}</h2>
                     <div className="buttons">
-                        <form onSubmit={this.handleSubmit}>
-                            <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
-                            <input type="text" id="add-top-score" onChange={this.handleChange}/>
-                        </form>
-                        <Link to={'/Stage/' + this.nextStage} className="next">Poziom {this.nextStage}</Link>
-                        <button className="resume" onClick={this.backToGame}>Wznów</button>
+                        {this.props.type == 'gameOver' ?
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
+                                <input type="text" id="add-top-score" onChange={this.handleChange}/>
+                            </form> : null}
+                        {this.props.type == 'win' ?
+                            <Link to={'/Stage/' + this.nextStage} className="next">Poziom {this.nextStage}</Link> : null}
+                        {this.props.type == 'pause'? <button className="resume" onClick={this.backToGame}>Wznów</button> : null}
                         <button className="restart" onClick={this.restartGame}>Restart</button>
                         <Link className="exit" to="/play">Wyjście</Link>
                     </div>

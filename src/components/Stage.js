@@ -285,6 +285,7 @@ class Stage extends React.Component {
         let closestBlock = {
             distance: 9999
         };
+        let blocksLeft = 0;
         let chosenBlock;
         let wasHit = false;
         blocks.forEach((block)=> {
@@ -303,6 +304,8 @@ class Stage extends React.Component {
                     closestBlock = collision;
                     chosenBlock = block;
                 }
+
+                blocksLeft++;
 
                 if (this.keyInterval[KEYCODES.RIGHT]) {
                     if (this.checkSpellCollision(position)) {
@@ -340,6 +343,14 @@ class Stage extends React.Component {
             } else {
                 this.props.hideCrate(chosenBlock.key);
             }
+        }
+
+        if (blocksLeft === 0) {
+            clearInterval(this.gameLoop);
+            this.gameLoop = null;
+            this.props.resetBall();
+            this.clearAllKeyIntervals();
+            this.props.showCustomWindow('win');
         }
     };
 
