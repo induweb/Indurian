@@ -40,6 +40,52 @@ export function loadData(id) {
     };
 }
 
+export function addScore(name, points) {
+
+    let scores = storageGetter('score');
+    let newScores = {
+        'name': name,
+        'score': points
+    };
+    let newIndex = -1;
+    scores.forEach((score, index) => {
+        if (points >= score.score && newIndex < 0) {
+            newIndex = index;
+        }
+    });
+
+    if (newIndex >= 0) {
+        scores.splice(newIndex, 0, newScores);
+    } else {
+        scores = [...scores, newScores];
+    }
+
+    storageSetter('score', scores);
+    return{
+        type: ACTIONS.ADD_SCORE,
+        payload: {
+            scores: scores
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function getScores(){
+    let getScores = storageGetter('score');
+
+    return{
+        type: ACTIONS.ADD_SCORE,
+        payload: {
+            scores: getScores
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function unlockStage(id){
 
     let stagesBlocking = storageGetter('stage');

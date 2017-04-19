@@ -23,8 +23,7 @@ class CustomWindow extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.playerName);
-        // e.target.style.opacity = 0.3;
+        this.props.addScore(this.playerName, this.props.points);
     };
 
     handleChange = (e) => {
@@ -69,7 +68,9 @@ class CustomWindow extends React.Component {
 
 const mapStateToProps = (state = {}) => {
     return {
-        type: state.game.customWindow.type
+        scores: state.game.topScores,
+        type: state.game.customWindow.type,
+        points: state.game.points
     }
 };
 
@@ -78,6 +79,7 @@ const mapDispatchToProps = (dispatch) => {
         restartGame: () => dispatch(actions.restartGame()),
         stageLoad: (id) => dispatch(actions.loadData(id)),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
+        addScore: (name, points) => dispatch(actions.addScore(name, points)),
         hideCustomWindow: () => dispatch(actions.hideCustomWindow())
     }
 };

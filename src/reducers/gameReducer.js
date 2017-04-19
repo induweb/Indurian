@@ -46,21 +46,7 @@ const initialState = {
         display: 'none',
         type: ''
     },
-    topScores: [
-        {
-            'name': 'Leleszek',
-            'score': 750
-        },
-        {
-            'name': 'Rasiak',
-            'score': 500
-        },
-        {
-            'name': 'Indu',
-            'score': 100
-        }
-    ]
-
+    topScores: []
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -190,6 +176,11 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.INCREASE_MANA:
             return {...state,
                 mana: state.mana + action.payload.value
+            };
+
+        case ACTIONS.ADD_SCORE:
+            return {...state,
+                topScores: action.payload.scores
             };
 
         case ACTIONS.DECREASE_MANA:
