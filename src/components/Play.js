@@ -10,14 +10,17 @@ class Play extends React.Component {
         this.props.stageLoad();
     }
 
+    componentDidMount() {
+        this.props.checkStagesBlocking();
+    }
+
     render () {
-        console.log(this.props.stagesList);
+        let unlockedList = this.props.unlocked;
         return (
           <div className="play">
             <div className="stage-list">
                 {this.props.stagesList.map(function(stage){
-                    console.log(stage);
-                    return <StageButton content={`${stage.id}`} unlocked={`${stage.unlocked}`} key={stage.id}/>;
+                    return <StageButton content={`${stage.id}`} unlocked={unlockedList[stage.id]} key={stage.id}/>;
                 })}
             </div>
 
@@ -28,13 +31,15 @@ class Play extends React.Component {
 
 const mapStateToProps = (state = {}) => {
     return {
-        stagesList: state.game.stagesData
+        stagesList: state.game.stagesData,
+        unlocked: state.game.blockingStages
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        stageLoad: (id) => dispatch(actions.loadData(id))
+        stageLoad: (id) => dispatch(actions.loadData(id)),
+        checkStagesBlocking: () => dispatch(actions.checkStagesBlocking())
     }
 };
 

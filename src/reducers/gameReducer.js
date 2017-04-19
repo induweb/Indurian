@@ -3,6 +3,9 @@ import ACTIONS from '../constants/actions';
 const initialState = {
     stagesData: [],
     blocks: [],
+    blockingStages: {
+        1: 'unlocked'
+    },
     lifes: 3,
     points: 0,
     mana: 188,
@@ -42,7 +45,13 @@ const initialState = {
     customWindow: {
         display: 'none',
         type: ''
-    }
+    },
+    topScores: [
+        {
+            'leleszek': 250
+        },
+    ]
+
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -53,6 +62,12 @@ const gameReducer = (state = initialState, action) => {
                 stagesData: action.payload,
                 blocks: action.id ? action.payload[action.id - 1].blocks : []
             };
+
+        case ACTIONS.UPDATE_STAGE_BLOCK_LIST:
+            return {...state,
+                blockingStages: action.payload.stagesBlocking
+            };
+
         case ACTIONS.WIZARD_IDLE:
             return {...state, wizard: {...state.wizard, status: action.payload.status}};
         case ACTIONS.WIZARD_MOVE_UP:

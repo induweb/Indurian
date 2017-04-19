@@ -350,6 +350,7 @@ class Stage extends React.Component {
             this.gameLoop = null;
             this.props.resetBall();
             this.clearAllKeyIntervals();
+            this.props.unlockStage(parseInt(this.props.params.stageId) + 1);
             this.props.showCustomWindow('win');
         }
     };
@@ -429,6 +430,7 @@ const mapDispatchToProps = (dispatch) => {
         changeDirYWithParam: (param) => dispatch(actions.changeDirYWithParam(param)),
         decreaseCrateValue: (id) => dispatch(actions.decreaseCrateValue(id)),
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
+        unlockStage: (id) => dispatch(actions.unlockStage(id)),
         addPoints: (points) => dispatch(actions.addPoints(points)),
         restartGame: () => dispatch(actions.restartGame()),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),

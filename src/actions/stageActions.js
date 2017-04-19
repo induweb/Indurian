@@ -30,14 +30,6 @@ function storageGetter(key) {
 }
 
 export function loadData(id) {
-    storageSetter('stage',{1:'unlocked',2:'unlocked'});
-    let stagesBlocking = storageGetter('stage');
-    // console.log(stagesBlocking);
-    let stages = stagesData.stages.map((stage) => {
-        stage.unlocked = stagesBlocking[stage.id] == 'unlocked' ? 'unlocked' : 'locked';
-        return stage;
-    });
-    // console.log('stages',stages);
     return {
         type: ACTIONS.LOAD_DATA,
         payload: stagesData.stages,
@@ -48,10 +40,34 @@ export function loadData(id) {
     };
 }
 
-export function loadStage(){
+export function unlockStage(id){
+
+    let stagesBlocking = storageGetter('stage');
+    if (stagesBlocking[id] !== 'unlocked') {
+        stagesBlocking[id] = 'unlocked';
+        storageSetter('stage', stagesBlocking);
+    }
+
+
     return{
-        type: ACTIONS.LOAD_STAGE,
-        payload: {},
+        type: ACTIONS.UPDATE_STAGE_BLOCK_LIST,
+        payload: {
+            stagesBlocking
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function checkStagesBlocking(){
+    let stagesBlocking = storageGetter('stage');
+
+    return{
+        type: ACTIONS.UPDATE_STAGE_BLOCK_LIST,
+        payload: {
+            stagesBlocking
+        },
         meta:{
             timestamp: Date.now()
         }
@@ -263,6 +279,10 @@ export function hideCrate(id){
 }
 
 export function showCustomWindow(type){
+    if (type == 'win') {
+        let scores = storageGetter('scores');
+        console.log('scores', scores);
+    }
     return{
         type: ACTIONS.SHOW_CUSTOM_WINDOW,
         payload: {

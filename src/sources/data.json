@@ -632,62 +632,6 @@
           "type": "crate-1",
           "value": 1,
           "key": 0
-        },
-        {
-          "top": 90,
-          "left": 440,
-          "type": "crate-1",
-          "value": 1,
-          "key": 1
-        },
-        {
-          "top": 130,
-          "left": 400,
-          "type": "crate-1",
-          "value": 1,
-          "key": 2
-        },
-        {
-          "top": 170,
-          "left": 480,
-          "type": "crate-1",
-          "value": 1,
-          "key": 3
-        },
-        {
-          "top": 210,
-          "left": 400,
-          "type": "crate-1",
-          "value": 1,
-          "key": 4
-        },
-        {
-          "top": 250,
-          "left": 400,
-          "type": "crate-2",
-          "value": 1,
-          "key": 5
-        },
-        {
-          "top": 290,
-          "left": 400,
-          "type": "crate-2",
-          "value": 1,
-          "key": 6
-        },
-        {
-          "top": 370,
-          "left": 440,
-          "type": "stone",
-          "value": 2,
-          "key": 7
-        },
-        {
-          "top": 370,
-          "left": 520,
-          "type": "stone",
-          "value": 2,
-          "key": 8
         }
       ]
 
