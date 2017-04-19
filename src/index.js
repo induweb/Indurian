@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import App from './components/Main';
 import About from './components/About';
-import Options from './components/Options';
+import Scores from './components/Scores';
 import Play from './components/Play';
 import Stage from './components/Stage';
 import LayoutWrapper from './components/LayoutWrapper';
@@ -27,7 +27,7 @@ ReactDOM.render((
     <Route path="/" component={LayoutWrapper}>
       <IndexRoute component={App}/>
       <Route path="/about" component={About} />
-      <Route path="/options" component={Options} />
+      <Route path="/scores" component={Scores} />
       <Route path="/play" component={Play} />
 
     </Route>

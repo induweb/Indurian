@@ -121,3 +121,17 @@ a {
     height: 420px;
     overflow: auto;
 }
+
+.options {
+    width: 100%;
+}
+
+.scores-table {
+    margin-top: 40px;
+    width: 100%;
+
+    th {
+        font-weight: bold;
+        padding-bottom: 20px;
+    }
+}

@@ -48,8 +48,17 @@ const initialState = {
     },
     topScores: [
         {
-            'leleszek': 250
+            'name': 'Leleszek',
+            'score': 750
         },
+        {
+            'name': 'Rasiak',
+            'score': 500
+        },
+        {
+            'name': 'Indu',
+            'score': 100
+        }
     ]
 
 };
