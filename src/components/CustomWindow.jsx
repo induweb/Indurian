@@ -9,6 +9,7 @@ class CustomWindow extends React.Component {
         super(props);
         this.playerName = '';
         this.nextStage = parseInt(this.props.id) + 1;
+        this.wasSend = false;
     }
 
     backToGame = () => {
@@ -24,6 +25,7 @@ class CustomWindow extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addScore(this.playerName, this.props.points);
+        this.wasSend = true;
     };
 
     handleChange = (e) => {
@@ -49,14 +51,20 @@ class CustomWindow extends React.Component {
                 <div className="custom-window-content">
                     <h2>{this.title}</h2>
                     <div className="buttons">
-                        {this.props.type == 'gameOver' ?
+                        {this.props.type == 'gameOver' && !this.wasSend ?
                             <form onSubmit={this.handleSubmit}>
                                 <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
                                 <input type="text" id="add-top-score" onChange={this.handleChange}/>
                             </form> : null}
+
+                        {this.props.type == 'gameOver' && this.wasSend ?
+                            <Link className="scores-btn" to="/Scores">Wyniki</Link> : null}
+
                         {this.props.type == 'win' ?
                             <Link to={'/Stage/' + this.nextStage} className="next">Poziom {this.nextStage}</Link> : null}
+
                         {this.props.type == 'pause'? <button className="resume" onClick={this.backToGame}>Wznów</button> : null}
+
                         <button className="restart" onClick={this.restartGame}>Restart</button>
                         <Link className="exit" to="/play">Wyjście</Link>
                     </div>

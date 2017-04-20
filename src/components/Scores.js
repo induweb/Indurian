@@ -13,7 +13,6 @@ class Scores extends React.Component {
     }
 
     render () {
-        console.log(this.props.scores);
         return (
             <div className="options">
                 <h1>Najlepsze wyniki</h1>

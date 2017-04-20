@@ -54,7 +54,7 @@ a {
         background-position: 0 0;
 
         &:hover {
-            background-position: -176px 0;
+            background-position: -98px 0;
         }
 
         &.play-btn {
@@ -65,8 +65,8 @@ a {
             background-image: url(../images/sprites/btn-home.png);
         }
 
-        &.config-btn {
-            background-image: url(../images/sprites/btn-config.png);
+        &.score-btn {
+            background-image: url(../images/sprites/btn-scores.png);
         }
 
         &.info-btn {
@@ -80,7 +80,7 @@ a {
 
     .active {
         span {
-            background-position: -88px 0!important;
+            background-position: -194px 0!important;
         }
     }
 }

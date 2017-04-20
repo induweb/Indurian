@@ -35,3 +35,13 @@ ReactDOM.render((
   </Router>
 </Provider>
 ), document.getElementById('app'));
+
+//TODO LIST:
+//////////////po dodniu wyniku znika formularz, pojawia sie link do listy wyników
+//bonusy ze zbitych bloków
+//przeciwnicy
+//animacja porazki
+//////////////button scores, poprawienie wszystkich
+//responsywnosc
+
+
