@@ -12,6 +12,18 @@ class CustomWindow extends React.Component {
         this.wasSend = false;
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.type == 'gameOver') {
+            if (this.props.scores[9].score > this.props.points) {
+                this.wasSend = true;
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.props.getScores();
+    }
+
     backToGame = () => {
         this.props.hideCustomWindow();
     };
@@ -58,7 +70,7 @@ class CustomWindow extends React.Component {
                             </form> : null}
 
                         {this.props.type == 'gameOver' && this.wasSend ?
-                            <Link className="scores-btn" to="/Scores">Wyniki</Link> : null}
+                            <Link className="scores-btn" to="/scores" activeClassName="active">Wyniki</Link> : null}
 
                         {this.props.type == 'win' ?
                             <Link to={'/Stage/' + this.nextStage} className="next">Poziom {this.nextStage}</Link> : null}
@@ -85,6 +97,7 @@ const mapStateToProps = (state = {}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         restartGame: () => dispatch(actions.restartGame()),
+        getScores: () => dispatch(actions.getScores()),
         stageLoad: (id) => dispatch(actions.loadData(id)),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
         addScore: (name, points) => dispatch(actions.addScore(name, points)),

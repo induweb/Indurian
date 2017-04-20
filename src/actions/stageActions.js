@@ -73,12 +73,12 @@ export function addScore(name, points) {
 }
 
 export function getScores(){
-    let getScores = storageGetter('score');
+    let scores = storageGetter('score');
 
     return{
         type: ACTIONS.ADD_SCORE,
         payload: {
-            scores: getScores
+            scores: scores
         },
         meta:{
             timestamp: Date.now()
