@@ -53,7 +53,7 @@ class CustomWindow extends React.Component {
                     <div className="buttons">
                         {this.props.type == 'gameOver' && !this.wasSend ?
                             <form onSubmit={this.handleSubmit}>
-                                <label htmlFor="add-top-score">X. najlepszy wynik<br/>PODAJ IMIĘ:</label>
+                                <label htmlFor="add-top-score">Dobry wynik!<br/>PODAJ IMIĘ:</label>
                                 <input type="text" id="add-top-score" onChange={this.handleChange}/>
                             </form> : null}
 

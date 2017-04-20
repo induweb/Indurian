@@ -1,6 +1,7 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import transform from './vendor/transform';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
@@ -19,6 +20,9 @@ import reduxStore from './stores/reduxStore';
 reduxStore.subscribe(()=> {
     // console.log('reduxStore nowyStan: ', reduxStore.getState());
 });
+
+window.addEventListener('resize', transform.fillDiv);
+window.addEventListener('load', transform.fillDiv);
 
 // Render the main component into the dom
 ReactDOM.render((
