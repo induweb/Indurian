@@ -41,18 +41,22 @@ export function loadData(id) {
 }
 
 export function addScore(name, points) {
-
     let scores = storageGetter('score');
+    let newIndex = -1;
     let newScores = {
         'name': name,
         'score': points
     };
-    let newIndex = -1;
-    scores.forEach((score, index) => {
-        if (points >= score.score && newIndex < 0) {
-            newIndex = index;
-        }
-    });
+
+    if (scores) {
+        scores.forEach((score, index) => {
+            if (points >= score.score && newIndex < 0) {
+                newIndex = index;
+            }
+        });
+    } else {
+        scores = [];
+    }
 
     if (newIndex >= 0) {
         scores.splice(newIndex, 0, newScores);
@@ -61,6 +65,7 @@ export function addScore(name, points) {
     }
 
     storageSetter('score', scores);
+
     return{
         type: ACTIONS.ADD_SCORE,
         payload: {

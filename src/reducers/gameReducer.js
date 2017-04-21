@@ -180,7 +180,7 @@ const gameReducer = (state = initialState, action) => {
 
         case ACTIONS.ADD_SCORE:
             return {...state,
-                topScores: action.payload.scores
+                topScores: action.payload.scores ? action.payload.scores : initialState.topScores
             };
 
         case ACTIONS.DECREASE_MANA:
