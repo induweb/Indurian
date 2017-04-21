@@ -94,8 +94,10 @@ export function getScores(){
 export function unlockStage(id){
 
     let stagesBlocking = storageGetter('stage');
-    if (!stagesBlocking)
+    if (!stagesBlocking) {
         storageSetter('stage', {'1': 'unlocked'});
+        stagesBlocking = storageGetter('stage');
+    }
 
     if (!stagesBlocking[id] || stagesBlocking[id] !== 'unlocked') {
         stagesBlocking[id] = 'unlocked';
@@ -333,9 +335,6 @@ export function hideCrate(id){
 }
 
 export function showCustomWindow(type){
-    if (type == 'win') {
-        let scores = storageGetter('scores');
-    }
     return{
         type: ACTIONS.SHOW_CUSTOM_WINDOW,
         payload: {
