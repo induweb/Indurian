@@ -46,6 +46,7 @@ ReactDOM.render((
 //przeciwnicy
 //animacja porazki
 //////////////button scores, poprawienie wszystkich
-//responsywnosc
+//////////////responsywnosc
+//sterowanie myszą
 
 

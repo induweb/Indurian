@@ -60,7 +60,7 @@ const gameReducer = (state = initialState, action) => {
 
         case ACTIONS.UPDATE_STAGE_BLOCK_LIST:
             return {...state,
-                blockingStages: action.payload.stagesBlocking
+                blockingStages: action.payload.stagesBlocking ? action.payload.stagesBlocking : initialState.blockingStages
             };
 
         case ACTIONS.WIZARD_IDLE:
