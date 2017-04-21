@@ -67,7 +67,7 @@ class Stage extends React.Component {
         } else {
             setTimeout(()=>{
                 this.props.resetBall();
-            },500);
+            },1000);
         }
         this.clearAllKeyIntervals();
     };

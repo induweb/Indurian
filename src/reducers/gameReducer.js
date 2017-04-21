@@ -190,7 +190,11 @@ const gameReducer = (state = initialState, action) => {
 
         case ACTIONS.DECREASE_LIFE:
             return {...state,
-                lifes: state.lifes - 1
+                lifes: state.lifes - 1,
+                wizard: {
+                    ...state.wizard,
+                    status: 'die'
+                }
             };
 
         case ACTIONS.SHOW_CUSTOM_WINDOW:

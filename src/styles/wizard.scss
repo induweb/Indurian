@@ -30,6 +30,15 @@
     background-image: url(../images/sprites/attack.png);
 }
 
+.wizard-die {
+    -webkit-animation: wizard-die-anim .5s steps(1); /* Safari 4+ */
+    -moz-animation:    wizard-die-anim .5s steps(1); /* Fx 5+ */
+    -o-animation:      wizard-die-anim .5s steps(1);
+    animation:         wizard-die-anim .5s steps(1); /* IE 10+, Fx 29+ */
+    background-image: url(../images/sprites/die.png);
+    background-position: 0 -225px;
+}
+
 .spell {
     //display: none;
     width: 10px;
@@ -171,6 +180,36 @@ keyframes wizard-attack-anim {
     25%  { background-position: 0 -73px;}
     50%  { background-position: 0 -146px;}
     75%  { background-position: 0 -219px;}
+}
+
+@keyframes wizard-die-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -152px;}
+    75%  { background-position: 0 -225px;}
+    100%  { background-position: 0 -225px;}
+}
+
+@-webkit-keyframes wizard-die-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -152px;}
+    75%  { background-position: 0 -225px;}
+    100%  { background-position: 0 -225px;}
+}
+@-moz-keyframes wizard-die-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -152px;}
+    75%  { background-position: 0 -225px;}
+    100%  { background-position: 0 -225px;}
+}
+@-o-keyframes wizard-die-anim {
+    0%   { background-position: 0 0;}
+    25%  { background-position: 0 -73px;}
+    50%  { background-position: 0 -152px;}
+    75%  { background-position: 0 -225px;}
+    100%  { background-position: 0 -225px;}
 }
 
 @keyframes spell-anim-1 {
