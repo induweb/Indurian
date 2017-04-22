@@ -7,6 +7,29 @@
     background-repeat: no-repeat;
 }
 
+.enemy-status {
+    position: absolute;
+    right: 0;
+    margin-top: -25px;
+    text-align: center;
+
+    .enemy-name {
+        font-size: 14px;
+    }
+
+    .hp-bar {
+        height: 4px;
+        background-color: #412c17;
+        padding: 1px;
+
+        .hp-value {
+
+            height: 2px;
+            background-color: #fb218d;
+        }
+    }
+}
+
 .orc-idle {
     -webkit-animation: orc-idle-anim 1s steps(1) infinite; /* Safari 4+ */
     -moz-animation:    orc-idle-anim 1s steps(1) infinite; /* Fx 5+ */
