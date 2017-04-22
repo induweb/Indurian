@@ -1,0 +1,96 @@
+.enemy {
+    position: absolute;
+    right: 90px;
+    bottom: 30px;
+    height: 118px;
+    width: 232px;
+    background-repeat: no-repeat;
+}
+
+.orc-idle {
+    -webkit-animation: orc-idle-anim 1s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    orc-idle-anim 1s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      orc-idle-anim 1s steps(1) infinite;
+    animation:         orc-idle-anim 1s steps(1) infinite; /* IE 10+, Fx 29+ */
+    background-image: url(../images/sprites/orc-idle.png);
+    //background-position: -20px -124px;
+    //&:hover {
+    //    background-position: -20px -248px;
+    //}
+
+}
+
+@-webkit-keyframes orc-idle-anim {
+    0%   { background-position: -20px 0;}
+    14%  { background-position: -20px -124px;}
+    28%  { background-position: -20px -248px;}
+    42%  { background-position: -20px -372px;}
+    56%  { background-position: -20px -496px;}
+    70%  { background-position: -20px -620px;}
+    85%  { background-position: -20px -744px;}
+}
+@-moz-keyframes orc-idle-anim {
+    0%   { background-position: -20px 0;}
+    14%  { background-position: -20px -124px;}
+    28%  { background-position: -20px -248px;}
+    42%  { background-position: -20px -372px;}
+    56%  { background-position: -20px -496px;}
+    70%  { background-position: -20px -620px;}
+    85%  { background-position: -20px -744px;}
+}
+@-o-keyframes orc-idle-anim {
+    0%   { background-position: -20px 0;}
+    14%  { background-position: -20px -124px;}
+    28%  { background-position: -20px -248px;}
+    42%  { background-position: -20px -372px;}
+    56%  { background-position: -20px -496px;}
+    70%  { background-position: -20px -620px;}
+    85%  { background-position: -20px -744px;}
+}
+@keyframes orc-idle-anim {
+    0%   { background-position: -20px 0;}
+    14%  { background-position: -20px -124px;}
+    28%  { background-position: -20px -248px;}
+    42%  { background-position: -20px -372px;}
+    56%  { background-position: -20px -496px;}
+    70%  { background-position: -20px -620px;}
+    85%  { background-position: -20px -744px;}
+}
+
+.orc-attack {
+    -webkit-animation: orc-attack-anim .5s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    orc-attack-anim .5s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      orc-attack-anim .5s steps(1) infinite;
+    animation:         orc-attack-anim .5s steps(1) infinite; /* IE 10+, Fx 29+ */
+    background-image: url(../images/sprites/orc-attack.png);
+    //background-position: 33px -816px;
+    //&:hover {
+    //    background-position: 33px -945px;
+    //}
+}
+
+@-webkit-keyframes orc-attack-anim {
+    0%   { background-position: 33px 0;}
+    25%  { background-position: 33px -129px;}
+    50%  { background-position: 33px -258px}
+    75%  { background-position: 33px -816px;}
+}
+
+@-moz-keyframes orc-attack-anim {
+    0%   { background-position: 33px 0;}
+    25%  { background-position: 33px -129px;}
+    50%  { background-position: 33px -258px}
+    75%  { background-position: 33px -816px;}
+}
+@-o-keyframes orc-attack-anim {
+    0%   { background-position: 33px 0;}
+    25%  { background-position: 33px -129px;}
+    50%  { background-position: 33px -258px}
+    75%  { background-position: 33px -816px;}
+}
+@keyframes orc-attack-anim {
+    0%   { background-position: 33px 0;}
+    25%  { background-position: 33px -129px;}
+    50%  { background-position: 33px -258px}
+    75%  { background-position: 33px -816px;}
+}

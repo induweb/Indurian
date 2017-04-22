@@ -5,6 +5,7 @@ import KEYCODES from '../constants/keyCodes';
 
 import WindowHeader from './WindowHeader';
 import CustomWindow from './CustomWindow';
+import Enemies from './Enemies';
 import Points from './Points';
 import Lifes from './Lifes';
 import Mana from './Mana';
@@ -386,6 +387,7 @@ class Stage extends React.Component {
                         <Spell width={this.props.spell.width} top={this.props.spell.top} display={this.props.spell.display} />
                         <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
                         <CrateView id={stageID} />
+                        <Enemies id={stageID} />
                     </div>
                     <CustomWindow display={this.props.customWindow.display} id={stageID}/>
                     <Points points={this.props.points}/>

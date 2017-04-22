@@ -1,8 +1,6 @@
 import React from 'react';
 import Crate from './Crate';
 import { connect } from 'react-redux';
-// import stagesData from 'json-loader!../sources/data.json';
-// require('../styles/stage.scss')
 
 class CrateView extends React.Component {
     constructor(props) {

@@ -54,8 +54,9 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.LOAD_DATA:
             return {
                 ...state,
-                stagesData: action.payload,
-                blocks: action.id ? action.payload[action.id - 1].blocks : []
+                stagesData: action.payload.stages,
+                blocks: action.id ? action.payload.stages[action.id - 1].blocks : [],
+                enemies: action.id ? action.payload.stages[action.id - 1].enemies : []
             };
 
         case ACTIONS.UPDATE_STAGE_BLOCK_LIST:

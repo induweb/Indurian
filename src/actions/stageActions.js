@@ -32,7 +32,7 @@ function storageGetter(key) {
 export function loadData(id) {
     return {
         type: ACTIONS.LOAD_DATA,
-        payload: stagesData.stages,
+        payload: stagesData,
         id: id,
         meta: {
             timestamp: Date.now()
@@ -146,7 +146,7 @@ export function wizardMoveUp(){
     return{
         type: ACTIONS.WIZARD_MOVE_UP,
         payload: {
-            positionMove: -5,
+            positionMove: -7,
             status: 'run'
         },
         meta:{
@@ -159,7 +159,7 @@ export function wizardMoveDown(){
     return{
         type: ACTIONS.WIZARD_MOVE_DOWN,
         payload: {
-            positionMove: 5,
+            positionMove: 7,
             status: 'run'
         },
         meta:{
