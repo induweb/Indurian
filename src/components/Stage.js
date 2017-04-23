@@ -340,13 +340,13 @@ class Stage extends React.Component {
 
         if (wasHit) {
             this.props.addPoints(10);
-            this.props.addExplosion();
             setTimeout(() => {
                 this.props.removeExplosion();
             }, 1000);
             if (chosenBlock.value > 1) {
                 this.props.decreaseCrateValue(chosenBlock.key);
             } else {
+                this.props.addExplosion(chosenBlock.top - 10, chosenBlock.left + 20);
                 this.props.hideCrate(chosenBlock.key);
             }
         }
@@ -447,7 +447,7 @@ const mapDispatchToProps = (dispatch) => {
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
         unlockStage: (id) => dispatch(actions.unlockStage(id)),
         addPoints: (points) => dispatch(actions.addPoints(points)),
-        addExplosion: () => dispatch(actions.addExplosion()),
+        addExplosion: (top, left) => dispatch(actions.addExplosion(top, left)),
         removeExplosion: () => dispatch(actions.removeExplosion()),
         restartGame: () => dispatch(actions.restartGame()),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),

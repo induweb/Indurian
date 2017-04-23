@@ -174,8 +174,8 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.ADD_EXPLOSION:
             return {...state,
                 explosion: [...state.explosion, {
-                    left: state.ball.position.left,
-                    top: state.ball.position.top,
+                    left: action.payload.left || state.ball.position.left,
+                    top: action.payload.top || state.ball.position.top,
                     display: 'block'
                 }]
             };

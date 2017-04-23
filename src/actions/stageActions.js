@@ -286,9 +286,13 @@ export function decreaseLife(){
     };
 }
 
-export function addExplosion() {
+export function addExplosion(top, left) {
     return{
         type: ACTIONS.ADD_EXPLOSION,
+        payload: {
+            top,
+            left
+        },
         meta:{
             timestamp: Date.now()
         }
