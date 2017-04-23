@@ -351,6 +351,7 @@
     {
       "id": 2,
       "title": "Drugie starcie",
+      "enemies": [],
       "blocks": [
         {
           "top": 50,
@@ -364,6 +365,7 @@
     },     {
       "id": 3,
       "title": "Bitwa 3",
+      "enemies": [],
       "blocks": [
         {
           "top": 0,

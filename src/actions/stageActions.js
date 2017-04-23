@@ -286,6 +286,24 @@ export function decreaseLife(){
     };
 }
 
+export function addExplosion() {
+    return{
+        type: ACTIONS.ADD_EXPLOSION,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function removeExplosion() {
+    return{
+        type: ACTIONS.REMOVE_EXPLOSION,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function addPoints(points) {
     return{
         type: ACTIONS.ADD_POINTS,

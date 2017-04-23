@@ -12,6 +12,7 @@ import Mana from './Mana';
 import Health from './Health';
 import Wizard from './Wizard';
 import Ball from './Ball';
+import Explosion from './Explosion';
 import CrateView from './CrateView';
 import Spell from './Spell';
 
@@ -339,6 +340,10 @@ class Stage extends React.Component {
 
         if (wasHit) {
             this.props.addPoints(10);
+            this.props.addExplosion();
+            setTimeout(() => {
+                this.props.removeExplosion();
+            }, 1000);
             if (chosenBlock.value > 1) {
                 this.props.decreaseCrateValue(chosenBlock.key);
             } else {
@@ -385,7 +390,14 @@ class Stage extends React.Component {
                     <div className="game-area">
                         <Wizard wizardPosition={this.props.wizard.positionTop} wizardState={this.props.wizard.status} />
                         <Spell width={this.props.spell.width} top={this.props.spell.top} display={this.props.spell.display} />
-                        <Ball top={this.props.ball.position.top} left={this.props.ball.position.left}/>
+                        <Ball top={this.props.ball.position.top}
+                              left={this.props.ball.position.left}
+                        />
+                        {this.props.explosion.map((data, index) => {
+                            return (
+                                <Explosion key={index} explosion={data}/>
+                            )
+                        })}
                         <CrateView id={stageID} />
                         <Enemies id={stageID} />
                     </div>
@@ -411,7 +423,8 @@ const mapStateToProps = (state) => {
         points: state.game.points,
         mana: state.game.mana,
         health: state.game.health,
-        customWindow: state.game.customWindow
+        customWindow: state.game.customWindow,
+        explosion: state.game.explosion
     }
 };
 
@@ -434,6 +447,8 @@ const mapDispatchToProps = (dispatch) => {
         hideCrate: (id) => dispatch(actions.hideCrate(id)),
         unlockStage: (id) => dispatch(actions.unlockStage(id)),
         addPoints: (points) => dispatch(actions.addPoints(points)),
+        addExplosion: () => dispatch(actions.addExplosion()),
+        removeExplosion: () => dispatch(actions.removeExplosion()),
         restartGame: () => dispatch(actions.restartGame()),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
         hideCustomWindow: () => dispatch(actions.hideCustomWindow()),

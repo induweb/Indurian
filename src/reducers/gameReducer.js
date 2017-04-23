@@ -36,6 +36,8 @@ const initialState = {
         dirX: 3,
         dirY: 3
     },
+    explosion: [],
+    enemies: [],
     area: {
         minX: 0,
         minY: 0,
@@ -167,6 +169,20 @@ const gameReducer = (state = initialState, action) => {
 
             return {...state,
                 blocks: blocksDecrease
+            };
+
+        case ACTIONS.ADD_EXPLOSION:
+            return {...state,
+                explosion: [...state.explosion, {
+                    left: state.ball.position.left,
+                    top: state.ball.position.top,
+                    display: 'block'
+                }]
+            };
+
+        case ACTIONS.REMOVE_EXPLOSION:
+            return {...state,
+                explosion: [...state.explosion.slice(1, state.explosion.length)]
             };
 
         case ACTIONS.ADD_POINTS:

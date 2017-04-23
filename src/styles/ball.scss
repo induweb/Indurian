@@ -42,3 +42,34 @@
     from { -webkit-transform: rotate(0deg); }
     to { -webkit-transform: rotate(360deg); }
 }
+
+@-webkit-keyframes boom {
+    0%     { -webkit-transform: translateZ(0) translateX(93px)   translateY(0px); }
+    25%    { -webkit-transform: translateZ(0) translateX(-837px) translateY(0px); }
+    25.01% { -webkit-transform: translateZ(0) translateX(93px)   translateY(-100px); }
+    50%    { -webkit-transform: translateZ(0) translateX(-837px) translateY(-100px); }
+    50.01% { -webkit-transform: translateZ(0) translateX(93px)   translateY(-200px); }
+    75%    { -webkit-transform: translateZ(0) translateX(-837px) translateY(-200px); }
+    75.01% { -webkit-transform: translateZ(0) translateX(93px)   translateY(-300px); }
+    100%   { -webkit-transform: translateZ(0) translateX(-837px) translateY(-300px); }
+}
+
+.explosion {
+    height: 100px;
+    width: 93px;
+    overflow: hidden;
+    position: absolute;
+    display: none;
+    z-index: 11;
+    top: 150px;
+    left: 510px;
+}
+
+.explosion:after {
+    background-image: url(../images/sprites/sprite-explosion.png);
+    -webkit-animation: boom 2s steps(10,start);
+    width: 930px;
+    height: 400px;
+    content: "";
+    display: block;
+}
