@@ -8,18 +8,19 @@
           "key": 0,
           "type": "orc",
           "name": "Barzul",
-          "value": 10,
-          "hp": 10,
+          "value": 100,
+          "hp": 100,
           "status": "idle",
+          "movingType": 1,
           "approximation": {
             "X": 20,
             "Y": 10
           },
           "position": {
             "top": 160,
-            "right": 90,
-            "height": 118,
-            "width": 120
+            "left": 536,
+            "bottom": 278,
+            "right": 656
           }
         }
       ],

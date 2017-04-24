@@ -6,13 +6,13 @@ require('../styles/enemy.scss');
 class Enemies extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.enemies);
     }
 
     render () {
         return (
             <div>
                 {this.props.enemies.map(data => {
+                    {/*console.log('DATA', data);*/}
                     return (
                         <Enemy key={data.key} {...data}/>
                     )

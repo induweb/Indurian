@@ -1,17 +1,16 @@
 import React from 'react';
 require('../styles/enemy.scss');
 
-class Crate extends React.Component {
+class Enemy extends React.Component {
 
   render () {
     return (
         <div className={`enemy ${this.props.type} orc-${this.props.status}`} style={{
-            top: this.props.position.top + 'px',
-            right: this.props.position.right + 'px'
+            top: this.props.position.top + 'px'
         }}
         >
             <div className="enemy-status" style={{
-                width: this.props.position.width + 'px',
+                width: this.props.position.right - this.props.position.left + 'px',
                 padding: '0 ' + this.props.approximation.X + 'px'
             }}>
                 <div className="enemy-name">{this.props.name}</div>
@@ -27,4 +26,4 @@ class Crate extends React.Component {
   }
 }
 
-export default Crate;
+export default Enemy;

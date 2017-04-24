@@ -168,6 +168,35 @@ export function wizardMoveDown(){
     };
 }
 
+
+export function enemyMoveUp(id){
+    return{
+        type: ACTIONS.ENEMY_MOVE_UP,
+        payload: {
+            positionMove: 0.5,
+            status: 'idle', //temporarily
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function enemyMoveDown(id){
+    return{
+        type: ACTIONS.ENEMY_MOVE_DOWN,
+        payload: {
+            positionMove: -0.5,
+            status: 'idle',//temporarily
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function spellCasting(){
     return{
         type: ACTIONS.SPELL_CASTING,

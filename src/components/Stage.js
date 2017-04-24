@@ -24,6 +24,7 @@ class Stage extends React.Component {
         this.keyInterval = [];
 
         this.gameLoop = null;
+        this.enemyMovement = 'UP';
         this.side = {
             None :0,
             Left : 1,
@@ -56,6 +57,7 @@ class Stage extends React.Component {
             if (this.props.mana < 188) {
                 this.props.increaseMana(0.1);
             }
+            this.enemyHandler();
             this.props.loopTick();
         }, 10);
     };
@@ -72,6 +74,86 @@ class Stage extends React.Component {
             },1000);
         }
         this.clearAllKeyIntervals();
+    };
+
+    explosion = (posTop, posLeft) => {
+        this.props.addExplosion(posTop, posLeft);
+        setTimeout(() => {
+            this.props.removeExplosion();
+        }, 1000);
+    };
+
+    enemyHandler = () => {
+        this.props.enemies.map((enemy) => {
+            let enemyPosition = {
+                top: enemy.position.top - enemy.approximation.Y,
+                right: enemy.position.right - enemy.approximation.X,
+                bottom: enemy.position.bottom + enemy.approximation.Y,
+                left: enemy.position.left + enemy.approximation.X
+            };
+
+            let collisionWithEnemy = this.checkCollision(enemyPosition);
+
+            if (collisionWithEnemy) {
+                // this.props.reduceEnemyHp()
+                this.explosion();
+
+                switch (collisionWithEnemy.side) {
+                    case (this.side.Left):
+                    case (this.side.Right):
+                        this.props.changeDirX();
+                        break;
+
+                    case (this.side.Top):
+                    case (this.side.Bottom):
+                        this.props.changeDirY();
+                        break;
+                }
+            }
+
+
+            switch (enemy.movingType) {
+                case 1:
+                    let random = Math.random();
+                    if (random < 0.01) {
+                        if (this.enemyMovement == 'UP') {
+                            this.enemyMovement = 'DOWN';
+                            this.props.enemyMoveDown(enemy.key);
+                        } else if (this.enemyMovement == 'DOWN') {
+                            this.enemyMovement = 'UP';
+                            this.props.enemyMoveUp(enemy.key);
+                        }
+                    } else {
+                        if (this.enemyMovement == 'UP') {
+                            this.props.enemyMoveUp(enemy.key);
+                        } else if (this.enemyMovement == 'DOWN') {
+                            this.props.enemyMoveDown(enemy.key);
+                        }
+                    }
+
+                    break;
+            }
+
+            switch (this.checkEnemyCollisionWithBorder(enemyPosition)) {
+                case 'TOP':
+                    this.enemyMovement = 'DOWN';
+                    this.props.enemyMoveDown(enemy.key);
+                    break;
+                case 'BOTTOM':
+                    this.enemyMovement = 'UP';
+                    this.props.enemyMoveUp(enemy.key);
+                    break;
+            }
+        });
+    };
+
+    checkEnemyCollisionWithBorder = (enemyPosition) => {
+        if (enemyPosition.top <= this.props.area.minY) {
+            return 'TOP';
+        }
+        if (enemyPosition.bottom >= this.props.area.maxY) {
+            return 'BOTTOM';
+        }
     };
 
     pauseGame = () => {
@@ -315,6 +397,7 @@ class Stage extends React.Component {
                             this.props.decreaseCrateValue(block.key);
                         } else {
                             this.props.hideCrate(block.key);
+                            this.explosion(block.top - 10, block.left + 20);
                         }
                         this.props.addPoints(10);
                         this.clearKeyInterval(KEYCODES.RIGHT);
@@ -340,13 +423,10 @@ class Stage extends React.Component {
 
         if (wasHit) {
             this.props.addPoints(10);
-            setTimeout(() => {
-                this.props.removeExplosion();
-            }, 1000);
             if (chosenBlock.value > 1) {
                 this.props.decreaseCrateValue(chosenBlock.key);
             } else {
-                this.props.addExplosion(chosenBlock.top - 10, chosenBlock.left + 20);
+                this.explosion(chosenBlock.top - 10, chosenBlock.left + 20);
                 this.props.hideCrate(chosenBlock.key);
             }
         }
@@ -424,7 +504,8 @@ const mapStateToProps = (state) => {
         mana: state.game.mana,
         health: state.game.health,
         customWindow: state.game.customWindow,
-        explosion: state.game.explosion
+        explosion: state.game.explosion,
+        enemies: state.game.enemies
     }
 };
 
@@ -434,6 +515,8 @@ const mapDispatchToProps = (dispatch) => {
         wizardIdle: () => dispatch(actions.wizardIdle()),
         wizardMoveUp: () => dispatch(actions.wizardMoveUp()),
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
+        enemyMoveUp: (id) => dispatch(actions.enemyMoveUp(id)),
+        enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
         spellCasting: () => dispatch(actions.spellCasting()),
         castStop: () => dispatch(actions.castStop()),
         loopTick: () => dispatch(actions.loopTick()),

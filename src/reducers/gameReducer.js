@@ -68,6 +68,7 @@ const gameReducer = (state = initialState, action) => {
 
         case ACTIONS.WIZARD_IDLE:
             return {...state, wizard: {...state.wizard, status: action.payload.status}};
+
         case ACTIONS.WIZARD_MOVE_UP:
             return {...state, wizard: {
                 positionTop: state.wizard.positionTop + action.payload.positionMove,
@@ -78,6 +79,7 @@ const gameReducer = (state = initialState, action) => {
                     bottom: state.wizard.positionTop + action.payload.positionMove + 73
                 }
             }};
+
         case ACTIONS.WIZARD_MOVE_DOWN:
             return {...state, wizard: {
                 positionTop: state.wizard.positionTop + action.payload.positionMove,
@@ -88,6 +90,43 @@ const gameReducer = (state = initialState, action) => {
                     bottom: state.wizard.positionTop + action.payload.positionMove + 73
                 }
             }};
+
+        case ACTIONS.ENEMY_MOVE_UP:
+
+            let newStateEnemiesMoveUp = {
+                ...state.enemies[action.payload.id],
+                position: {
+                    ...state.enemies[action.payload.id].position,
+                    top: state.enemies[action.payload.id].position.top - action.payload.positionMove,
+                    bottom: state.enemies[action.payload.id].position.bottom - action.payload.positionMove
+                },
+                status: action.payload.status
+            };
+            let indexEnemyMoveUp = action.payload.id;
+            let enemiesMoveUp = [ ...state.enemies.slice(0,indexEnemyMoveUp), newStateEnemiesMoveUp, ...state.enemies.slice(indexEnemyMoveUp+1, state.enemies.length)];
+
+            return {...state,
+                enemies: enemiesMoveUp
+            };
+
+        case ACTIONS.ENEMY_MOVE_DOWN:
+
+            let newStateEnemiesMoveDown = {
+                ...state.enemies[action.payload.id],
+                position: {
+                    ...state.enemies[action.payload.id].position,
+                    top: state.enemies[action.payload.id].position.top - action.payload.positionMove,
+                    bottom: state.enemies[action.payload.id].position.bottom - action.payload.positionMove
+                },
+                status: action.payload.status
+            };
+            let indexEnemyMoveDown = action.payload.id;
+            let enemiesMoveDown = [ ...state.enemies.slice(0,indexEnemyMoveDown), newStateEnemiesMoveDown, ...state.enemies.slice(indexEnemyMoveDown+1, state.enemies.length)];
+
+            return {...state,
+                enemies: enemiesMoveDown
+            };
+
         case ACTIONS.SPELL_CASTING:
             return {...state,
                 spell: {
