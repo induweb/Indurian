@@ -24,6 +24,8 @@ class Stage extends React.Component {
         this.keyInterval = [];
 
         this.gameLoop = null;
+        this.blocksEmpty = false;
+        this.enemiesEmpty = false;
         this.enemyMovement = 'UP';
         this.side = {
             None :0,
@@ -45,6 +47,8 @@ class Stage extends React.Component {
             this.stageId = nextProps.params.stageId;
             //load stage data
             this.props.stageLoad(nextProps.params.stageId);
+            this.enemiesEmpty = false;
+            this.blocksEmpty = false;
             this.props.hideCustomWindow();
         }
     };
@@ -58,6 +62,7 @@ class Stage extends React.Component {
                 this.props.increaseMana(0.1);
             }
             this.enemyHandler();
+            this.gameWinCheck();
             this.props.loopTick();
         }, 10);
     };
@@ -84,6 +89,7 @@ class Stage extends React.Component {
     };
 
     enemyHandler = () => {
+        let enemiesLeft = 0;
         this.props.enemies.map((enemy) => {
 
             if (enemy.hp <= 0) {
@@ -91,6 +97,8 @@ class Stage extends React.Component {
                 this.props.addPoints(enemy.value);
                 return;
             }
+
+            enemiesLeft++;
 
             let enemyPosition = {
                 top: enemy.position.top + enemy.approximation.Y,
@@ -132,6 +140,9 @@ class Stage extends React.Component {
                             this.enemyMovement = 'UP';
                             this.props.enemyMoveUp(enemy.key);
                         }
+                    } else if (random > 0.99) {
+                        console.log('ATTACK');
+                        this.props.enemyAttack(enemy.key);
                     } else {
                         if (this.enemyMovement == 'UP') {
                             this.props.enemyMoveUp(enemy.key);
@@ -143,12 +154,12 @@ class Stage extends React.Component {
                     break;
             }
 
-            switch (this.checkEnemyCollisionWithBorder(enemyPosition)) {
-                case 'TOP':
+            switch (this.checkCharCollisionWithBorder(enemyPosition)) {
+                case this.side.Top:
                     this.enemyMovement = 'DOWN';
                     this.props.enemyMoveDown(enemy.key);
                     break;
-                case 'BOTTOM':
+                case this.side.Bottom:
                     this.enemyMovement = 'UP';
                     this.props.enemyMoveUp(enemy.key);
                     break;
@@ -162,14 +173,18 @@ class Stage extends React.Component {
                 this.props.castStop();
             }
         });
+
+        if (enemiesLeft === 0) {
+            this.enemiesEmpty = true;
+        }
     };
 
-    checkEnemyCollisionWithBorder = (enemyPosition) => {
-        if (enemyPosition.top <= this.props.area.minY) {
-            return 'TOP';
+    checkCharCollisionWithBorder = (position) => {
+        if (position.top <= this.props.area.minY) {
+            return this.side.Top;
         }
-        if (enemyPosition.bottom >= this.props.area.maxY) {
-            return 'BOTTOM';
+        if (position.bottom >= this.props.area.maxY) {
+            return this.side.Bottom;
         }
     };
 
@@ -199,14 +214,12 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.UP: {
-                if (this.keyInterval[KEYCODES.RIGHT] || !this.gameLoop ) {
+                if (!this.gameLoop ) {
                     return;
                 }
                 if (data) {
                     if (!this.keyInterval[KEYCODES.UP]) {
-                        if (this.keyInterval[KEYCODES.DOWN]) {
-                            this.clearKeyInterval(KEYCODES.DOWN);
-                        }
+                        this.clearAllKeyIntervals();
                         this.keyInterval[KEYCODES.UP] = setInterval(()=>{
                             this.props.wizardMoveUp();
                         }, 25);
@@ -217,14 +230,12 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.DOWN: {
-                if (this.keyInterval[KEYCODES.RIGHT] || !this.gameLoop ) {
+                if (!this.gameLoop ) {
                     return;
                 }
                 if (data) {
                     if (!this.keyInterval[KEYCODES.DOWN]) {
-                        if (this.keyInterval[KEYCODES.UP]) {
-                            this.clearKeyInterval(KEYCODES.UP);
-                        }
+                        this.clearAllKeyIntervals();
                         this.keyInterval[KEYCODES.DOWN] = setInterval(()=>{
                             this.props.wizardMoveDown();
                         }, 25);
@@ -238,16 +249,9 @@ class Stage extends React.Component {
                 if (!this.gameLoop) {
                     return;
                 }
-                if (this.keyInterval[KEYCODES.DOWN]) {
-                    this.clearKeyInterval(KEYCODES.DOWN);
-                }
-                if (this.keyInterval[KEYCODES.UP]) {
-                    this.clearKeyInterval(KEYCODES.UP);
-                }
-
                 if (data) {
                     if (!this.keyInterval[KEYCODES.RIGHT]) {
-
+                        this.clearAllKeyIntervals();
                         this.keyInterval[KEYCODES.RIGHT] = setInterval(()=>{
                             if (this.props.mana <= 0) {
                                 this.clearKeyInterval(KEYCODES.RIGHT);
@@ -265,6 +269,16 @@ class Stage extends React.Component {
                 break;
             }
         }
+
+        switch (this.checkCharCollisionWithBorder(this.props.wizard.paddle)) {
+            case this.side.Top:
+                this.clearKeyInterval(KEYCODES.UP);
+                break;
+            case this.side.Bottom:
+                this.clearKeyInterval(KEYCODES.DOWN);
+                break;
+        }
+
     };
 
     clearKeyInterval = (keyCode) => {
@@ -449,6 +463,12 @@ class Stage extends React.Component {
         }
 
         if (blocksLeft === 0) {
+            this.blocksEmpty = true;
+        }
+    };
+
+    gameWinCheck = () => {
+        if (this.blocksEmpty && this.enemiesEmpty) {
             clearInterval(this.gameLoop);
             this.gameLoop = null;
             this.props.resetBall();
@@ -534,6 +554,7 @@ const mapDispatchToProps = (dispatch) => {
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         enemyMoveUp: (id) => dispatch(actions.enemyMoveUp(id)),
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
+        enemyAttack: (id) => dispatch(actions.enemyAttack(id)),
         deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
         decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),

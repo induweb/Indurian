@@ -193,12 +193,25 @@ export function deleteEnemy(id){
     };
 }
 
+export function enemyAttack(id){
+    return{
+        type: ACTIONS.ENEMY_ATTACK,
+        payload: {
+            status: 'attack',
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function enemyMoveUp(id){
     return{
         type: ACTIONS.ENEMY_MOVE_UP,
         payload: {
             positionMove: 0.5,
-            status: 'idle', //temporarily
+            status: 'run',
             id
         },
         meta:{
@@ -212,7 +225,7 @@ export function enemyMoveDown(id){
         type: ACTIONS.ENEMY_MOVE_DOWN,
         payload: {
             positionMove: -0.5,
-            status: 'idle',//temporarily
+            status: 'run',
             id
         },
         meta:{
