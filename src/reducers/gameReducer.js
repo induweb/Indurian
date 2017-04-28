@@ -126,6 +126,18 @@ const gameReducer = (state = initialState, action) => {
                 enemies: enemiesAttack
             };
 
+        case ACTIONS.SET_ENEMY_STATUS:
+            let newStateEnemiesStatus = {
+                ...state.enemies[action.payload.id],
+                status: action.payload.status
+            };
+            let indexEnemyStatus = action.payload.id;
+            let enemiesStatus = [ ...state.enemies.slice(0,indexEnemyStatus), newStateEnemiesStatus, ...state.enemies.slice(indexEnemyStatus+1, state.enemies.length)];
+
+            return {...state,
+                enemies: enemiesStatus
+            };
+
 
         case ACTIONS.ENEMY_MOVE_UP:
 

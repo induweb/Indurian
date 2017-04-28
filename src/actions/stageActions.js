@@ -206,6 +206,19 @@ export function enemyAttack(id){
     };
 }
 
+export function setEnemyStatus(id, value){
+    return{
+        type: ACTIONS.SET_ENEMY_STATUS,
+        payload: {
+            status: value,
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function enemyMoveUp(id){
     return{
         type: ACTIONS.ENEMY_MOVE_UP,

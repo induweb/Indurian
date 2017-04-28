@@ -26,7 +26,7 @@ class Stage extends React.Component {
         this.gameLoop = null;
         this.blocksEmpty = false;
         this.enemiesEmpty = false;
-        this.enemyMovement = 'UP';
+        this.enemyMovement = 'IDLE';
         this.side = {
             None :0,
             Left : 1,
@@ -126,13 +126,28 @@ class Stage extends React.Component {
 
                         break;
                 }
-
             }
 
             switch (enemy.movingType) {
                 case 1:
-                    let random = Math.random();
-                    if (random < 0.01) {
+                    let random = Math.random(); //IDLE, UP, DOWN, ATTACK
+
+                    if ( this.enemyMovement == 'ATTACK')
+                        return;
+
+                    if (random > 0.99) {
+                        this.props.enemyAttack(enemy.key);
+                        this.enemyMovement = 'ATTACK';
+                        setTimeout(()=>{
+                            this.enemyMovement = 'IDLE';
+                            this.props.setEnemyStatus(enemy.key, 'idle');
+                        },500);
+                    } else if (random < 0.01) { //change attack
+
+                        if (this.enemyMovement == 'IDLE') {
+                            this.enemyMovement = random > 0.5 ? 'UP' : 'DOWN';
+                        }
+
                         if (this.enemyMovement == 'UP') {
                             this.enemyMovement = 'DOWN';
                             this.props.enemyMoveDown(enemy.key);
@@ -140,9 +155,6 @@ class Stage extends React.Component {
                             this.enemyMovement = 'UP';
                             this.props.enemyMoveUp(enemy.key);
                         }
-                    } else if (random > 0.99) {
-                        console.log('ATTACK');
-                        this.props.enemyAttack(enemy.key);
                     } else {
                         if (this.enemyMovement == 'UP') {
                             this.props.enemyMoveUp(enemy.key);
@@ -556,6 +568,7 @@ const mapDispatchToProps = (dispatch) => {
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
         enemyAttack: (id) => dispatch(actions.enemyAttack(id)),
         deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
+        setEnemyStatus: (id, value) => dispatch(actions.setEnemyStatus(id, value)),
         decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),
         castStop: () => dispatch(actions.castStop()),

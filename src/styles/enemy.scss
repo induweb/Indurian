@@ -92,22 +92,42 @@
     0%   { background-position: -20px 0;}
     16%  { background-position: -20px -124px;}
     32%  { background-position: -20px -248px;}
-    //42%  { background-position: -20px -372px;}
+    49%  { background-position: -20px -496px;}
+    66%  { background-position: -20px -620px;}
+    82%  { background-position: -20px -744px;}
+}
+
+@-moz-keyframes orc-run-anim {
+    0%   { background-position: -20px 0;}
+    16%  { background-position: -20px -124px;}
+    32%  { background-position: -20px -248px;}
+    49%  { background-position: -20px -496px;}
+    66%  { background-position: -20px -620px;}
+    82%  { background-position: -20px -744px;}
+}
+@-o-keyframes orc-run-anim {
+    0%   { background-position: -20px 0;}
+    16%  { background-position: -20px -124px;}
+    32%  { background-position: -20px -248px;}
+    49%  { background-position: -20px -496px;}
+    66%  { background-position: -20px -620px;}
+    82%  { background-position: -20px -744px;}
+}
+@keyframes orc-run-anim {
+    0%   { background-position: -20px 0;}
+    16%  { background-position: -20px -124px;}
+    32%  { background-position: -20px -248px;}
     49%  { background-position: -20px -496px;}
     66%  { background-position: -20px -620px;}
     82%  { background-position: -20px -744px;}
 }
 
 .orc-attack {
-    -webkit-animation: orc-attack-anim .5s steps(1) infinite; /* Safari 4+ */
-    -moz-animation:    orc-attack-anim .5s steps(1) infinite; /* Fx 5+ */
-    -o-animation:      orc-attack-anim .5s steps(1) infinite;
-    animation:         orc-attack-anim .5s steps(1) infinite; /* IE 10+, Fx 29+ */
+    -webkit-animation: orc-attack-anim .5s steps(1); /* Safari 4+ */
+    -moz-animation:    orc-attack-anim .5s steps(1); /* Fx 5+ */
+    -o-animation:      orc-attack-anim .5s steps(1);
+    animation:         orc-attack-anim .5s steps(1); /* IE 10+, Fx 29+ */
     background-image: url(../images/sprites/orc-attack.png);
-    //background-position: 33px -816px;
-    //&:hover {
-    //    background-position: 33px -945px;
-    //}
 }
 
 @-webkit-keyframes orc-attack-anim {
