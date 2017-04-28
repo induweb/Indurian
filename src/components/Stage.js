@@ -85,17 +85,25 @@ class Stage extends React.Component {
 
     enemyHandler = () => {
         this.props.enemies.map((enemy) => {
+
+            if (enemy.hp <= 0) {
+                this.props.deleteEnemy(enemy.key);
+                this.props.addPoints(enemy.value);
+                return;
+            }
+
             let enemyPosition = {
-                top: enemy.position.top - enemy.approximation.Y,
+                top: enemy.position.top + enemy.approximation.Y,
                 right: enemy.position.right - enemy.approximation.X,
-                bottom: enemy.position.bottom + enemy.approximation.Y,
+                bottom: enemy.position.bottom - enemy.approximation.Y,
                 left: enemy.position.left + enemy.approximation.X
             };
 
             let collisionWithEnemy = this.checkCollision(enemyPosition);
 
             if (collisionWithEnemy) {
-                // this.props.reduceEnemyHp()
+
+                this.props.decreaseEnemyHp(enemy.key, 10);
                 this.explosion();
 
                 switch (collisionWithEnemy.side) {
@@ -107,10 +115,11 @@ class Stage extends React.Component {
                     case (this.side.Top):
                     case (this.side.Bottom):
                         this.props.changeDirY();
+
                         break;
                 }
-            }
 
+            }
 
             switch (enemy.movingType) {
                 case 1:
@@ -143,6 +152,14 @@ class Stage extends React.Component {
                     this.enemyMovement = 'UP';
                     this.props.enemyMoveUp(enemy.key);
                     break;
+            }
+
+            let collisionEnemyWithSpell  = this.checkSpellCollision(enemyPosition);
+            if (collisionEnemyWithSpell) {
+                this.props.decreaseEnemyHp(enemy.key, 10);
+                this.explosion(this.props.spell.top - 10, this.props.spell.width + 80);
+                this.clearKeyInterval(KEYCODES.RIGHT);
+                this.props.castStop();
             }
         });
     };
@@ -315,9 +332,9 @@ class Stage extends React.Component {
             let distance = Math.abs(dx) + Math.abs(dy);
 
             if (wy > hx) {
-                return wy > -hx ? {side: this.side.Top, distance: distance} : {side: this.side.Left, distance: distance};
+                return wy > -hx ? {side: this.side.Bottom, distance: distance} : {side: this.side.Left, distance: distance};
             } else {
-                return wy > -hx ? {side: this.side.Right, distance: distance} : {side: this.side.Bottom, distance: distance};
+                return wy > -hx ? {side: this.side.Right, distance: distance} : {side: this.side.Top, distance: distance};
             }
         } else {
             return this.side.None;
@@ -517,6 +534,8 @@ const mapDispatchToProps = (dispatch) => {
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         enemyMoveUp: (id) => dispatch(actions.enemyMoveUp(id)),
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
+        deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
+        decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),
         castStop: () => dispatch(actions.castStop()),
         loopTick: () => dispatch(actions.loopTick()),

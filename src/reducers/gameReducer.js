@@ -91,6 +91,33 @@ const gameReducer = (state = initialState, action) => {
                 }
             }};
 
+        case ACTIONS.DECREASE_ENEMY_HP:
+
+            let newStateEnemiesDecreaseHp = {
+                ...state.enemies[action.payload.id],
+                hp: state.enemies[action.payload.id].hp - action.payload.value
+            };
+            let indexEnemyDecreaseHp = action.payload.id;
+            let enemiesDecreaseHp = [ ...state.enemies.slice(0,indexEnemyDecreaseHp), newStateEnemiesDecreaseHp, ...state.enemies.slice(indexEnemyDecreaseHp+1, state.enemies.length)];
+
+            return {...state,
+                enemies: enemiesDecreaseHp
+            };
+
+        case ACTIONS.DELETE_ENEMY:
+
+            // let newStateEnemiesDelete = {
+            //     ...state.enemies[action.payload.id],
+            //     hp: state.enemies[action.payload.id].hp - action.payload.value
+            // };
+            let indexEnemyDelete = action.payload.id;
+            let enemiesDelete = [ ...state.enemies.slice(0,indexEnemyDelete - 1), ...state.enemies.slice(indexEnemyDelete+1, state.enemies.length)];
+
+
+            return {...state,
+                enemies: enemiesDelete
+            };
+
         case ACTIONS.ENEMY_MOVE_UP:
 
             let newStateEnemiesMoveUp = {

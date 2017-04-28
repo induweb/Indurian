@@ -168,6 +168,30 @@ export function wizardMoveDown(){
     };
 }
 
+export function decreaseEnemyHp(id, value){
+    return{
+        type: ACTIONS.DECREASE_ENEMY_HP,
+        payload: {
+            id,
+            value
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function deleteEnemy(id){
+    return{
+        type: ACTIONS.DELETE_ENEMY,
+        payload: {
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
 
 export function enemyMoveUp(id){
     return{
