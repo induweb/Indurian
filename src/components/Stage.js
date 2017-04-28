@@ -70,6 +70,7 @@ class Stage extends React.Component {
     stopGame = () => {
         clearInterval(this.gameLoop);
         this.gameLoop = null;
+        this.setAllEnemiesIdle();
         this.props.decreaseLife();
         if (this.props.lifes === 0) {
             this.gameOver();
@@ -191,6 +192,12 @@ class Stage extends React.Component {
         }
     };
 
+    setAllEnemiesIdle = () => {
+        this.props.enemies.map((enemy) => {
+            this.props.setEnemyStatus(enemy.key, 'idle');
+        });
+    };
+
     checkCharCollisionWithBorder = (position) => {
         if (position.top <= this.props.area.minY) {
             return this.side.Top;
@@ -203,6 +210,7 @@ class Stage extends React.Component {
     pauseGame = () => {
         if (this.props.customWindow.display == 'none') {
             clearInterval(this.gameLoop);
+            this.setAllEnemiesIdle();
             this.gameLoop = null;
             this.props.showCustomWindow('pause');
         }
@@ -258,9 +266,9 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.RIGHT: {
-                if (!this.gameLoop) {
-                    return;
-                }
+                // if (!this.gameLoop) {
+                //     return;
+                // }
                 if (data) {
                     if (!this.keyInterval[KEYCODES.RIGHT]) {
                         this.clearAllKeyIntervals();
