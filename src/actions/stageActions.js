@@ -219,6 +219,36 @@ export function setEnemyStatus(id, value){
     };
 }
 
+export function addEnemySpell(id){
+    return{
+        type: ACTIONS.ADD_ENEMY_SPELL,
+        payload: {
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function moveEnemySpell(){
+    return{
+        type: ACTIONS.MOVE_ENEMY_SPELL,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function removeEnemySpell() {
+    return{
+        type: ACTIONS.REMOVE_ENEMY_SPELL,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function enemyMoveUp(id){
     return{
         type: ACTIONS.ENEMY_MOVE_UP,

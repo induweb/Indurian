@@ -6,6 +6,7 @@ import KEYCODES from '../constants/keyCodes';
 import WindowHeader from './WindowHeader';
 import CustomWindow from './CustomWindow';
 import Enemies from './Enemies';
+import EnemiesSpells from './EnemiesSpells';
 import Points from './Points';
 import Lifes from './Lifes';
 import Mana from './Mana';
@@ -131,22 +132,32 @@ class Stage extends React.Component {
 
             switch (enemy.movingType) {
                 case 1:
-                    let random = Math.random(); //IDLE, UP, DOWN, ATTACK
-
-                    if ( this.enemyMovement == 'ATTACK')
+                    if (this.enemyMovement == 'ATTACK')
                         return;
+
+                    let random = Math.random(); //IDLE, UP, DOWN, ATTACK
 
                     if (random > 0.99) {
                         this.props.enemyAttack(enemy.key);
+                        this.props.addEnemySpell(enemy.key);
                         this.enemyMovement = 'ATTACK';
                         setTimeout(()=>{
-                            this.enemyMovement = 'IDLE';
+                            if (random > 0.9933) {
+                                this.enemyMovement = 'UP';
+                            } else if (random > 0.9966 ) {
+                                this.enemyMovement = 'DOWN';
+                            } else {
+                                this.enemyMovement = 'IDLE';
+                            }
                             this.props.setEnemyStatus(enemy.key, 'idle');
                         },500);
+                        setTimeout(() => {
+                            this.props.removeEnemySpell();
+                        }, 1500);
                     } else if (random < 0.01) { //change attack
 
                         if (this.enemyMovement == 'IDLE') {
-                            this.enemyMovement = random > 0.5 ? 'UP' : 'DOWN';
+                            this.enemyMovement = random > 0.45 ? 'UP' : 'DOWN';
                         }
 
                         if (this.enemyMovement == 'UP') {
@@ -187,6 +198,8 @@ class Stage extends React.Component {
             }
         });
 
+        this.moveAllEnemiesSpells();
+
         if (enemiesLeft === 0) {
             this.enemiesEmpty = true;
         }
@@ -196,6 +209,10 @@ class Stage extends React.Component {
         this.props.enemies.map((enemy) => {
             this.props.setEnemyStatus(enemy.key, 'idle');
         });
+    };
+
+    moveAllEnemiesSpells = () => {
+        this.props.moveEnemySpell();
     };
 
     checkCharCollisionWithBorder = (position) => {
@@ -491,6 +508,8 @@ class Stage extends React.Component {
         if (this.blocksEmpty && this.enemiesEmpty) {
             clearInterval(this.gameLoop);
             this.gameLoop = null;
+            this.enemiesEmpty = false;
+            this.blocksEmpty = false;
             this.props.resetBall();
             this.clearAllKeyIntervals();
             this.props.unlockStage(parseInt(this.props.params.stageId) + 1);
@@ -537,6 +556,7 @@ class Stage extends React.Component {
                         })}
                         <CrateView id={stageID} />
                         <Enemies id={stageID} />
+                        <EnemiesSpells id={stageID} />
                     </div>
                     <CustomWindow display={this.props.customWindow.display} id={stageID}/>
                     <Points points={this.props.points}/>
@@ -562,7 +582,8 @@ const mapStateToProps = (state) => {
         health: state.game.health,
         customWindow: state.game.customWindow,
         explosion: state.game.explosion,
-        enemies: state.game.enemies
+        enemies: state.game.enemies,
+        enemiesSpells: state.game.enemiesSpells
     }
 };
 
@@ -576,6 +597,9 @@ const mapDispatchToProps = (dispatch) => {
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
         enemyAttack: (id) => dispatch(actions.enemyAttack(id)),
         deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
+        addEnemySpell: (id) => dispatch(actions.addEnemySpell(id)),
+        moveEnemySpell: () => dispatch(actions.moveEnemySpell()),
+        removeEnemySpell: () => dispatch(actions.removeEnemySpell()),
         setEnemyStatus: (id, value) => dispatch(actions.setEnemyStatus(id, value)),
         decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),

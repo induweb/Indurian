@@ -155,3 +155,72 @@
     50%  { background-position: 33px -258px}
     75%  { background-position: 33px -816px;}
 }
+
+.enemy-spell {
+    width: 64px;
+    height: 40px;
+    position: absolute;
+    background-image: url(../images/sprites/Iceball-green.png);
+    -webkit-animation: orc-spell-anim .5s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    orc-spell-anim .5s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      orc-spell-anim .5s steps(1) infinite;
+    animation:         orc-spell-anim .5s steps(1) infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes orc-spell-anim {
+    0%   { background-position: 0 0;}
+    9%   { background-position: 0 -40px;}
+    18%  { background-position: 0 -80px;}
+    27%  { background-position: 0 -120px;}
+    36%  { background-position: 0 -160px;}
+    45%  { background-position: 0 -200px;}
+    54%  { background-position: 0 -240px;}
+    63%  { background-position: 0 -200px;}
+    72%  { background-position: 0 -160px;}
+    81%  { background-position: 0 -120px;}
+    90%  { background-position: 0 -80px;}
+    100%  { background-position: 0 -40px;}
+}
+
+@-moz-keyframes orc-spell-anim {
+    0%   { background-position: 0 0;}
+    9%   { background-position: 0 -40px;}
+    18%  { background-position: 0 -80px;}
+    27%  { background-position: 0 -120px;}
+    36%  { background-position: 0 -160px;}
+    45%  { background-position: 0 -200px;}
+    54%  { background-position: 0 -240px;}
+    63%  { background-position: 0 -200px;}
+    72%  { background-position: 0 -160px;}
+    81%  { background-position: 0 -120px;}
+    90%  { background-position: 0 -80px;}
+    100%  { background-position: 0 -40px;}
+}
+@-o-keyframes orc-spell-anim {
+    0%   { background-position: 0 0;}
+    9%   { background-position: 0 -40px;}
+    18%  { background-position: 0 -80px;}
+    27%  { background-position: 0 -120px;}
+    36%  { background-position: 0 -160px;}
+    45%  { background-position: 0 -200px;}
+    54%  { background-position: 0 -240px;}
+    63%  { background-position: 0 -200px;}
+    72%  { background-position: 0 -160px;}
+    81%  { background-position: 0 -120px;}
+    90%  { background-position: 0 -80px;}
+    100%  { background-position: 0 -40px;}
+}
+@keyframes orc-spell-anim {
+    0%   { background-position: 0 0;}
+    9%   { background-position: 0 -40px;}
+    18%  { background-position: 0 -80px;}
+    27%  { background-position: 0 -120px;}
+    36%  { background-position: 0 -160px;}
+    45%  { background-position: 0 -200px;}
+    54%  { background-position: 0 -240px;}
+    63%  { background-position: 0 -200px;}
+    72%  { background-position: 0 -160px;}
+    81%  { background-position: 0 -120px;}
+    90%  { background-position: 0 -80px;}
+    100%  { background-position: 0 -40px;}
+}

@@ -38,6 +38,7 @@ const initialState = {
     },
     explosion: [],
     enemies: [],
+    enemiesSpells: [],
     area: {
         minX: 0,
         minY: 0,
@@ -108,7 +109,6 @@ const gameReducer = (state = initialState, action) => {
 
             let indexEnemyDelete = action.payload.id;
             let enemiesDelete = [ ...state.enemies.slice(0,indexEnemyDelete - 1), ...state.enemies.slice(indexEnemyDelete+1, state.enemies.length)];
-
 
             return {...state,
                 enemies: enemiesDelete
@@ -265,6 +265,31 @@ const gameReducer = (state = initialState, action) => {
                     top: action.payload.top || state.ball.position.top,
                     display: 'block'
                 }]
+            };
+
+        case ACTIONS.ADD_ENEMY_SPELL:
+            return {...state,
+                enemiesSpells: [...state.enemiesSpells, {
+                    left: state.enemies[action.payload.id].position.left,
+                    top: state.enemies[action.payload.id].position.top + 60,
+                    display: 'block'
+                }]
+            };
+
+        case ACTIONS.MOVE_ENEMY_SPELL:
+            let newEnemiesSpells = state.enemiesSpells.map(spell => {
+                return {
+                    left: spell.left - 4,
+                    top: spell.top
+                }
+            });
+            return {...state,
+                enemiesSpells: newEnemiesSpells
+            };
+
+        case ACTIONS.REMOVE_ENEMY_SPELL:
+            return {...state,
+                enemiesSpells: [...state.enemiesSpells.slice(1, state.enemiesSpells.length)]
             };
 
         case ACTIONS.REMOVE_EXPLOSION:
