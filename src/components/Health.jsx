@@ -8,7 +8,7 @@ class Health extends React.Component {
     render() {
         return (
             <div className="health-bar">
-                <span></span>
+                <span style={{left: this.props.health + 70 + 'px'}}></span>
             </div>
         );
     }

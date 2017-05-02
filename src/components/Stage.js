@@ -27,6 +27,7 @@ class Stage extends React.Component {
         this.gameLoop = null;
         this.blocksEmpty = false;
         this.enemiesEmpty = false;
+        this.spellCounter = 0;
         this.enemyMovement = 'IDLE';
         this.side = {
             None :0,
@@ -48,6 +49,7 @@ class Stage extends React.Component {
             this.stageId = nextProps.params.stageId;
             //load stage data
             this.props.stageLoad(nextProps.params.stageId);
+            this.spellCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
             this.props.hideCustomWindow();
@@ -78,6 +80,7 @@ class Stage extends React.Component {
         } else {
             setTimeout(()=>{
                 this.props.resetBall();
+                this.props.resetManaAndHp();
             },1000);
         }
         this.clearAllKeyIntervals();
@@ -139,7 +142,7 @@ class Stage extends React.Component {
 
                     if (random > 0.99) {
                         this.props.enemyAttack(enemy.key);
-                        this.props.addEnemySpell(enemy.key);
+                        this.props.addEnemySpell(enemy.key, ++this.spellCounter);
                         this.enemyMovement = 'ATTACK';
                         setTimeout(()=>{
                             if (random > 0.9933) {
@@ -151,9 +154,6 @@ class Stage extends React.Component {
                             }
                             this.props.setEnemyStatus(enemy.key, 'idle');
                         },500);
-                        setTimeout(() => {
-                            this.props.removeEnemySpell();
-                        }, 1500);
                     } else if (random < 0.01) { //change attack
 
                         if (this.enemyMovement == 'IDLE') {
@@ -174,7 +174,6 @@ class Stage extends React.Component {
                             this.props.enemyMoveDown(enemy.key);
                         }
                     }
-
                     break;
             }
 
@@ -198,7 +197,13 @@ class Stage extends React.Component {
             }
         });
 
-        this.moveAllEnemiesSpells();
+        if (this.props.enemiesSpells.length) {
+            this.moveAllEnemiesSpells();
+            this.props.enemiesSpells.map(spell => {
+                this.checkEnemiesSpellCollisionWithBorder(spell.left, spell.id);
+            });
+        }
+
 
         if (enemiesLeft === 0) {
             this.enemiesEmpty = true;
@@ -221,6 +226,12 @@ class Stage extends React.Component {
         }
         if (position.bottom >= this.props.area.maxY) {
             return this.side.Bottom;
+        }
+    };
+
+    checkEnemiesSpellCollisionWithBorder = (spellLeft, id) => {
+        if (spellLeft <= this.props.area.minX ) {
+            this.props.removeEnemySpell(id);
         }
     };
 
@@ -283,9 +294,9 @@ class Stage extends React.Component {
                 break;
             }
             case KEYCODES.RIGHT: {
-                // if (!this.gameLoop) {
-                //     return;
-                // }
+                if (!this.gameLoop) {
+                    return;
+                }
                 if (data) {
                     if (!this.keyInterval[KEYCODES.RIGHT]) {
                         this.clearAllKeyIntervals();
@@ -419,6 +430,26 @@ class Stage extends React.Component {
         if (this.checkCollision(this.props.wizard.paddle).side) {
             this.bounceWithAngle(this.calculateHitAngle());
         }
+
+        this.props.enemiesSpells.map(spell => {
+            let spellPosition = {
+                top: spell.top,
+                right: spell.left + 10,
+                bottom:  spell.top + 10,
+                left: spell.left
+            };
+
+            let collisionWithEnemiesSpell = this.checkCollision(spellPosition,this.props.wizard.paddle);
+            if (collisionWithEnemiesSpell.side) {
+                this.props.decreaseHp(10);
+                this.explosion(spellPosition.top, spellPosition.left);
+                this.props.removeEnemySpell(spell.id);
+            }
+        });
+
+        if (this.props.health <= 0) {
+               this.stopGame();
+        }
     };
 
     checkSpellCollision = (objectPosition) => {
@@ -508,6 +539,7 @@ class Stage extends React.Component {
         if (this.blocksEmpty && this.enemiesEmpty) {
             clearInterval(this.gameLoop);
             this.gameLoop = null;
+            this.spellCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
             this.props.resetBall();
@@ -597,9 +629,9 @@ const mapDispatchToProps = (dispatch) => {
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
         enemyAttack: (id) => dispatch(actions.enemyAttack(id)),
         deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
-        addEnemySpell: (id) => dispatch(actions.addEnemySpell(id)),
+        addEnemySpell: (id, counter) => dispatch(actions.addEnemySpell(id, counter)),
         moveEnemySpell: () => dispatch(actions.moveEnemySpell()),
-        removeEnemySpell: () => dispatch(actions.removeEnemySpell()),
+        removeEnemySpell: (id) => dispatch(actions.removeEnemySpell(id)),
         setEnemyStatus: (id, value) => dispatch(actions.setEnemyStatus(id, value)),
         decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),
@@ -620,8 +652,10 @@ const mapDispatchToProps = (dispatch) => {
         restartGame: () => dispatch(actions.restartGame()),
         showCustomWindow: (type) => dispatch(actions.showCustomWindow(type)),
         hideCustomWindow: () => dispatch(actions.hideCustomWindow()),
+        resetManaAndHp: () => dispatch(actions.resetManaAndHp()),
         increaseMana: (value) => dispatch(actions.increaseMana(value)),
-        decreaseMana: (value) => dispatch(actions.decreaseMana(value))
+        decreaseMana: (value) => dispatch(actions.decreaseMana(value)),
+        decreaseHp: (value) => dispatch(actions.decreaseHp(value))
     }
 };
 

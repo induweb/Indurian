@@ -219,9 +219,22 @@ export function setEnemyStatus(id, value){
     };
 }
 
-export function addEnemySpell(id){
+export function addEnemySpell(id, counter){
     return{
         type: ACTIONS.ADD_ENEMY_SPELL,
+        payload: {
+            id,
+            counter
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function removeEnemySpell(id){
+    return{
+        type: ACTIONS.REMOVE_ENEMY_SPELL,
         payload: {
             id
         },
@@ -234,15 +247,6 @@ export function addEnemySpell(id){
 export function moveEnemySpell(){
     return{
         type: ACTIONS.MOVE_ENEMY_SPELL,
-        meta:{
-            timestamp: Date.now()
-        }
-    };
-}
-
-export function removeEnemySpell() {
-    return{
-        type: ACTIONS.REMOVE_ENEMY_SPELL,
         meta:{
             timestamp: Date.now()
         }
@@ -441,9 +445,30 @@ export function increaseMana(value) {
     };
 }
 
+export function resetManaAndHp() {
+    return{
+        type: ACTIONS.RESET_MANA_AND_HP,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function decreaseMana(value) {
     return{
         type: ACTIONS.DECREASE_MANA,
+        payload: {
+            value
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function decreaseHp(value) {
+    return{
+        type: ACTIONS.DECREASE_HP,
         payload: {
             value
         },

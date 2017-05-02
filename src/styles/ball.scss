@@ -67,7 +67,7 @@
 
 .explosion:after {
     background-image: url(../images/sprites/sprite-explosion.png);
-    -webkit-animation: boom 2s steps(10,start);
+    -webkit-animation: boom 2s steps(10);
     width: 930px;
     height: 400px;
     content: "";

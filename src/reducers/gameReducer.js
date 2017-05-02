@@ -9,7 +9,7 @@ const initialState = {
     lifes: 3,
     points: 0,
     mana: 188,
-    health: 100,
+    health: 188,
     wizard: {
         positionTop: 175,
         status: 'idle',
@@ -272,24 +272,29 @@ const gameReducer = (state = initialState, action) => {
                 enemiesSpells: [...state.enemiesSpells, {
                     left: state.enemies[action.payload.id].position.left,
                     top: state.enemies[action.payload.id].position.top + 60,
-                    display: 'block'
+                    display: 'block',
+                    id: action.payload.counter
                 }]
+            };
+
+        case ACTIONS.REMOVE_ENEMY_SPELL:
+            let id = action.payload.id;
+            let elementIndex = state.enemiesSpells.map(function(x) {return x.id; }).indexOf(id);
+            let newEnemiesSpellRemove = [ ...state.enemiesSpells.slice(0,elementIndex), ...state.enemiesSpells.slice(elementIndex+1, state.enemiesSpells.length)];
+
+            return {...state,
+                enemiesSpells: newEnemiesSpellRemove
             };
 
         case ACTIONS.MOVE_ENEMY_SPELL:
             let newEnemiesSpells = state.enemiesSpells.map(spell => {
                 return {
-                    left: spell.left - 4,
-                    top: spell.top
+                    ...spell,
+                    left: spell.left - 4
                 }
             });
             return {...state,
                 enemiesSpells: newEnemiesSpells
-            };
-
-        case ACTIONS.REMOVE_ENEMY_SPELL:
-            return {...state,
-                enemiesSpells: [...state.enemiesSpells.slice(1, state.enemiesSpells.length)]
             };
 
         case ACTIONS.REMOVE_EXPLOSION:
@@ -315,6 +320,17 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.DECREASE_MANA:
             return {...state,
                 mana: state.mana - action.payload.value
+            };
+
+        case ACTIONS.DECREASE_HP:
+            return {...state,
+                health: state.health - action.payload.value
+            };
+
+        case ACTIONS.RESET_MANA_AND_HP:
+            return {...state,
+                health: initialState.health,
+                mana: initialState.mana
             };
 
         case ACTIONS.DECREASE_LIFE:
