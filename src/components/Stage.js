@@ -441,7 +441,7 @@ class Stage extends React.Component {
 
             let collisionWithEnemiesSpell = this.checkCollision(spellPosition,this.props.wizard.paddle);
             if (collisionWithEnemiesSpell.side) {
-                this.props.decreaseHp(10);
+                this.props.decreaseHp(47);
                 this.explosion(spellPosition.top, spellPosition.left);
                 this.props.removeEnemySpell(spell.id);
             }
