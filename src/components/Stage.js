@@ -45,10 +45,10 @@ class Stage extends React.Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.params && this.stageId != nextProps.params.stageId) {
-            // this.props.restartGame();
             this.stageId = nextProps.params.stageId;
             //load stage data
             this.props.stageLoad(nextProps.params.stageId);
+            this.themeSound.play();
             this.spellCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
@@ -570,6 +570,7 @@ class Stage extends React.Component {
             this.props.unlockStage(parseInt(this.props.params.stageId) + 1);
             this.props.showCustomWindow('win');
             this.themeSound.pause();
+            this.gameWinSound.play();
         }
     };
 
@@ -577,8 +578,9 @@ class Stage extends React.Component {
         this.paddleSound = new Audio('../sounds/paddle.mp3');
 
         this.explosionSound = new Audio('../sounds/explosion.mp3');
+        this.gameWinSound = new Audio('../sounds/game-win.mp3');
         this.themeSound = new Audio('../sounds/brave-soldiers.mp3');
-        this.themeSound.volume = 0.1;
+        this.themeSound.volume = 0.5;
         this.themeSound.addEventListener('ended', () => {
             this.themeSound.currentTime = 0;
             this.themeSound.play();
@@ -607,10 +609,10 @@ class Stage extends React.Component {
         document.removeEventListener('keydown', this.keyHandler.bind(this, true));
         document.removeEventListener('keyup', this.keyHandler.bind(this, false));
         this.themeSound.pause();
+        this.gameWinSound.pause();
     }
 
     render() {
-        // console.log('pppp', this.props);
         const stageID = this.props.params.stageId;
         return (<div className="stage-container" key={stageID}>
                     <WindowHeader>Poziom #{stageID}</WindowHeader>
