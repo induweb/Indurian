@@ -100,10 +100,18 @@ class Stage extends React.Component {
             if (enemy.hp <= 0) {
                 this.props.deleteEnemy(enemy.key);
                 this.props.addPoints(enemy.value);
+                this.orcDieSound.play();
+                setTimeout(() => {
+                    this.wizardLaughSound.play();
+                }, 1000);
                 return;
             }
 
             enemiesLeft++;
+
+            if (!enemy.position) {
+                return; //bug fix
+            }
 
             let enemyPosition = {
                 top: enemy.position.top + enemy.approximation.Y,
@@ -118,6 +126,7 @@ class Stage extends React.Component {
 
                 this.props.decreaseEnemyHp(enemy.key, 10);
                 this.explosion();
+                this.orcHitSound.play();
 
                 switch (collisionWithEnemy.side) {
                     case (this.side.Left):
@@ -143,6 +152,7 @@ class Stage extends React.Component {
                     if (random > 0.99) {
                         this.props.enemyAttack(enemy.key);
                         this.props.addEnemySpell(enemy.key, ++this.spellCounter);
+                        this.orcAttackSound.play();
                         this.enemyMovement = 'ATTACK';
                         setTimeout(()=>{
                             if (random > 0.9933) {
@@ -308,6 +318,7 @@ class Stage extends React.Component {
                             }
                             this.props.spellCasting();
                             this.props.decreaseMana(1);
+                            this.wizardSpellSound.play();
                         }, 25);
                     }
                 } else {
@@ -350,7 +361,7 @@ class Stage extends React.Component {
 
     checkBorderCollision = () => {
         if (this.props.ball.position.left + this.props.ball.dirX <= this.props.area.minX) {
-            this.props.changeDirX();
+            this.wizardDieSound.play();
             this.stopGame();
         }
         if (this.props.ball.position.top + this.props.ball.dirY <= this.props.area.minY) {
@@ -428,27 +439,31 @@ class Stage extends React.Component {
 
     checkPaddleCollision = () => {
         if (this.checkCollision(this.props.wizard.paddle).side) {
+
+            this.paddleSound.play();
             this.bounceWithAngle(this.calculateHitAngle());
         }
 
         this.props.enemiesSpells.map(spell => {
             let spellPosition = {
-                top: spell.top,
+                top: spell.top + 10,
                 right: spell.left + 10,
-                bottom:  spell.top + 10,
+                bottom:  spell.top + 20,
                 left: spell.left
             };
 
             let collisionWithEnemiesSpell = this.checkCollision(spellPosition,this.props.wizard.paddle);
             if (collisionWithEnemiesSpell.side) {
                 this.props.decreaseHp(47);
-                this.explosion(spellPosition.top, spellPosition.left);
+                this.explosion(spellPosition.top - 10, spellPosition.left);
+                this.wizardHitSound.play();
                 this.props.removeEnemySpell(spell.id);
             }
         });
 
         if (this.props.health <= 0) {
-               this.stopGame();
+            this.stopGame();
+            this.wizardDieSound.play();
         }
     };
 
@@ -497,6 +512,10 @@ class Stage extends React.Component {
                         } else {
                             this.props.hideCrate(block.key);
                             this.explosion(block.top - 10, block.left + 20);
+
+                            this.explosionSound.pause();
+                            this.explosionSound.currentTime = 0;
+                            this.explosionSound.play();
                         }
                         this.props.addPoints(10);
                         this.clearKeyInterval(KEYCODES.RIGHT);
@@ -527,6 +546,10 @@ class Stage extends React.Component {
             } else {
                 this.explosion(chosenBlock.top - 10, chosenBlock.left + 20);
                 this.props.hideCrate(chosenBlock.key);
+
+                this.explosionSound.pause();
+                this.explosionSound.currentTime = 0;
+                this.explosionSound.play();
             }
         }
 
@@ -546,7 +569,27 @@ class Stage extends React.Component {
             this.clearAllKeyIntervals();
             this.props.unlockStage(parseInt(this.props.params.stageId) + 1);
             this.props.showCustomWindow('win');
+            this.themeSound.pause();
         }
+    };
+
+    loadSounds = () => {
+        this.paddleSound = new Audio('../sounds/paddle.mp3');
+
+        this.explosionSound = new Audio('../sounds/explosion.mp3');
+        this.themeSound = new Audio('../sounds/brave-soldiers.mp3');
+        this.themeSound.volume = 0.1;
+        this.themeSound.addEventListener('ended', () => {
+            this.themeSound.currentTime = 0;
+            this.themeSound.play();
+        }, false);
+        this.wizardHitSound = new Audio('../sounds/wizard-hit.mp3');
+        this.wizardDieSound = new Audio('../sounds/wizard-die.mp3');
+        this.wizardLaughSound = new Audio('../sounds/wizard-laugh.mp3');
+        this.wizardSpellSound = new Audio('../sounds/wizard-spell.mp3');
+        this.orcHitSound = new Audio('../sounds/orc-hit.mp3');
+        this.orcDieSound = new Audio('../sounds/orc-die.mp3');
+        this.orcAttackSound = new Audio('../sounds/orc-attack.mp3');
     };
 
     componentWillMount(){
@@ -555,19 +598,15 @@ class Stage extends React.Component {
     }
 
     componentDidMount(){
-        // this.gameLoop = setInterval(() => {
-        //     this.checkBorderCollision();
-        //     this.checkPaddleCollision();
-        //     this.checkCratesCollision();
-        //     this.props.loopTick();
-        // }, 10);
-
+        this.loadSounds();
+        this.themeSound.play();
     }
 
     componentWillUnmount() {
         clearInterval(this.gameLoop);
         document.removeEventListener('keydown', this.keyHandler.bind(this, true));
         document.removeEventListener('keyup', this.keyHandler.bind(this, false));
+        this.themeSound.pause();
     }
 
     render() {
