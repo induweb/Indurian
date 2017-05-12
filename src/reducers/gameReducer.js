@@ -49,7 +49,8 @@ const initialState = {
         display: 'none',
         type: ''
     },
-    topScores: []
+    topScores: [],
+    coins: []
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -295,6 +296,36 @@ const gameReducer = (state = initialState, action) => {
             });
             return {...state,
                 enemiesSpells: newEnemiesSpells
+            };
+
+        case ACTIONS.ADD_COIN:
+            return {...state,
+                coins: [...state.coins, {
+                    left: state.blocks[action.payload.id].left,
+                    top: state.blocks[action.payload.id].top + 7,
+                    display: 'block',
+                    id: action.payload.counter
+                }]
+            };
+
+        case ACTIONS.REMOVE_COIN:
+            let coinId = action.payload.id;
+            let coinIndex = state.coins.map(function(x) {return x.id; }).indexOf(coinId);
+            let newCoinsRemove = [ ...state.coins.slice(0,coinIndex), ...state.coins.slice(coinIndex+1, state.coins.length)];
+
+            return {...state,
+                coins: newCoinsRemove
+            };
+
+        case ACTIONS.MOVE_COIN:
+            let newCoins = state.coins.map(coin => {
+                return {
+                    ...coin,
+                    left: coin.left - 3
+                }
+            });
+            return {...state,
+                coins: newCoins
             };
 
         case ACTIONS.REMOVE_EXPLOSION:

@@ -253,6 +253,41 @@ export function moveEnemySpell(){
     };
 }
 
+export function addCoin(id, counter){
+    return{
+        type: ACTIONS.ADD_COIN,
+        payload: {
+            id,
+            counter
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function removeCoin(id){
+    return{
+        type: ACTIONS.REMOVE_COIN,
+        payload: {
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+export function moveCoin(){
+    return{
+        type: ACTIONS.MOVE_COIN,
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
+
 export function enemyMoveUp(id){
     return{
         type: ACTIONS.ENEMY_MOVE_UP,

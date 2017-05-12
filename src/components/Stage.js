@@ -10,6 +10,7 @@ import EnemiesSpells from './EnemiesSpells';
 import Points from './Points';
 import Lifes from './Lifes';
 import Mana from './Mana';
+import Coins from './Coins';
 import Health from './Health';
 import Wizard from './Wizard';
 import Ball from './Ball';
@@ -28,6 +29,7 @@ class Stage extends React.Component {
         this.blocksEmpty = false;
         this.enemiesEmpty = false;
         this.spellCounter = 0;
+        this.coinCounter = 0;
         this.enemyMovement = 'IDLE';
         this.side = {
             None :0,
@@ -50,6 +52,7 @@ class Stage extends React.Component {
             this.props.stageLoad(nextProps.params.stageId);
             this.themeSound.play();
             this.spellCounter = 0;
+            this.coinCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
             this.props.hideCustomWindow();
@@ -65,6 +68,7 @@ class Stage extends React.Component {
                 this.props.increaseMana(0.1);
             }
             this.enemyHandler();
+            this.coinsHandler();
             this.gameWinCheck();
             this.props.loopTick();
         }, 10);
@@ -230,6 +234,19 @@ class Stage extends React.Component {
         this.props.moveEnemySpell();
     };
 
+    moveAllCoins = () => {
+        this.props.moveCoin();
+    };
+
+    coinsHandler = () => {
+        if (this.props.coins.length) {
+            this.moveAllCoins();
+            this.props.coins.map(coin => {
+                this.checkCoinsCollisionWithBorder(coin.left, coin.id);
+            });
+        }
+    };
+
     checkCharCollisionWithBorder = (position) => {
         if (position.top <= this.props.area.minY) {
             return this.side.Top;
@@ -242,6 +259,12 @@ class Stage extends React.Component {
     checkEnemiesSpellCollisionWithBorder = (spellLeft, id) => {
         if (spellLeft <= this.props.area.minX ) {
             this.props.removeEnemySpell(id);
+        }
+    };
+
+    checkCoinsCollisionWithBorder = (coinLeft, id) => {
+        if (coinLeft <= this.props.area.minX ) {
+            this.props.removeCoin(id);
         }
     };
 
@@ -461,6 +484,22 @@ class Stage extends React.Component {
             }
         });
 
+        this.props.coins.map(coin => {
+            let coinPosition = {
+                top: coin.top,
+                right: coin.left + 25,
+                bottom:  coin.top + 25,
+                left: coin.left
+            };
+
+            let collisionWithCoin = this.checkCollision(coinPosition,this.props.wizard.paddle);
+            if (collisionWithCoin.side) {
+                this.props.addPoints(30);
+                this.coinSound.play();
+                this.props.removeCoin(coin.id);
+            }
+        });
+
         if (this.props.health <= 0) {
             this.stopGame();
             this.wizardDieSound.play();
@@ -516,6 +555,9 @@ class Stage extends React.Component {
                             this.explosionSound.pause();
                             this.explosionSound.currentTime = 0;
                             this.explosionSound.play();
+                            let random = Math.random();
+                            if (random > 0.7)
+                                this.props.addCoin(block.key, ++this.coinCounter);
                         }
                         this.props.addPoints(10);
                         this.clearKeyInterval(KEYCODES.RIGHT);
@@ -546,10 +588,12 @@ class Stage extends React.Component {
             } else {
                 this.explosion(chosenBlock.top - 10, chosenBlock.left + 20);
                 this.props.hideCrate(chosenBlock.key);
-
                 this.explosionSound.pause();
                 this.explosionSound.currentTime = 0;
                 this.explosionSound.play();
+                let random = Math.random();
+                if (random > 0.7)
+                    this.props.addCoin(chosenBlock.key, ++this.coinCounter);
             }
         }
 
@@ -563,6 +607,7 @@ class Stage extends React.Component {
             clearInterval(this.gameLoop);
             this.gameLoop = null;
             this.spellCounter = 0;
+            this.coinCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
             this.props.resetBall();
@@ -580,6 +625,8 @@ class Stage extends React.Component {
         this.explosionSound = new Audio('../sounds/explosion.mp3');
         this.gameWinSound = new Audio('../sounds/game-win.mp3');
         this.themeSound = new Audio('../sounds/brave-soldiers.mp3');
+        this.coinSound = new Audio('../sounds/coin.mp3');
+        this.coinSound.volume = 0.5;
         this.themeSound.volume = 0.5;
         this.themeSound.addEventListener('ended', () => {
             this.themeSound.currentTime = 0;
@@ -630,6 +677,7 @@ class Stage extends React.Component {
                         <CrateView id={stageID} />
                         <Enemies id={stageID} />
                         <EnemiesSpells id={stageID} />
+                        <Coins />
                     </div>
                     <CustomWindow display={this.props.customWindow.display} id={stageID}/>
                     <Points points={this.props.points}/>
@@ -656,7 +704,8 @@ const mapStateToProps = (state) => {
         customWindow: state.game.customWindow,
         explosion: state.game.explosion,
         enemies: state.game.enemies,
-        enemiesSpells: state.game.enemiesSpells
+        enemiesSpells: state.game.enemiesSpells,
+        coins: state.game.coins
     }
 };
 
@@ -673,6 +722,9 @@ const mapDispatchToProps = (dispatch) => {
         addEnemySpell: (id, counter) => dispatch(actions.addEnemySpell(id, counter)),
         moveEnemySpell: () => dispatch(actions.moveEnemySpell()),
         removeEnemySpell: (id) => dispatch(actions.removeEnemySpell(id)),
+        addCoin: (id, counter) => dispatch(actions.addCoin(id, counter)),
+        moveCoin: () => dispatch(actions.moveCoin()),
+        removeCoin: (id) => dispatch(actions.removeCoin(id)),
         setEnemyStatus: (id, value) => dispatch(actions.setEnemyStatus(id, value)),
         decreaseEnemyHp: (id, value) => dispatch(actions.decreaseEnemyHp(id, value)),
         spellCasting: () => dispatch(actions.spellCasting()),

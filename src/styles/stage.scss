@@ -133,14 +133,76 @@
     span {
         position: absolute;
         background-color: #53381d;
-        //content: '';
         top: 17px;
         bottom: 19px;
-        //left: 70px;
         right: 24px;
-        //l 70 - 0
-        //l 258 - 188
     }
+}
+
+.coin {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-image: url(../images/sprites/coin.png);
+    -webkit-animation: coin-anim .5s steps(1) infinite; /* Safari 4+ */
+    -moz-animation:    coin-anim .5s steps(1) infinite; /* Fx 5+ */
+    -o-animation:      coin-anim .5s steps(1) infinite;
+    animation:         coin-anim .5s steps(1) infinite; /* IE 10+, Fx 29+ */
+    position: absolute;
+}
+
+@-webkit-keyframes coin-anim {
+    0%  { background-position: 0 -225px;}
+    10%  { background-position: 0 -200px;}
+    20%  { background-position: 0 -175px;}
+    30%  { background-position: 0 -150px;}
+    40%  { background-position: 0 -125px;}
+    50%  { background-position: 0 -100px;}
+    60%  { background-position: 0 -75px;}
+    70%  { background-position: 0 -50px;}
+    80%   { background-position: 0 -25px;}
+    90%   { background-position: 0 0;}
+    100%   { background-position: 0 0;}
+}
+
+@-moz-keyframes coin-anim {
+    0%  { background-position: 0 -225px;}
+    10%  { background-position: 0 -200px;}
+    20%  { background-position: 0 -175px;}
+    30%  { background-position: 0 -150px;}
+    40%  { background-position: 0 -125px;}
+    50%  { background-position: 0 -100px;}
+    60%  { background-position: 0 -75px;}
+    70%  { background-position: 0 -50px;}
+    80%   { background-position: 0 -25px;}
+    90%   { background-position: 0 0;}
+    100%   { background-position: 0 0;}
+}
+@-o-keyframes coin-anim {
+    0%  { background-position: 0 -225px;}
+    10%  { background-position: 0 -200px;}
+    20%  { background-position: 0 -175px;}
+    30%  { background-position: 0 -150px;}
+    40%  { background-position: 0 -125px;}
+    50%  { background-position: 0 -100px;}
+    60%  { background-position: 0 -75px;}
+    70%  { background-position: 0 -50px;}
+    80%   { background-position: 0 -25px;}
+    90%   { background-position: 0 0;}
+    100%   { background-position: 0 0;}
+}
+@keyframes coin-anim {
+    0%  { background-position: 0 -225px;}
+    10%  { background-position: 0 -200px;}
+    20%  { background-position: 0 -175px;}
+    30%  { background-position: 0 -150px;}
+    40%  { background-position: 0 -125px;}
+    50%  { background-position: 0 -100px;}
+    60%  { background-position: 0 -75px;}
+    70%  { background-position: 0 -50px;}
+    80%   { background-position: 0 -25px;}
+    90%   { background-position: 0 0;}
+    100%   { background-position: 0 0;}
 }
 
 .lifes-bar {
