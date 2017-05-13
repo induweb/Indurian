@@ -61,14 +61,14 @@ class Stage extends React.Component {
 
     startGame = () => {
         this.gameLoop = setInterval(() => {
+            this.enemyHandler();
+            this.coinsHandler();
             this.checkBorderCollision();
             this.checkPaddleCollision();
             this.checkCratesCollision();
             if (this.props.mana < 188) {
                 this.props.increaseMana(0.1);
             }
-            this.enemyHandler();
-            this.coinsHandler();
             this.gameWinCheck();
             this.props.loopTick();
         }, 10);
@@ -79,6 +79,12 @@ class Stage extends React.Component {
         this.gameLoop = null;
         this.setAllEnemiesIdle();
         this.props.decreaseLife();
+        this.props.enemiesSpells.map(spell => {
+            this.props.removeEnemySpell(spell.id);
+        });
+        this.props.coins.map(coin => {
+            this.props.removeCoin(coin.id);
+        });
         if (this.props.lifes === 0) {
             this.gameOver();
         } else {
