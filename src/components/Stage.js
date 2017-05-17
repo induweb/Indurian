@@ -150,6 +150,17 @@ class Stage extends React.Component {
 
                         break;
                 }
+
+                this.props.enemyStop(enemy.key);
+                this.enemyMovement = 'IDLE';
+            }
+
+            let collisionEnemyWithSpell  = this.checkSpellCollision(enemyPosition);
+            if (collisionEnemyWithSpell) {
+                this.props.decreaseEnemyHp(enemy.key, 10);
+                this.explosion(this.props.spell.top - 10, this.props.spell.width + 80);
+                this.clearKeyInterval(KEYCODES.RIGHT);
+                this.props.castStop();
             }
 
             switch (enemy.movingType) {
@@ -206,14 +217,6 @@ class Stage extends React.Component {
                     this.enemyMovement = 'UP';
                     this.props.enemyMoveUp(enemy.key);
                     break;
-            }
-
-            let collisionEnemyWithSpell  = this.checkSpellCollision(enemyPosition);
-            if (collisionEnemyWithSpell) {
-                this.props.decreaseEnemyHp(enemy.key, 10);
-                this.explosion(this.props.spell.top - 10, this.props.spell.width + 80);
-                this.clearKeyInterval(KEYCODES.RIGHT);
-                this.props.castStop();
             }
         });
 
@@ -723,6 +726,7 @@ const mapDispatchToProps = (dispatch) => {
         wizardMoveDown: () => dispatch(actions.wizardMoveDown()),
         enemyMoveUp: (id) => dispatch(actions.enemyMoveUp(id)),
         enemyMoveDown: (id) => dispatch(actions.enemyMoveDown(id)),
+        enemyStop: (id) => dispatch(actions.enemyStop(id)),
         enemyAttack: (id) => dispatch(actions.enemyAttack(id)),
         deleteEnemy: (id) => dispatch(actions.deleteEnemy(id)),
         addEnemySpell: (id, counter) => dispatch(actions.addEnemySpell(id, counter)),

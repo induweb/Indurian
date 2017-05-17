@@ -316,6 +316,19 @@ export function enemyMoveDown(id){
     };
 }
 
+export function enemyStop(id){
+    return{
+        type: ACTIONS.ENEMY_STOP,
+        payload: {
+            status: 'idle',
+            id
+        },
+        meta:{
+            timestamp: Date.now()
+        }
+    };
+}
+
 export function spellCasting(){
     return{
         type: ACTIONS.SPELL_CASTING,

@@ -7,6 +7,7 @@ const ACTIONS = {
     WIZARD_MOVE_DOWN: Symbol('WIZARD_MOVE_DOWN'),
     ENEMY_MOVE_UP: Symbol('ENEMY_MOVE_UP'),
     ENEMY_MOVE_DOWN: Symbol('ENEMY_MOVE_DOWN'),
+    ENEMY_STOP: Symbol('ENEMY_STOP'),
     SPELL_CASTING: Symbol('SPELL_CASTING'),
     CAST_STOP: Symbol('CAST_STOP'),
     LOOP_TICK: Symbol('LOOP_TICK'),

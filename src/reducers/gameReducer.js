@@ -176,6 +176,19 @@ const gameReducer = (state = initialState, action) => {
                 enemies: enemiesMoveDown
             };
 
+        case ACTIONS.ENEMY_STOP:
+
+            let newStateEnemiesStop = {
+                ...state.enemies[action.payload.id],
+                status: action.payload.status
+            };
+            let indexEnemyStop = action.payload.id;
+            let enemiesStop = [ ...state.enemies.slice(0,indexEnemyStop), newStateEnemiesStop, ...state.enemies.slice(indexEnemyStop+1, state.enemies.length)];
+
+            return {...state,
+                enemies: enemiesStop
+            };
+
         case ACTIONS.SPELL_CASTING:
             return {...state,
                 spell: {
