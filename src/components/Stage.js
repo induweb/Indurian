@@ -55,6 +55,12 @@ class Stage extends React.Component {
             this.coinCounter = 0;
             this.enemiesEmpty = false;
             this.blocksEmpty = false;
+            this.props.enemiesSpells.map(spell => {
+                this.props.removeEnemySpell(spell.id);
+            });
+            this.props.coins.map(coin => {
+                this.props.removeCoin(coin.id);
+            });
             this.props.hideCustomWindow();
         }
     };

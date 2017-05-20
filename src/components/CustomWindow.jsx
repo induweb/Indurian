@@ -14,7 +14,7 @@ class CustomWindow extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.type == 'gameOver') {
-            if (this.props.scores.length > 8 && this.props.scores[9].score > this.props.points) {
+            if (this.props.scores.length > 9 && this.props.scores[9].score > this.props.points) {
                 this.wasSend = true;
             }
         }

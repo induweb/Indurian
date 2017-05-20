@@ -2,6 +2,201 @@
   "stages": [
     {
       "id": 1,
+      "title": "Drugie starcie",
+      "enemies": [
+        {
+          "key": 0,
+          "type": "orc",
+          "name": "Barzul",
+          "value": 100,
+          "hp": 100,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 160,
+            "left": 536,
+            "bottom": 278,
+            "right": 656
+          }
+        }
+      ],
+      "blocks": [
+        {
+          "top": 40,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 0
+        },
+        {
+          "top": 80,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 1
+        },
+        {
+          "top": 120,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 2
+        },
+        {
+          "top": 160,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 3
+        },
+        {
+          "top": 200,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 4
+        },
+        {
+          "top": 240,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 5
+        },
+        {
+          "top": 280,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 6
+        },
+        {
+          "top": 320,
+          "left": 340,
+          "type": "crate-1",
+          "value": 1,
+          "key": 7
+        },
+        {
+          "top": 360,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 8
+        },
+        {
+          "top": 40,
+          "left": 380,
+          "type": "stone",
+          "value": 2,
+          "key": 9
+        },
+        {
+          "top": 80,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 10
+        },
+        {
+          "top": 120,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 11
+        },
+        {
+          "top": 160,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 12
+        },
+        {
+          "top": 200,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 13
+        },
+        {
+          "top": 240,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 14
+        },
+        {
+          "top": 280,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 15
+        },
+        {
+          "top": 320,
+          "left": 380,
+          "type": "crate-2",
+          "value": 1,
+          "key": 16
+        },
+        {
+          "top": 360,
+          "left": 380,
+          "type": "stone",
+          "value": 2,
+          "key": 17
+        },
+        {
+          "top": 40,
+          "left": 420,
+          "type": "stone",
+          "value": 2,
+          "key": 18
+        },
+        {
+          "top": 360,
+          "left": 420,
+          "type": "stone",
+          "value": 2,
+          "key": 19
+        },
+        {
+          "top": 40,
+          "left": 460,
+          "type": "stone",
+          "value": 2,
+          "key": 20
+        },
+        {
+          "top": 360,
+          "left": 460,
+          "type": "stone",
+          "value": 2,
+          "key": 21
+        },
+        {
+          "top": 40,
+          "left": 500,
+          "type": "stone",
+          "value": 2,
+          "key": 22
+        },
+        {
+          "top": 360,
+          "left": 500,
+          "type": "stone",
+          "value": 2,
+          "key": 23
+        }
+      ]
+    },
+    {
+      "id": 2,
       "title": "Startujemy",
       "enemies": [
         {
@@ -346,20 +541,6 @@
           "type": "stone",
           "value": 2,
           "key": 45
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Drugie starcie",
-      "enemies": [],
-      "blocks": [
-        {
-          "top": 50,
-          "left": 400,
-          "type": "crate-1",
-          "value": 1,
-          "key": 0
         }
       ]
     },
