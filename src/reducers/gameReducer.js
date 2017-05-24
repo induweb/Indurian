@@ -109,7 +109,7 @@ const gameReducer = (state = initialState, action) => {
         case ACTIONS.DELETE_ENEMY:
 
             let indexEnemyDelete = action.payload.id;
-            let enemiesDelete = [ ...state.enemies.slice(0,indexEnemyDelete - 1), ...state.enemies.slice(indexEnemyDelete+1, state.enemies.length)];
+            let enemiesDelete = [ ...state.enemies.slice(0,indexEnemyDelete), ...state.enemies.slice(indexEnemyDelete+1, state.enemies.length)];
 
             return {...state,
                 enemies: enemiesDelete

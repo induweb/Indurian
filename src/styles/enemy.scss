@@ -1,10 +1,11 @@
 .enemy {
     position: absolute;
-    right: 90px;
+    //right: 90px;
     bottom: 30px;
     height: 118px;
     width: 232px;
     background-repeat: no-repeat;
+    //background-position: right;
 }
 
 .enemy-status {
@@ -128,6 +129,7 @@
     -o-animation:      orc-attack-anim .5s steps(1);
     animation:         orc-attack-anim .5s steps(1); /* IE 10+, Fx 29+ */
     background-image: url(../images/sprites/orc-attack.png);
+    background-position: 33px 0;
 }
 
 @-webkit-keyframes orc-attack-anim {

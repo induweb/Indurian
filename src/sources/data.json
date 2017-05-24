@@ -547,466 +547,486 @@
     {
       "id": 3,
       "title": "Bitwa 3",
-      "enemies": [],
+      "enemies": [
+        {
+          "key": 0,
+          "type": "orc",
+          "name": "Barzul",
+          "value": 100,
+          "hp": 100,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 160,
+            "left": 536,
+            "bottom": 278,
+            "right": 656
+          }
+        }
+      ],
       "blocks": [
         {
           "top": 0,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 0
         },
         {
           "top": 40,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 1
         },
         {
           "top": 80,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 2
         },
         {
           "top": 120,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 3
         },
         {
           "top": 160,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 4
         },
         {
           "top": 200,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 5
         },
         {
           "top": 240,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 6
         },
         {
           "top": 280,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 7
         },
         {
           "top": 320,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 8
         },
         {
           "top": 360,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 9
         },
         {
           "top": 400,
-          "left": 426,
+          "left": 420,
           "type":"crate-1",
           "value": 1,
           "key": 10
         },
         {
           "top": 0,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 11
         },
         {
           "top": 40,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 12
         },
         {
           "top": 80,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 13
         },
         {
           "top": 120,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 14
         },
         {
           "top": 160,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 15
         },
         {
           "top": 200,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 16
         },
         {
           "top": 240,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 17
         },
         {
           "top": 280,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 18
         },
         {
           "top": 320,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 19
         },
         {
           "top": 360,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 20
         },
         {
           "top": 400,
-          "left": 466,
+          "left": 460,
           "type": "crate-2",
           "value": 1,
           "key": 21
         },
         {
           "top": 0,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 22
         },
         {
           "top": 40,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 23
         },
         {
           "top": 80,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 24
         },
         {
           "top": 120,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 25
         },
         {
           "top": 160,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 26
         },
         {
           "top": 200,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 27
         },
         {
           "top": 240,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 28
         },
         {
           "top": 280,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 29
         },
         {
           "top": 320,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 30
         },
         {
           "top": 360,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 31
         },
         {
           "top": 400,
-          "left": 506,
+          "left": 380,
           "type": "crate-3",
           "value": 1,
           "key": 32
         },
         {
           "top": 0,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 33
         },
         {
           "top": 40,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 34
         },
         {
           "top": 80,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 35
         },
         {
           "top": 120,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 36
         },
         {
           "top": 160,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 37
         },
         {
           "top": 200,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 38
         },
         {
           "top": 240,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 39
         },
         {
           "top": 280,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 40
         },
         {
           "top": 320,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 41
         },
         {
           "top": 360,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 42
         },
         {
           "top": 400,
-          "left": 546,
+          "left": 340,
           "type": "stone",
           "value": 2,
           "key": 43
         },
         {
           "top": 0,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 44
         },
         {
           "top": 40,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 45
         },
         {
           "top": 80,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 46
         },
         {
           "top": 120,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 47
         },
         {
           "top": 160,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 48
         },
         {
           "top": 200,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 49
         },
         {
           "top": 240,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 50
         },
         {
           "top": 280,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 51
         },
         {
           "top": 320,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 52
         },
         {
           "top": 360,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 53
         },
         {
           "top": 400,
-          "left": 586,
+          "left": 300,
           "type": "crate-1",
           "value": 1,
           "key": 54
         },
         {
           "top": 0,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 55
         },
         {
           "top": 40,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 56
         },
         {
           "top": 80,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 57
         },
         {
           "top": 120,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 58
         },
         {
           "top": 160,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 59
         },
         {
           "top": 200,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 60
         },
         {
           "top": 240,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 61
         },
         {
           "top": 280,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 62
         },
         {
           "top": 320,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 63
         },
         {
           "top": 360,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 64
         },
         {
           "top": 400,
-          "left": 626,
+          "left": 260,
           "type": "crate-2",
           "value": 1,
           "key": 65
@@ -1164,6 +1184,601 @@
           "type": "stone",
           "value": 2,
           "key": 87
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Czwarte starcie",
+      "enemies": [
+        {
+          "key": 0,
+          "type": "orc",
+          "name": "Barzul",
+          "value": 100,
+          "hp": 100,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 240,
+            "left": 436,
+            "bottom": 348,
+            "right": 556
+          }
+        },
+        {
+          "key": 1,
+          "type": "orc",
+          "name": "AnzVerd",
+          "value": 200,
+          "hp": 200,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 70,
+            "left": 500,
+            "bottom": 188,
+            "right": 620
+          }
+        }
+      ],
+      "blocks": [
+        {
+          "top": 40,
+          "left": 300,
+          "type": "crate-2",
+          "value": 1,
+          "key": 0
+        },
+        {
+          "top": 80,
+          "left": 300,
+          "type": "crate-2",
+          "value": 1,
+          "key": 1
+        },
+        {
+          "top": 400,
+          "left": 300,
+          "type": "stone",
+          "value": 2,
+          "key": 2
+        },
+        {
+          "top": 0,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 3
+        },
+        {
+          "top": 40,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 4
+        },
+        {
+          "top": 80,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 5
+        },
+        {
+          "top": 120,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 6
+        },
+        {
+          "top": 160,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 7
+        },
+        {
+          "top": 200,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 8
+        },
+        {
+          "top": 240,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 9
+        },
+        {
+          "top": 280,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 10
+        },
+        {
+          "top": 320,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 11
+        },
+        {
+          "top": 360,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 12
+        },
+        {
+          "top": 400,
+          "left": 706,
+          "type": "stone",
+          "value": 2,
+          "key": 13
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Bitwa 5",
+      "enemies": [
+        {
+          "key": 0,
+          "type": "orc",
+          "name": "Barzul",
+          "value": 100,
+          "hp": 100,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 300,
+            "left": 536,
+            "bottom": 418,
+            "right": 656
+          }
+        },
+        {
+          "key": 1,
+          "type": "orc",
+          "name": "AnzVerd",
+          "value": 200,
+          "hp": 200,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 70,
+            "left": 500,
+            "bottom": 188,
+            "right": 620
+          }
+        }
+      ],
+      "blocks": [
+        {
+          "top": 0,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 0
+        },
+        {
+          "top": 40,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 1
+        },
+        {
+          "top": 80,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 2
+        },
+        {
+          "top": 120,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 3
+        },
+        {
+          "top": 160,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 4
+        },
+        {
+          "top": 320,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 5
+        },
+        {
+          "top": 360,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 6
+        },
+        {
+          "top": 400,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 7
+        },
+        {
+          "top": 0,
+          "left": 380,
+          "type": "crate-3",
+          "value": 1,
+          "key": 8
+        },
+        {
+          "top": 40,
+          "left": 380,
+          "type": "crate-3",
+          "value": 1,
+          "key": 9
+        },
+        {
+          "top": 320,
+          "left": 380,
+          "type": "crate-3",
+          "value": 1,
+          "key": 10
+        },
+        {
+          "top": 360,
+          "left": 380,
+          "type": "crate-3",
+          "value": 1,
+          "key": 11
+        },
+        {
+          "top": 400,
+          "left": 380,
+          "type": "crate-3",
+          "value": 1,
+          "key": 12
+        },
+        {
+          "top": 0,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 13
+        },
+        {
+          "top": 40,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 14
+        },
+        {
+          "top": 80,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 15
+        },
+        {
+          "top": 320,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 16
+        },
+        {
+          "top": 360,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 17
+        },
+        {
+          "top": 400,
+          "left": 340,
+          "type": "stone",
+          "value": 2,
+          "key": 18
+        },
+        {
+          "top": 0,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 19
+        },
+        {
+          "top": 40,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 20
+        },
+        {
+          "top": 80,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 21
+        },
+        {
+          "top": 120,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 22
+        },
+        {
+          "top": 320,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 23
+        },
+        {
+          "top": 360,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 24
+        },
+        {
+          "top": 400,
+          "left": 300,
+          "type": "crate-1",
+          "value": 1,
+          "key": 25
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Pudzian Band",
+      "enemies": [
+        {
+          "key": 0,
+          "type": "orc",
+          "name": "Pudzian",
+          "value": 300,
+          "hp": 300,
+          "status": "idle",
+          "movingType": 1,
+          "approximation": {
+            "X": 20,
+            "Y": 10
+          },
+          "position": {
+            "top": 160,
+            "left": 536,
+            "bottom": 278,
+            "right": 656
+          }
+        }
+      ],
+      "blocks": [
+        {
+          "top": 0,
+          "left": 300,
+          "type":"crate-2",
+          "value": 1,
+          "key": 0
+        },
+        {
+          "top": 0,
+          "left": 340,
+          "type":"crate-2",
+          "value": 1,
+          "key": 1
+        },
+        {
+          "top": 0,
+          "left": 380,
+          "type":"crate-2",
+          "value": 1,
+          "key": 2
+        },
+        {
+          "top": 0,
+          "left": 420,
+          "type":"crate-2",
+          "value": 1,
+          "key": 3
+        },
+        {
+          "top": 0,
+          "left": 460,
+          "type":"crate-2",
+          "value": 1,
+          "key": 4
+        },
+        {
+          "top": 0,
+          "left": 260,
+          "type":"crate-2",
+          "value": 1,
+          "key": 5
+        },
+        {
+          "top": 0,
+          "left": 220,
+          "type":"crate-2",
+          "value": 1,
+          "key": 6
+        },
+        {
+          "top": 40,
+          "left": 300,
+          "type":"crate-1",
+          "value": 1,
+          "key": 7
+        },
+        {
+          "top": 40,
+          "left": 340,
+          "type":"crate-1",
+          "value": 1,
+          "key": 8
+        },
+        {
+          "top": 40,
+          "left": 380,
+          "type":"crate-1",
+          "value": 1,
+          "key": 9
+        },
+        {
+          "top": 40,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 10
+        },
+        {
+          "top": 40,
+          "left": 460,
+          "type":"crate-1",
+          "value": 1,
+          "key": 11
+        },
+        {
+          "top": 40,
+          "left": 260,
+          "type":"crate-1",
+          "value": 1,
+          "key": 12
+        },
+        {
+          "top": 40,
+          "left": 220,
+          "type":"crate-1",
+          "value": 1,
+          "key": 13
+        },
+        {
+          "top": 360,
+          "left": 300,
+          "type":"crate-1",
+          "value": 1,
+          "key": 14
+        },
+        {
+          "top": 360,
+          "left": 340,
+          "type":"crate-1",
+          "value": 1,
+          "key": 15
+        },
+        {
+          "top": 360,
+          "left": 380,
+          "type":"crate-1",
+          "value": 1,
+          "key": 16
+        },
+        {
+          "top": 360,
+          "left": 420,
+          "type":"crate-1",
+          "value": 1,
+          "key": 17
+        },
+        {
+          "top": 360,
+          "left": 460,
+          "type":"crate-1",
+          "value": 1,
+          "key": 18
+        },
+        {
+          "top": 360,
+          "left": 260,
+          "type":"crate-1",
+          "value": 1,
+          "key": 19
+        },
+        {
+          "top": 360,
+          "left": 220,
+          "type":"crate-1",
+          "value": 1,
+          "key": 20
+        },
+        {
+          "top": 400,
+          "left": 300,
+          "type":"stone",
+          "value": 2,
+          "key": 21
+        },
+        {
+          "top": 400,
+          "left": 340,
+          "type":"stone",
+          "value": 2,
+          "key": 22
+        },
+        {
+          "top": 400,
+          "left": 380,
+          "type":"stone",
+          "value": 2,
+          "key": 23
+        },
+        {
+          "top": 400,
+          "left": 420,
+          "type":"stone",
+          "value": 2,
+          "key": 24
+        },
+        {
+          "top": 400,
+          "left": 460,
+          "type":"stone",
+          "value": 2,
+          "key": 25
+        },
+        {
+          "top": 400,
+          "left": 260,
+          "type":"stone",
+          "value": 2,
+          "key": 26
+        },
+        {
+          "top": 400,
+          "left": 220,
+          "type":"stone",
+          "value": 2,
+          "key": 27
         }
       ]
     }

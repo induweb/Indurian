@@ -6,7 +6,8 @@ class Enemy extends React.Component {
   render () {
     return (
         <div className={`enemy ${this.props.type} orc-${this.props.status}`} style={{
-            top: this.props.position.top + 'px'
+            top: this.props.position.top + 'px',
+            left: this.props.position.left - + 110 + 'px'
         }}
         >
             <div className="enemy-status" style={{

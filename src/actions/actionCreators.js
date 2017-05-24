@@ -5,6 +5,5 @@ const actions = [
     stageActions,
     loadActions
 ];
-console.log('actions', actions);
 
 export default actions[0]

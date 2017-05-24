@@ -30,7 +30,7 @@ class Stage extends React.Component {
         this.enemiesEmpty = false;
         this.spellCounter = 0;
         this.coinCounter = 0;
-        this.enemyMovement = 'IDLE';
+        this.enemyMovement = [];
         this.side = {
             None :0,
             Left : 1,
@@ -111,18 +111,12 @@ class Stage extends React.Component {
 
     enemyHandler = () => {
         let enemiesLeft = 0;
-        this.props.enemies.map((enemy) => {
-
-            if (enemy.hp <= 0) {
-                this.props.deleteEnemy(enemy.key);
-                this.props.addPoints(enemy.value);
-                this.orcDieSound.play();
-                setTimeout(() => {
-                    this.wizardLaughSound.play();
-                }, 1000);
-                return;
-            }
-
+        if (!this.enemyMovement) {
+            this.props.enemies.map((enemy)=> {
+                this.enemyMovement[enemy.key] = 'IDLE';
+            });
+        }
+        this.props.enemies.map((enemy, index) => {
             enemiesLeft++;
 
             if (!enemy.position) {
@@ -140,7 +134,7 @@ class Stage extends React.Component {
 
             if (collisionWithEnemy) {
 
-                this.props.decreaseEnemyHp(enemy.key, 10);
+                this.props.decreaseEnemyHp(index, 10);
                 this.explosion();
                 this.orcHitSound.play();
 
@@ -157,13 +151,13 @@ class Stage extends React.Component {
                         break;
                 }
 
-                this.props.enemyStop(enemy.key);
-                this.enemyMovement = 'IDLE';
+                this.props.enemyStop(index);
+                this.enemyMovement[enemy.key] = 'IDLE';
             }
 
             let collisionEnemyWithSpell  = this.checkSpellCollision(enemyPosition);
             if (collisionEnemyWithSpell) {
-                this.props.decreaseEnemyHp(enemy.key, 10);
+                this.props.decreaseEnemyHp(index, 10);
                 this.explosion(this.props.spell.top - 10, this.props.spell.width + 80);
                 this.clearKeyInterval(KEYCODES.RIGHT);
                 this.props.castStop();
@@ -171,44 +165,44 @@ class Stage extends React.Component {
 
             switch (enemy.movingType) {
                 case 1:
-                    if (this.enemyMovement == 'ATTACK')
+                    if (this.enemyMovement[enemy.key] == 'ATTACK')
                         return;
 
                     let random = Math.random(); //IDLE, UP, DOWN, ATTACK
 
                     if (random > 0.99) {
-                        this.props.enemyAttack(enemy.key);
-                        this.props.addEnemySpell(enemy.key, ++this.spellCounter);
+                        this.props.enemyAttack(index);
+                        this.props.addEnemySpell(index, ++this.spellCounter);
                         this.orcAttackSound.play();
-                        this.enemyMovement = 'ATTACK';
+                        this.enemyMovement[enemy.key] = 'ATTACK';
                         setTimeout(()=>{
                             if (random > 0.9933) {
-                                this.enemyMovement = 'UP';
+                                this.enemyMovement[enemy.key] = 'UP';
                             } else if (random > 0.9966 ) {
-                                this.enemyMovement = 'DOWN';
+                                this.enemyMovement[enemy.key] = 'DOWN';
                             } else {
-                                this.enemyMovement = 'IDLE';
+                                this.enemyMovement[enemy.key] = 'IDLE';
                             }
-                            this.props.setEnemyStatus(enemy.key, 'idle');
+                            this.props.setEnemyStatus(index, 'idle');
                         },500);
                     } else if (random < 0.01) { //change attack
 
-                        if (this.enemyMovement == 'IDLE') {
-                            this.enemyMovement = random > 0.45 ? 'UP' : 'DOWN';
+                        if (this.enemyMovement[enemy.key] == 'IDLE') {
+                            this.enemyMovement[enemy.key] = random > 0.45 ? 'UP' : 'DOWN';
                         }
 
-                        if (this.enemyMovement == 'UP') {
-                            this.enemyMovement = 'DOWN';
-                            this.props.enemyMoveDown(enemy.key);
-                        } else if (this.enemyMovement == 'DOWN') {
-                            this.enemyMovement = 'UP';
-                            this.props.enemyMoveUp(enemy.key);
+                        if (this.enemyMovement[enemy.key] == 'UP') {
+                            this.enemyMovement[enemy.key] = 'DOWN';
+                            this.props.enemyMoveDown(index);
+                        } else if (this.enemyMovement[enemy.key] == 'DOWN') {
+                            this.enemyMovement[enemy.key] = 'UP';
+                            this.props.enemyMoveUp(index);
                         }
                     } else {
-                        if (this.enemyMovement == 'UP') {
-                            this.props.enemyMoveUp(enemy.key);
-                        } else if (this.enemyMovement == 'DOWN') {
-                            this.props.enemyMoveDown(enemy.key);
+                        if (this.enemyMovement[enemy.key] == 'UP') {
+                            this.props.enemyMoveUp(index);
+                        } else if (this.enemyMovement[enemy.key] == 'DOWN') {
+                            this.props.enemyMoveDown(index);
                         }
                     }
                     break;
@@ -216,13 +210,23 @@ class Stage extends React.Component {
 
             switch (this.checkCharCollisionWithBorder(enemyPosition)) {
                 case this.side.Top:
-                    this.enemyMovement = 'DOWN';
-                    this.props.enemyMoveDown(enemy.key);
+                    this.enemyMovement[enemy.key] = 'DOWN';
+                    this.props.enemyMoveDown(index);
                     break;
                 case this.side.Bottom:
-                    this.enemyMovement = 'UP';
-                    this.props.enemyMoveUp(enemy.key);
+                    this.enemyMovement[enemy.key] = 'UP';
+                    this.props.enemyMoveUp(index);
                     break;
+            }
+
+            if (enemy.hp <= 0) {
+                this.props.deleteEnemy(index);
+                this.props.addPoints(enemy.value);
+                this.orcDieSound.play();
+                setTimeout(() => {
+                    this.wizardLaughSound.play();
+                }, 1000);
+                return;
             }
         });
 
@@ -240,8 +244,8 @@ class Stage extends React.Component {
     };
 
     setAllEnemiesIdle = () => {
-        this.props.enemies.map((enemy) => {
-            this.props.setEnemyStatus(enemy.key, 'idle');
+        this.props.enemies.map((enemy, index) => {
+            this.props.setEnemyStatus(index, 'idle');
         });
     };
 
