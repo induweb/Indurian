@@ -3,14 +3,10 @@ Arcade game built with React, Redux, HTML, CSS. Clone of Brick Breaker (Arkanoid
 
 Demo - http://indurian.induweb.pl
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+Gameplay video
 
 [![Indurian](http://img.youtube.com/vi/5qw4dKGEFnw/0.jpg)](http://www.youtube.com/watch?v=5qw4dKGEFnw)
 
-
-Gameplay video - https://www.youtube.com/watch?v=5qw4dKGEFnw
 
 # Features:
 
